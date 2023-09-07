@@ -6,6 +6,7 @@
  * @author 
  **/
 
+import java.nio.file.Files;
 import java.util.ArrayList;
 
 public class JottTokenizer {
@@ -17,6 +18,17 @@ public class JottTokenizer {
      * @return an ArrayList of Jott Tokens
      */
     public static ArrayList<Token> tokenize(String filename){
+
+    //turn file into a string
+    String fileString = Files.readString(filename);
+
+    //goes through whole file string
+    for ( int i = 0; i < fileString.length(); i++ ) {
+
+        //branches from DFA
+        
+    }
+
 		return null;
 	}
 }
