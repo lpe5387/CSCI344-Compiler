@@ -1,4 +1,12 @@
 # CSCI344-Compiler
+
+This file contains provided code, testers, and test cases.
+
+provided shouls be a top level package in your src directory
+JottParserTester and JottTokenizerTester classes should be in a package call testers.
+
+the testCases directories should be in the working directory of your project. 
+
 Authors:
 Issac Kim,
 Dara Prak,
