@@ -1,7 +1,7 @@
 # CSCI344-Compiler
 Authors:
 Issac Kim,
-Dara Prak
-Luka Eaton
-Andrew Dantone
-lucie lim
+Dara Prak,
+Luka Eaton,
+Andrew Dantone,
+Lucie Lim
