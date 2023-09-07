@@ -1,4 +1,4 @@
 # CSCI344-Compiler
 Authors:
-Issac Kim
+Issac Kim,
 Dara Prak
