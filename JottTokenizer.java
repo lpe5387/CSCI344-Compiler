@@ -97,6 +97,15 @@ public class JottTokenizer {
 
           case '.':
 
+          case '#':
+            while(ch != '\n'){
+              i++;
+              ch = fileString.charAt(i);
+            }
+          case '\n':
+            lineNum++;
+
+
 
         }
 
