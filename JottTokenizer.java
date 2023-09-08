@@ -21,7 +21,6 @@ public class JottTokenizer {
    */
   public static void main(String[] args){
     tokenize(args[1]);
-    System.out.println(args[1]);
   }
 
 	/**
