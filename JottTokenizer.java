@@ -31,6 +31,8 @@ public class JottTokenizer {
    */
   public static ArrayList<Token> tokenize(String filename){
 
+    ArrayList<Token> tokenStream = new ArrayList<Token>();
+
     //turns String filename into Path file
     Path file = Paths.get(filename);
     file = file.toAbsolutePath(); //redundancy in file pathing where CSCI344 repeated
@@ -39,12 +41,20 @@ public class JottTokenizer {
       file = file.toRealPath();
       //turns file into a string
       String fileString = Files.readString(file);
+      String token = "";
+      TokenType type;
       int lineNum = 1;
 
       //goes through whole file string
       for ( int i = 0; i < fileString.length(); i++ ) {
 
         char ch = fileString.charAt(i);
+
+
+        switch(ch){
+          case ',': 
+
+        }
 
         if(ch == '\n'){
 
