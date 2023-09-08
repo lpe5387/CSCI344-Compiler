@@ -33,9 +33,10 @@ public class JottTokenizer {
 
     //turns String filename into Path file
     Path file = Paths.get(filename);
+    file = file.toAbsolutePath(); //redundancy in file pathing where CSCI344 repeated
 
     try{
-
+      file = file.toRealPath();
       //turns file into a string
       String fileString = Files.readString(file);
       int lineNum = 1;
