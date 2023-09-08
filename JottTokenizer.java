@@ -41,8 +41,8 @@ public class JottTokenizer {
       file = file.toRealPath();
       //turns file into a string
       String fileString = Files.readString(file);
-      String token = "";
-      TokenType type;
+      String charStream = "";
+      TokenType type = TokenType.ASSIGN;
       int lineNum = 1;
 
       //goes through whole file string
@@ -52,7 +52,51 @@ public class JottTokenizer {
 
 
         switch(ch){
-          case ',': 
+          case ',':
+            Token token = (charStream == "") ? new Token(",", filename, lineNum, TokenType.COMMA) : new Token(charStream, filename, lineNum, type);
+            tokenStream.add(token);
+            token = new Token(",", filename, lineNum, TokenType.COMMA);
+            tokenStream.add(token);
+
+          case '[':
+            token = (charStream == "") ? new Token("[", filename, lineNum, TokenType.L_BRACKET) : new Token(charStream, filename, lineNum, type);
+            tokenStream.add(token);
+            token = new Token("[", filename, lineNum, TokenType.L_BRACKET);
+            tokenStream.add(token);
+
+          case ']':
+            token = (charStream == "") ? new Token("]", filename, lineNum, TokenType.R_BRACKET) : new Token(charStream, filename, lineNum, type);
+            tokenStream.add(token);
+            token = new Token("]", filename, lineNum, TokenType.R_BRACKET);
+            tokenStream.add(token);
+          case '{':
+            token = (charStream == "") ? new Token("{", filename, lineNum, TokenType.L_BRACE) : new Token(charStream, filename, lineNum, type);
+            tokenStream.add(token);
+            token = new Token("{", filename, lineNum, TokenType.L_BRACE);
+            tokenStream.add(token);          
+          case '}':
+            token = (charStream == "") ? new Token("}", filename, lineNum, TokenType.R_BRACE) : new Token(charStream, filename, lineNum, type);
+            tokenStream.add(token);
+            token = new Token("}", filename, lineNum, TokenType.R_BRACE);
+            tokenStream.add(token);
+          case '=':
+
+          case '<':
+
+          case '>':
+
+          case '/':
+
+          case '+':
+
+          case '-':
+
+          case '*':
+
+          case ';':
+
+          case '.':
+
 
         }
 
