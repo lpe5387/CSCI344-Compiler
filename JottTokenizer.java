@@ -137,25 +137,31 @@ public class JottTokenizer {
             token = new Token("*", filename, lineNum, TokenType.MATH_OP);
             tokenStream.add(token);
           case ';':
-            charStream += ";";
-            token = new Token(charStream, filename, lineNum, TokenType.SEMICOLON);
+            token = new Token(";", filename, lineNum, TokenType.SEMICOLON);
             tokenStream.add(token);
           case ':':
-            charStream += ":";
-            if(type == TokenType.COLON){
-              
-            }
-            char oneAhead = fileString.charAt(i + 1);
-            if(oneAhead == ':'){
-              type = TokenType.FC_HEADER;
+            nextChar = fileString.charAt(i + 1);
+            if(nextChar == ':'){
+              token = new Token("::", filename, lineNum, TokenType.FC_HEADER);
+              i++;
             } else {
-              type = TokenType.COLON;
+              token = new Token(":", filename, lineNum, TokenType.COLON);
             }
+              tokenStream.add(token);
           case '.':
-            oneAhead = fileString.charAt(i + 1);
-            if(Character.isDigit(oneAhead)){
-              charStream += ".";
+            i++;
+            ch = fileString.charAt(i);
+            if(!Character.isDigit(ch)){
+              // Invalid Token
             }
+            charStream += '.';
+            while((Character.isDigit(ch)) && i < endOfFile){
+              charStream += ch;
+              i++;
+              ch = fileString.charAt(i);
+            }
+            token = new Token(charStream, filename, lineNum, TokenType.NUMBER);
+            tokenStream.add(token);
           case '0':
             while( (Character.isDigit(ch) || ch == '.') && i < endOfFile){
               if(ch == '.'){
