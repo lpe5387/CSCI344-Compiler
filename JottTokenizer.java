@@ -3,7 +3,7 @@
 /**
  * This class is responsible for tokenizing Jott code.
  * 
- * @author Issac Kim
+ * @author Issac Kim, lucie lim
  **/
 
 import java.io.IOException;
@@ -105,7 +105,7 @@ public class JottTokenizer {
           case '\n':
             lineNum++;
 
-
+          case ' ':
 
         }
 
