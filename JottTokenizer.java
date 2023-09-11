@@ -89,13 +89,22 @@ public class JottTokenizer {
           case '*':
 
           case ';':
-            token = new Token(";", filename, lineNum, TokenType.SEMICOLON);
+            charStream += ";";
+            token = new Token(charStream, filename, lineNum, TokenType.SEMICOLON);
             tokenStream.add(token);
           case ':':
+            charStream += ":";
+            if(type == TokenType.COLON){
+              
+            }
             char oneAhead = fileString.charAt(i + 1);
-            if(Character.isDigit(oneAhead))
+            if(oneAhead == ':'){
+              type = TokenType.FC_HEADER;
+            } else {
+              type = TokenType.COLON;
+            }
           case '.':
-            char oneAhead = fileString.charAt(i + 1);
+            oneAhead = fileString.charAt(i + 1);
             if(Character.isDigit(oneAhead)){
               charStream += ".";
             }
