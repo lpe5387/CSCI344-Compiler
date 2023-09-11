@@ -132,10 +132,9 @@ public class JottTokenizer {
               }
             }
             if(charStream != ""){
-              token = new Token(charStream, filename, lineNum, type);
+              token = new Token(charStream, filename, lineNum, TokenType.ID_KEYWORD);
+              charStream = "";
             }
-            charStream = "";
-
         }
 
         if(ch == '\n'){
