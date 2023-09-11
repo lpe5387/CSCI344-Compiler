@@ -68,19 +68,62 @@ public class JottTokenizer {
             token = new Token(",", filename, lineNum, TokenType.COMMA);
             tokenStream.add(token);
           case '=':
-
+            // check to see if the next char is a another = sign
+            char nextChar = fileString.charAt(i+1);
+            if ( nextChar == '=' ) {
+              token = new Token("==", filename, lineNum, TokenType.REL_OP);
+              tokenStream.add(token);
+              //update position in the file string 
+              i++;
+            } else {
+              token = new Token("=", filename, lineNum, TokenType.ASSIGN);
+              tokenStream.add(token);
+            }
+            //clean up char stream
+            charStream = "";
           case '<':
+            nextChar = fileString.charAt(i+1);
+            if ( nextChar == '=' ) {
+              //add the equal to the current char which could be < or > into a string
+              charStream = ch + "=";
+              //put that string into the tokenizer
+              token = new Token(charStream, filename, lineNum, TokenType.REL_OP);
+              tokenStream.add(token);
+              i++;
+            } else {
+              token = new Token("<", filename, lineNum, TokenType.REL_OP);
+              tokenStream.add(token);
+            }
+            //clean up char stream 
+            charStream = "";
 
           case '>':
-
+            nextChar = fileString.charAt(i+1);
+            if ( nextChar == '=' ) {
+              //add the equal to the current char which could be < or > into a string
+              charStream = ch + "=";
+              //put that string into the tokenizer
+              token = new Token(charStream, filename, lineNum, TokenType.REL_OP);
+              tokenStream.add(token);
+              i++;
+            } else {
+              token = new Token(">", filename, lineNum, TokenType.REL_OP);
+              tokenStream.add(token);
+            }
+            //clean up char stream 
+            charStream = "";
           case '/':
-
+            token = new Token("/", filename, lineNum, TokenType.MATH_OP);
+            tokenStream.add(token);
           case '+':
-
+            token = new Token("+", filename, lineNum, TokenType.MATH_OP);
+            tokenStream.add(token);
           case '-':
-
+            token = new Token("-", filename, lineNum, TokenType.MATH_OP);
+            tokenStream.add(token);
           case '*':
-
+            token = new Token("*", filename, lineNum, TokenType.MATH_OP);
+            tokenStream.add(token);
           case ';':
 
           case '.':
