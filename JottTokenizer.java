@@ -153,10 +153,7 @@ public class JottTokenizer {
                 decimal++;
               }
               if(decimal > 1){
-                //Error message and break
-                charStream = charStream + ch;
-                System.out.println("Syntax Error: Incorrect number\n" + charStream + "\n[Line " + lineNum + "]");
-                System.exit(0);
+                break;
               }
               charStream = charStream + ch;
               i++;
@@ -170,10 +167,7 @@ public class JottTokenizer {
                 decimal++;
               }
               if(decimal > 1){
-                //Error message and break
-                charStream = charStream + ch;
-                System.out.println("Syntax Error: Incorrect number\n" + charStream + "\n[Line " + lineNum + "]");
-                System.exit(0);
+                break;
               }
               charStream = charStream + ch;
               i++;
@@ -187,10 +181,7 @@ public class JottTokenizer {
                 decimal++;
               }
               if(decimal > 1){
-                //Error message and break
-                charStream = charStream + ch;
-                System.out.println("Syntax Error: Incorrect number\n" + charStream + "\n[Line " + lineNum + "]");
-                System.exit(0);
+                break;
               }
               charStream = charStream + ch;
               i++;
@@ -204,10 +195,7 @@ public class JottTokenizer {
                 decimal++;
               }
               if(decimal > 1){
-                //Error message and break
-                charStream = charStream + ch;
-                System.out.println("Syntax Error: Incorrect number\n" + charStream + "\n[Line " + lineNum + "]");
-                System.exit(0);
+                break;
               }
               charStream = charStream + ch;
               i++;
@@ -221,10 +209,7 @@ public class JottTokenizer {
                 decimal++;
               }
               if(decimal > 1){
-                //Error message and break
-                charStream = charStream + ch;
-                System.out.println("Syntax Error: Incorrect number\n" + charStream + "\n[Line " + lineNum + "]");
-                System.exit(0);
+                break;
               }
               charStream = charStream + ch;
               i++;
@@ -238,10 +223,7 @@ public class JottTokenizer {
                 decimal++;
               }
               if(decimal > 1){
-                //Error message and break
-                charStream = charStream + ch;
-                System.out.println("Syntax Error: Incorrect number\n" + charStream + "\n[Line " + lineNum + "]");
-                System.exit(0);
+                break;
               }
               charStream = charStream + ch;
               i++;
@@ -255,10 +237,7 @@ public class JottTokenizer {
                 decimal++;
               }
               if(decimal > 1){
-                //Error message and break
-                charStream = charStream + ch;
-                System.out.println("Syntax Error: Incorrect number\n" + charStream + "\n[Line " + lineNum + "]");
-                System.exit(0);
+                break;
               }
               charStream = charStream + ch;
               i++;
@@ -272,10 +251,7 @@ public class JottTokenizer {
                 decimal++;
               }
               if(decimal > 1){
-                //Error message and break
-                charStream = charStream + ch;
-                System.out.println("Syntax Error: Incorrect number\n" + charStream + "\n[Line " + lineNum + "]");
-                System.exit(0);
+                break;
               }
               charStream = charStream + ch;
               i++;
@@ -289,10 +265,7 @@ public class JottTokenizer {
                 decimal++;
               }
               if(decimal > 1){
-                //Error message and break
-                charStream = charStream + ch;
-                System.out.println("Syntax Error: Incorrect number\n" + charStream + "\n[Line " + lineNum + "]");
-                System.exit(0);
+                break;
               }
               charStream = charStream + ch;
               i++;
@@ -306,10 +279,7 @@ public class JottTokenizer {
                 decimal++;
               }
               if(decimal > 1){
-                //Error message and break
-                charStream = charStream + ch;
-                System.out.println("Syntax Error: Incorrect number\n" + charStream + "\n[Line " + lineNum + "]");
-                System.exit(0);
+                break;
               }
               charStream = charStream + ch;
               i++;
@@ -340,6 +310,7 @@ public class JottTokenizer {
               tokenStream.add(token);
             }
             if(charStream != ""){
+              //resetting state goes here
               charStream = "";
               decimal = 0;
             }
