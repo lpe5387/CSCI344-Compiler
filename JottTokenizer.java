@@ -3,7 +3,7 @@
 /**
  * This class is responsible for tokenizing Jott code.
  * 
- * @author Issac Kim, lucie lim
+ * @author Issac Kim, lucie lim, Dara Prak
  **/
 
 import java.io.IOException;
@@ -94,9 +94,16 @@ public class JottTokenizer {
           case '*':
 
           case ';':
-
+            token = new Token(";", filename, lineNum, TokenType.SEMICOLON);
+            tokenStream.add(token);
+          case ':':
+            char oneAhead = fileString.charAt(i + 1);
+            if(Character.isDigit(oneAhead))
           case '.':
-
+            char oneAhead = fileString.charAt(i + 1);
+            if(Character.isDigit(oneAhead)){
+              charStream += ".";
+            }
           case '0':
             while( (Character.isDigit(ch) || ch == '.') && i < endOfFile){
               if(ch == '.' && decimal == 0){
