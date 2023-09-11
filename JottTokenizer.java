@@ -3,7 +3,7 @@
 /**
  * This class is responsible for tokenizing Jott code.
  * 
- * @author Issac Kim, lucie lim
+ * @author Issac Kim, lucie lim, Dara Prak
  **/
 
 import java.io.IOException;
@@ -44,7 +44,9 @@ public class JottTokenizer {
       String charStream = "";
       TokenType type = TokenType.ASSIGN; //placeholder to initalize variable
       int lineNum = 1;
+
       int endOfFile = fileString.length();
+      int decimal = 0;
 
       //goes through whole file string
       for ( int i = 0; i < endOfFile; i++ ) {
@@ -52,20 +54,30 @@ public class JottTokenizer {
         char ch = fileString.charAt(i);
 
         switch(ch){
+          /**
+           * Initial case:
+           *  charStream = ""
+           *  decimal = 0
+           */
           case ',':
-            Token token = new Token(",", filename, lineNum, TokenType.COMMA);
+            charStream = charStream + ",";
+            Token token = new Token(charStream, filename, lineNum, TokenType.COMMA);
             tokenStream.add(token);
           case '[':
-            token = new Token(",", filename, lineNum, TokenType.COMMA);
+            charStream = charStream + "[";
+            token = new Token(charStream, filename, lineNum, TokenType.L_BRACKET);
             tokenStream.add(token);
           case ']':
-            token = new Token(",", filename, lineNum, TokenType.COMMA);
+            charStream = charStream + "]";          
+            token = new Token(charStream, filename, lineNum, TokenType.R_BRACKET);
             tokenStream.add(token);
           case '{':
-            token = new Token(",", filename, lineNum, TokenType.COMMA);
+            charStream = charStream + "{";
+            token = new Token(charStream, filename, lineNum, TokenType.L_BRACE);
             tokenStream.add(token);       
           case '}':
-            token = new Token(",", filename, lineNum, TokenType.COMMA);
+            charStream = charStream + "}";
+            token = new Token(charStream, filename, lineNum, TokenType.R_BRACE);
             tokenStream.add(token);
           case '=':
             // check to see if the next char is a another = sign
@@ -125,29 +137,155 @@ public class JottTokenizer {
             token = new Token("*", filename, lineNum, TokenType.MATH_OP);
             tokenStream.add(token);
           case ';':
-
+            token = new Token(";", filename, lineNum, TokenType.SEMICOLON);
+            tokenStream.add(token);
+          case ':':
+            char oneAhead = fileString.charAt(i + 1);
+            if(Character.isDigit(oneAhead))
           case '.':
-
+            char oneAhead = fileString.charAt(i + 1);
+            if(Character.isDigit(oneAhead)){
+              charStream += ".";
+            }
           case '0':
-
+            while( (Character.isDigit(ch) || ch == '.') && i < endOfFile){
+              if(ch == '.' && decimal == 0){
+                decimal++;
+              }
+              if(decimal > 1){
+                //Error message and break
+              }
+              charStream = charStream + ch;
+              i++;
+              ch = fileString.charAt(i);
+            }
+            token = new Token(charStream, filename, lineNum, TokenType.NUMBER);
+            tokenStream.add(token);
           case '1':
-
+            while( (Character.isDigit(ch) || ch == '.') && i < endOfFile){
+              if(ch == '.' && decimal == 0){
+                decimal++;
+              }
+              if(decimal > 1){
+                //Error message and break
+              }
+              charStream = charStream + ch;
+              i++;
+              ch = fileString.charAt(i);
+            }
+            token = new Token(charStream, filename, lineNum, TokenType.NUMBER);
+            tokenStream.add(token);
           case '2':
-
+            while( (Character.isDigit(ch) || ch == '.') && i < endOfFile){
+              if(ch == '.' && decimal == 0){
+                decimal++;
+              }
+              if(decimal > 1){
+                //Error message and break
+              }
+              charStream = charStream + ch;
+              i++;
+              ch = fileString.charAt(i);
+            }
+            token = new Token(charStream, filename, lineNum, TokenType.NUMBER);
+            tokenStream.add(token);
           case '3':
-
+            while( (Character.isDigit(ch) || ch == '.') && i < endOfFile){
+              if(ch == '.' && decimal == 0){
+                decimal++;
+              }
+              if(decimal > 1){
+                //Error message and break
+              }
+              charStream = charStream + ch;
+              i++;
+              ch = fileString.charAt(i);
+            }
+            token = new Token(charStream, filename, lineNum, TokenType.NUMBER);
+            tokenStream.add(token);
           case '4':
-
-          case '5': 
-
+            while( (Character.isDigit(ch) || ch == '.') && i < endOfFile){
+              if(ch == '.' && decimal == 0){
+                decimal++;
+              }
+              if(decimal > 1){
+                //Error message and break
+              }
+              charStream = charStream + ch;
+              i++;
+              ch = fileString.charAt(i);
+            }
+            token = new Token(charStream, filename, lineNum, TokenType.NUMBER);
+            tokenStream.add(token);
+          case '5':
+            while( (Character.isDigit(ch) || ch == '.') && i < endOfFile){
+              if(ch == '.' && decimal == 0){
+                decimal++;
+              }
+              if(decimal > 1){
+                //Error message and break
+              }
+              charStream = charStream + ch;
+              i++;
+              ch = fileString.charAt(i);
+            }
+            token = new Token(charStream, filename, lineNum, TokenType.NUMBER);
+            tokenStream.add(token);
           case '6':
-
+            while( (Character.isDigit(ch) || ch == '.') && i < endOfFile){
+              if(ch == '.' && decimal == 0){
+                decimal++;
+              }
+              if(decimal > 1){
+                //Error message and break
+              }
+              charStream = charStream + ch;
+              i++;
+              ch = fileString.charAt(i);
+            }
+            token = new Token(charStream, filename, lineNum, TokenType.NUMBER);
+            tokenStream.add(token);
           case '7':
-
+            while( (Character.isDigit(ch) || ch == '.') && i < endOfFile){
+              if(ch == '.' && decimal == 0){
+                decimal++;
+              }
+              if(decimal > 1){
+                //Error message and break
+              }
+              charStream = charStream + ch;
+              i++;
+              ch = fileString.charAt(i);
+            }
+            token = new Token(charStream, filename, lineNum, TokenType.NUMBER);
+            tokenStream.add(token);
           case '8':
-
+            while( (Character.isDigit(ch) || ch == '.') && i < endOfFile){
+              if(ch == '.' && decimal == 0){
+                decimal++;
+              }
+              if(decimal > 1){
+                //Error message and break
+              }
+              charStream = charStream + ch;
+              i++;
+              ch = fileString.charAt(i);
+            }
+            token = new Token(charStream, filename, lineNum, TokenType.NUMBER);
+            tokenStream.add(token);
           case '9':
-
+            while( (Character.isDigit(ch) || ch == '.') && i < endOfFile){
+              if(ch == '.' && decimal == 0){
+                decimal++;
+              }
+              if(decimal > 1){
+                //Error message and break
+              }
+              charStream = charStream + ch;
+              i++;
+              ch = fileString.charAt(i);
+            }
+            token = new Token(charStream, filename, lineNum, TokenType.NUMBER);
           case '#':
             while(ch != '\n' && i < endOfFile){
               i++;
@@ -158,17 +296,24 @@ public class JottTokenizer {
 
           case ' ':
 
+          default:
+            if(Character.isAlphabetic(ch) && charStream == ""){
+              charStream = charStream + ch;
+              i++;
+              ch = fileString.charAt(i);
+              while( (Character.isAlphabetic(ch) || Character.isDigit(ch)) && i < endOfFile){
+                charStream = charStream + ch;
+                i++;
+                ch = fileString.charAt(i);
+              }
+              token = new Token(charStream, filename, lineNum, TokenType.ID_KEYWORD);
+              tokenStream.add(token);
+            }
+            if(charStream != ""){
+              charStream = "";
+              decimal = 0;
+            }
         }
-
-        if(ch == '\n'){
-
-          lineNum++;
-          continue;
-
-        }
-
-        System.out.println(ch);
-        //branches from DFA
           
       }
 
