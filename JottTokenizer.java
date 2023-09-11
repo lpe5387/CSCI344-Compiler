@@ -53,40 +53,20 @@ public class JottTokenizer {
 
         switch(ch){
           case ',':
-            Token token = (charStream == "") ? new Token(",", filename, lineNum, TokenType.COMMA) : new Token(charStream, filename, lineNum, type);
+            Token token = new Token(",", filename, lineNum, TokenType.COMMA);
             tokenStream.add(token);
-            if(charStream != ""){
-              token = new Token(",", filename, lineNum, TokenType.COMMA);
-              tokenStream.add(token);
-            }
           case '[':
-            token = (charStream == "") ? new Token("[", filename, lineNum, TokenType.L_BRACKET) : new Token(charStream, filename, lineNum, type);
+            token = new Token(",", filename, lineNum, TokenType.COMMA);
             tokenStream.add(token);
-            if(charStream != ""){
-              token = new Token("[", filename, lineNum, TokenType.L_BRACKET);
-              tokenStream.add(token);
-            }
           case ']':
-            token = (charStream == "") ? new Token("]", filename, lineNum, TokenType.R_BRACKET) : new Token(charStream, filename, lineNum, type);
+            token = new Token(",", filename, lineNum, TokenType.COMMA);
             tokenStream.add(token);
-            if(charStream != ""){
-              token = new Token("]", filename, lineNum, TokenType.R_BRACKET);
-              tokenStream.add(token);
-            }
           case '{':
-            token = (charStream == "") ? new Token("{", filename, lineNum, TokenType.L_BRACE) : new Token(charStream, filename, lineNum, type);
-            tokenStream.add(token);
-            if(charStream != ""){
-              token = new Token("{", filename, lineNum, TokenType.L_BRACE);
-              tokenStream.add(token);
-            }        
+            token = new Token(",", filename, lineNum, TokenType.COMMA);
+            tokenStream.add(token);       
           case '}':
-            token = (charStream == "") ? new Token("}", filename, lineNum, TokenType.R_BRACE) : new Token(charStream, filename, lineNum, type);
+            token = new Token(",", filename, lineNum, TokenType.COMMA);
             tokenStream.add(token);
-            if(charStream != ""){
-              token = new Token("}", filename, lineNum, TokenType.R_BRACE);
-              tokenStream.add(token);
-            }
           case '=':
 
           case '<':
