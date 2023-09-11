@@ -3,7 +3,7 @@
 /**
  * This class is responsible for tokenizing Jott code.
  * 
- * @author Issac Kim, lucie lim, Dara Prak
+ * @author Issac Kim, lucie lim, Dara Prak, Andrew Dantone
  **/
 
 import java.io.IOException;
@@ -92,6 +92,45 @@ public class JottTokenizer {
           case '-':
 
           case '*':
+
+          case '!':
+            //check next char for an =
+            char nextChar = fileString.charAt(i + 1); 
+            if (nextChar == '='){ //if so make it a token
+              token = new Token("!=", filename, lineNum, TokenType.REL_OP);
+              tokenStream.add(token);
+              i++;
+            }
+            else{//otherwise its an error as an ! can only be followed by an =
+              //TODO error out of here and break
+            };
+
+          case: '"':
+            String tok = "\""; //initial " for start of string
+            char nextChar = fileString.charAt(i + 1); //get the next character
+            tok += nextChar; //add it to the token string, have to do this here in case empty string
+            int x = 1;
+            //loops through all follwing nums, chars, and spaces
+            while(Character.isDigit(nextChar) || Character.isAlphabetic(nextChar) || nextChar == ' '){ 
+              if (x != 1){ 
+                tok += nextChar; //add character to string
+              }
+              x++; //increase count
+              nextChar = fileString.charAt(i + x); //get next character
+            }
+            //catching the ending "
+            if (x != 1){
+              tok += "\"";
+            }
+            x++;
+            //if we end with a " end normally
+            if (nextChar == '"'){
+              token = new Token(tok, filename, lineNum, TokenType.STRING);
+              i += x;
+            }
+            else{ //if we end with anything else error, if we reach here with a num, char, or space something has gone very wrong
+              //error out and break
+            };
 
           case ';':
             token = new Token(";", filename, lineNum, TokenType.SEMICOLON);
