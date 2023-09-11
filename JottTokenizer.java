@@ -56,10 +56,10 @@ public class JottTokenizer {
             Token token = new Token(",", filename, lineNum, TokenType.COMMA);
             tokenStream.add(token);
           case '[':
-            token = new Token(",", filename, lineNum, TokenType.COMMA);
+            token = new Token("[", filename, lineNum, TokenType.COMMA);
             tokenStream.add(token);
           case ']':
-            token = new Token(",", filename, lineNum, TokenType.COMMA);
+            token = new Token("]", filename, lineNum, TokenType.COMMA);
             tokenStream.add(token);
           case '{':
             token = new Token(",", filename, lineNum, TokenType.COMMA);
@@ -86,7 +86,11 @@ public class JottTokenizer {
           case '.':
 
           case '0':
-
+            while(Character.isDigit(ch) && i < endOfFile){
+              charStream = charStream + ch;
+              i++;
+              ch = fileString.charAt(i);
+            }
           case '1':
 
           case '2':
@@ -114,6 +118,23 @@ public class JottTokenizer {
             lineNum++;
 
           case ' ':
+
+          default:
+            charStream = "";
+            if(Character.isAlphabetic(ch)){
+              charStream = charStream + ch;
+              i++;
+              ch = fileString.charAt(i);
+              while( (Character.isAlphabetic(ch) || Character.isDigit(ch)) && i < endOfFile){
+                charStream = charStream + ch;
+                i++;
+                ch = fileString.charAt(i);
+              }
+            }
+            if(charStream != ""){
+              token = new Token(charStream, filename, lineNum, type);
+            }
+            charStream = "";
 
         }
 
