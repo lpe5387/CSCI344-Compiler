@@ -120,8 +120,7 @@ public class JottTokenizer {
           case ' ':
 
           default:
-            charStream = "";
-            if(Character.isAlphabetic(ch)){
+            if(Character.isAlphabetic(ch) && charStream == ""){
               charStream = charStream + ch;
               i++;
               ch = fileString.charAt(i);
