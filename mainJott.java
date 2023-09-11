@@ -1,0 +1,20 @@
+/**
+ *  This is the main file to run the program
+ * 
+ *  @author: Lucie Lim, 
+ */
+
+
+public class mainJott {
+    public static void main (String[] args) {
+        try {
+           JottTokenizer.main(args);
+        } catch (Exception exception) {
+            //syntax error, invalid token "!", filename.jott: lineNum
+            // 
+            // TODO print the exception being sent from the jott tokenizer
+            // 
+            //System.out.println();
+        }
+    }    
+}
