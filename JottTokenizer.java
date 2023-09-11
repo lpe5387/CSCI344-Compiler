@@ -44,7 +44,9 @@ public class JottTokenizer {
       String charStream = "";
       TokenType type = TokenType.ASSIGN; //placeholder to initalize variable
       int lineNum = 1;
+
       int endOfFile = fileString.length();
+      int decimal = 0;
 
       //goes through whole file string
       for ( int i = 0; i < endOfFile; i++ ) {
@@ -53,19 +55,24 @@ public class JottTokenizer {
 
         switch(ch){
           case ',':
-            Token token = new Token(",", filename, lineNum, TokenType.COMMA);
+            charStream = charStream + ",";
+            Token token = new Token(charStream, filename, lineNum, TokenType.COMMA);
             tokenStream.add(token);
           case '[':
-            token = new Token("[", filename, lineNum, TokenType.COMMA);
+            charStream = charStream + "[";
+            token = new Token(charStream, filename, lineNum, TokenType.L_BRACKET);
             tokenStream.add(token);
           case ']':
-            token = new Token("]", filename, lineNum, TokenType.COMMA);
+            charStream = charStream + "]";          
+            token = new Token(charStream, filename, lineNum, TokenType.R_BRACKET);
             tokenStream.add(token);
           case '{':
-            token = new Token(",", filename, lineNum, TokenType.COMMA);
+            charStream = charStream + "{";
+            token = new Token(charStream, filename, lineNum, TokenType.L_BRACE);
             tokenStream.add(token);       
           case '}':
-            token = new Token(",", filename, lineNum, TokenType.COMMA);
+            charStream = charStream + "}";
+            token = new Token(charStream, filename, lineNum, TokenType.R_BRACE);
             tokenStream.add(token);
           case '=':
 
@@ -86,29 +93,125 @@ public class JottTokenizer {
           case '.':
 
           case '0':
-            while(Character.isDigit(ch) && i < endOfFile){
+            while( (Character.isDigit(ch) || ch == '.') && i < endOfFile){
+              if(ch == '.' && decimal == 0){
+                decimal++;
+              }
+              if(decimal > 1){
+                //Error message and break
+              }
               charStream = charStream + ch;
               i++;
               ch = fileString.charAt(i);
             }
           case '1':
-
+            while( (Character.isDigit(ch) || ch == '.') && i < endOfFile){
+              if(ch == '.' && decimal == 0){
+                decimal++;
+              }
+              if(decimal > 1){
+                //Error message and break
+              }
+              charStream = charStream + ch;
+              i++;
+              ch = fileString.charAt(i);
+            }
           case '2':
-
+            while( (Character.isDigit(ch) || ch == '.') && i < endOfFile){
+              if(ch == '.' && decimal == 0){
+                decimal++;
+              }
+              if(decimal > 1){
+                //Error message and break
+              }
+              charStream = charStream + ch;
+              i++;
+              ch = fileString.charAt(i);
+            }
           case '3':
-
+            while( (Character.isDigit(ch) || ch == '.') && i < endOfFile){
+              if(ch == '.' && decimal == 0){
+                decimal++;
+              }
+              if(decimal > 1){
+                //Error message and break
+              }
+              charStream = charStream + ch;
+              i++;
+              ch = fileString.charAt(i);
+            }
           case '4':
-
-          case '5': 
-
+            while( (Character.isDigit(ch) || ch == '.') && i < endOfFile){
+              if(ch == '.' && decimal == 0){
+                decimal++;
+              }
+              if(decimal > 1){
+                //Error message and break
+              }
+              charStream = charStream + ch;
+              i++;
+              ch = fileString.charAt(i);
+            }
+          case '5':
+            while( (Character.isDigit(ch) || ch == '.') && i < endOfFile){
+              if(ch == '.' && decimal == 0){
+                decimal++;
+              }
+              if(decimal > 1){
+                //Error message and break
+              }
+              charStream = charStream + ch;
+              i++;
+              ch = fileString.charAt(i);
+            }
           case '6':
-
+            while( (Character.isDigit(ch) || ch == '.') && i < endOfFile){
+              if(ch == '.' && decimal == 0){
+                decimal++;
+              }
+              if(decimal > 1){
+                //Error message and break
+              }
+              charStream = charStream + ch;
+              i++;
+              ch = fileString.charAt(i);
+            }
           case '7':
-
+            while( (Character.isDigit(ch) || ch == '.') && i < endOfFile){
+              if(ch == '.' && decimal == 0){
+                decimal++;
+              }
+              if(decimal > 1){
+                //Error message and break
+              }
+              charStream = charStream + ch;
+              i++;
+              ch = fileString.charAt(i);
+            }
           case '8':
-
+            while( (Character.isDigit(ch) || ch == '.') && i < endOfFile){
+              if(ch == '.' && decimal == 0){
+                decimal++;
+              }
+              if(decimal > 1){
+                //Error message and break
+              }
+              charStream = charStream + ch;
+              i++;
+              ch = fileString.charAt(i);
+            }
           case '9':
-
+            while( (Character.isDigit(ch) || ch == '.') && i < endOfFile){
+              if(ch == '.' && decimal == 0){
+                decimal++;
+              }
+              if(decimal > 1){
+                //Error message and break
+              }
+              charStream = charStream + ch;
+              i++;
+              ch = fileString.charAt(i);
+            }
           case '#':
             while(ch != '\n' && i < endOfFile){
               i++;
@@ -133,6 +236,7 @@ public class JottTokenizer {
             if(charStream != ""){
               token = new Token(charStream, filename, lineNum, TokenType.ID_KEYWORD);
               charStream = "";
+              decimal = 0;
             }
         }
 
