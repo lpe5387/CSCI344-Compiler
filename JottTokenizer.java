@@ -111,6 +111,9 @@ public class JottTokenizer {
               }
               if(decimal > 1){
                 //Error message and break
+                charStream = charStream + ch;
+                System.out.println("Syntax Error: Incorrect number\n" + charStream + "\n[Line " + lineNum + "]");
+                System.exit(0);
               }
               charStream = charStream + ch;
               i++;
@@ -125,6 +128,9 @@ public class JottTokenizer {
               }
               if(decimal > 1){
                 //Error message and break
+                charStream = charStream + ch;
+                System.out.println("Syntax Error: Incorrect number\n" + charStream + "\n[Line " + lineNum + "]");
+                System.exit(0);
               }
               charStream = charStream + ch;
               i++;
@@ -139,6 +145,9 @@ public class JottTokenizer {
               }
               if(decimal > 1){
                 //Error message and break
+                charStream = charStream + ch;
+                System.out.println("Syntax Error: Incorrect number\n" + charStream + "\n[Line " + lineNum + "]");
+                System.exit(0);
               }
               charStream = charStream + ch;
               i++;
@@ -153,6 +162,9 @@ public class JottTokenizer {
               }
               if(decimal > 1){
                 //Error message and break
+                charStream = charStream + ch;
+                System.out.println("Syntax Error: Incorrect number\n" + charStream + "\n[Line " + lineNum + "]");
+                System.exit(0);
               }
               charStream = charStream + ch;
               i++;
@@ -167,6 +179,9 @@ public class JottTokenizer {
               }
               if(decimal > 1){
                 //Error message and break
+                charStream = charStream + ch;
+                System.out.println("Syntax Error: Incorrect number\n" + charStream + "\n[Line " + lineNum + "]");
+                System.exit(0);
               }
               charStream = charStream + ch;
               i++;
@@ -181,6 +196,9 @@ public class JottTokenizer {
               }
               if(decimal > 1){
                 //Error message and break
+                charStream = charStream + ch;
+                System.out.println("Syntax Error: Incorrect number\n" + charStream + "\n[Line " + lineNum + "]");
+                System.exit(0);
               }
               charStream = charStream + ch;
               i++;
@@ -195,6 +213,9 @@ public class JottTokenizer {
               }
               if(decimal > 1){
                 //Error message and break
+                charStream = charStream + ch;
+                System.out.println("Syntax Error: Incorrect number\n" + charStream + "\n[Line " + lineNum + "]");
+                System.exit(0);
               }
               charStream = charStream + ch;
               i++;
@@ -209,6 +230,9 @@ public class JottTokenizer {
               }
               if(decimal > 1){
                 //Error message and break
+                charStream = charStream + ch;
+                System.out.println("Syntax Error: Incorrect number\n" + charStream + "\n[Line " + lineNum + "]");
+                System.exit(0);
               }
               charStream = charStream + ch;
               i++;
@@ -223,6 +247,9 @@ public class JottTokenizer {
               }
               if(decimal > 1){
                 //Error message and break
+                charStream = charStream + ch;
+                System.out.println("Syntax Error: Incorrect number\n" + charStream + "\n[Line " + lineNum + "]");
+                System.exit(0);
               }
               charStream = charStream + ch;
               i++;
@@ -237,6 +264,9 @@ public class JottTokenizer {
               }
               if(decimal > 1){
                 //Error message and break
+                charStream = charStream + ch;
+                System.out.println("Syntax Error: Incorrect number\n" + charStream + "\n[Line " + lineNum + "]");
+                System.exit(0);
               }
               charStream = charStream + ch;
               i++;
