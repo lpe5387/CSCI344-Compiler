@@ -1,14 +1,14 @@
-public class FuncDefParamsNode implements JottTree {
+public class FunctionReturnNode {
     
-    private IdNode id;
+    private String voidReturn;
     private TypeNode type;
 
-    private FuncDefParamsTNode funcDefParamsT;
+    public FunctionReturnNode(String voidReturn){
+        this.voidReturn = voidReturn;
+    }
 
-    public FuncDefParamsNode(IdNode id, TypeNode type, FuncDefParamsTNode funcDefParamsT){
-        this.id = id;
+    public FunctionReturnNode(TypeNode type){
         this.type = type;
-        this.funcDefParamsT = funcDefParamsT;
     }
 
     public String convertToJott(){return "";}

@@ -1,9 +1,9 @@
 public class FuncCallNode implements JottTree {
     
-    private String id;
+    private IdNode id;
     private ParamsNode params;
 
-    public FuncCallNode(String id, ParamsNode params){
+    public FuncCallNode(IdNode id, ParamsNode params){
         this.id = id;
         this.params = params;
     }

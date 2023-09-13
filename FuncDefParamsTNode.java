@@ -1,11 +1,11 @@
 public class FuncDefParamsTNode implements JottTree {
     
-    private String id;
-    private String type;
+    private IdNode id;
+    private TypeNode type;
 
     private FuncDefParamsTNode funcDefParamsT;
 
-    public FuncDefParamsTNode(String id, String type, FuncDefParamsTNode funcDefParamsT){
+    public FuncDefParamsTNode(IdNode id, TypeNode type, FuncDefParamsTNode funcDefParamsT){
         this.id = id;
         this.type = type;
         this.funcDefParamsT = funcDefParamsT;

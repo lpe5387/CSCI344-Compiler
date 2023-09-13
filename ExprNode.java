@@ -1,34 +1,48 @@
 public class ExprNode implements JottTree {
     
-    private String bool;
+    private BoolNode bool;
     private FuncCallNode func;
-    private String op;
-    private String id;
-    private String num;
-    private String str;
+    private OpNode op;
+    private IdNode id;
+    private NumNode num;
+    private StringLiteralNode str;
 
     private ExprNode expr;
 
-    public ExprNode(String value, String checkType){
-        if(checkType.equals("bool")) this.bool = value;
-        else if(checkType.equals("id")) this.id = value;
-        else if(checkType.equals("num")) this.num = value;
-        else if(checkType.equals("str_literal")) this.str = value;
+    public ExprNode(StringLiteralNode str){
+        this.str = str;
+    }
+
+    public ExprNode(NumNode num){
+        this.num = num;
+    }
+
+    public ExprNode(BoolNode bool){
+        this.bool = bool;
+    }
+
+    public ExprNode(IdNode id){
+        this.id = id;
     }
 
     public ExprNode(FuncCallNode func){
         this.func = func;
     }
 
-    public ExprNode(FuncCallNode func, String op, ExprNode expr){
+    public ExprNode(FuncCallNode func, OpNode op, ExprNode expr){
         this.func = func;
         this.op = op;
         this.expr = expr;
     }
 
-    public ExprNode(String value, String op, ExprNode expr, String checkType){
-        if(checkType.equals("id")) this.id = value;
-        else if(checkType.equals("num")) this.num = value;
+    public ExprNode(NumNode num, OpNode op, ExprNode expr){
+        this.num = num;
+        this.op = op;
+        this.expr = expr;
+    }
+
+    public ExprNode(IdNode id, OpNode op, ExprNode expr){
+        this.id = id;
         this.op = op;
         this.expr = expr;
     }

@@ -1,15 +1,15 @@
 public class AsmtNode implements JottTree {
     
-    private String type;
-    private String id;
+    private TypeNode type;
+    private IdNode id;
     private ExprNode expr;
 
-    public AsmtNode(String id, ExprNode expr){
+    public AsmtNode(IdNode id, ExprNode expr){
         this.id = id;
         this.expr = expr;
     }
 
-    public AsmtNode(String type, String id, ExprNode expr){
+    public AsmtNode(TypeNode type, IdNode id, ExprNode expr){
         this.type = type;
         this.id = id;
         this.expr = expr;

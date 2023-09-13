@@ -1,11 +1,9 @@
-public class VarDecNode implements JottTree {
+public class BoolNode {
+    
+    private String value;
 
-    private TypeNode type;
-    private IdNode id;
-
-    public VarDecNode(TypeNode type, IdNode id){
-        this.type = type;
-        this.id = id;
+    public BoolNode(String value){
+        this.value = value;
     }
 
     public String convertToJott(){return "";}
