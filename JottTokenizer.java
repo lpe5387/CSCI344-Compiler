@@ -179,10 +179,10 @@ public class JottTokenizer {
             }
               tokenStream.add(token);
           case '.':
-            i++;
+            i++; // looks ahead one
             ch = fileString.charAt(i);
             if(!Character.isDigit(ch)){
-              // Invalid Token
+              throw new SyntaxException("Invalid token \""+ch+"\""+", expected int.", filename, lineNum);
             }
             charStream += '.';
             while((Character.isDigit(ch)) && i < endOfFile){
@@ -377,7 +377,9 @@ public class JottTokenizer {
 
       //handles SecExe
       System.out.println(sece.toString());
-
+      
+    } catch(SyntaxException synex){
+      System.out.println(synex.toString());
     }
 
 		return null;
