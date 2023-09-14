@@ -8,7 +8,7 @@
 public class mainJott {
     public static void main (String[] args) {
         try {
-           JottTokenizer.main(args);
+           JottTokenizer.tokenize(args[1]);
         } catch (Exception exception) {
             //syntax error, invalid token "!", filename.jott: lineNum
             // 
