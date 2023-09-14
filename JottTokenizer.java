@@ -138,7 +138,7 @@ public class JottTokenizer {
             tokenStream.add(token);
           case '!':
             //check next char for an =
-            char nextChar = fileString.charAt(i + 1); 
+            char nextChar = fileString.charAt(i + 1);
             if (nextChar == '='){ //if so make it a token
               token = new Token("!=", filename, lineNum, TokenType.REL_OP);
               tokenStream.add(token);
