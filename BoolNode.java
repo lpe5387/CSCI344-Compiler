@@ -18,8 +18,9 @@ public class BoolNode {
      * Function to parse a Boolean node for the parse tree.
      * @param tokenlist the list of tokens made from the Tokenizer
      * @return BoolNode
+     * @throws SyntaxException
      */
-    public static BoolNode ParseBool(ArrayList<Token> tokenlist){
+    public static BoolNode ParseBool(ArrayList<Token> tokenlist) throws SyntaxException{
         Token token = tokenlist.get(0);
         String tokenValue = token.getToken();
         if(token.getTokenType() == TokenType.ID_KEYWORD && (tokenValue.equals("True") || 
@@ -29,8 +30,8 @@ public class BoolNode {
             return node;
         }
         else{
-            // throw new SyntaxException();
-            return null;
+            throw new SyntaxException("Expected a Boolean value, got "+token.getTokenType()+
+            " ("+token.getToken()+")", token.getFilename(), token.getLineNum());
         }
     }
 
