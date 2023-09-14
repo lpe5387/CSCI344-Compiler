@@ -1,3 +1,8 @@
+/**
+ * This class is responsible for the if statement node for the parse tree
+ *
+ * @author Luka Eaton
+ */
 public class IfStmtNode implements JottTree {
     
     private ExprNode expr;

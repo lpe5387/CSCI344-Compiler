@@ -1,3 +1,8 @@
+/**
+ * This class is responsible for the function definition parameters node for the parse tree
+ *
+ * @author Luka Eaton
+ */
 public class FuncDefParamsNode implements JottTree {
     
     private IdNode id;

@@ -1,3 +1,8 @@
+/**
+ * This class is responsible for the body node for the parse tree
+ *
+ * @author Luka Eaton
+ */
 public class BodyNode implements JottTree {
     
     private BodyStmtNode bodyStmt;

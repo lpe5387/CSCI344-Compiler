@@ -1,3 +1,8 @@
+/**
+ * This class is responsible for the ID node for the parse tree
+ *
+ * @author Luka Eaton
+ */
 public class IdNode implements JottTree {
  
     private String value;

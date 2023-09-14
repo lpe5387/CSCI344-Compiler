@@ -1,3 +1,8 @@
+/**
+ * This class is responsible for the while loop node for the parse tree
+ *
+ * @author Luka Eaton
+ */
 public class WhileLoopNode implements JottTree {
     
     private ExprNode expr;

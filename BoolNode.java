@@ -1,3 +1,8 @@
+/**
+ * This class is responsible for the boolean node for the parse tree
+ *
+ * @author Luka Eaton
+ */
 public class BoolNode {
     
     private String value;

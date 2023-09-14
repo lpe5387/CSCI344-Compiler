@@ -1,3 +1,8 @@
+/**
+ * This class is responsible for the return statement node for the parse tree
+ *
+ * @author Luka Eaton
+ */
 public class ReturnStmtNode implements JottTree {
 
     private ExprNode expr;

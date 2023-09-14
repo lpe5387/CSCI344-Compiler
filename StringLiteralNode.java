@@ -1,3 +1,8 @@
+/**
+ * This class is responsible for the string literal node for the parse tree
+ *
+ * @author Luka Eaton
+ */
 public class StringLiteralNode {
     
     private String value;

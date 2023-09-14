@@ -1,3 +1,8 @@
+/**
+ * This class is responsible for the assignment node for the parse tree
+ *
+ * @author Luka Eaton
+ */
 public class AsmtNode implements JottTree {
     
     private TypeNode type;

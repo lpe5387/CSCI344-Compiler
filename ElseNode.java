@@ -1,3 +1,8 @@
+/**
+ * This class is responsible for the else node for the parse tree
+ *
+ * @author Luka Eaton
+ */
 public class ElseNode implements JottTree {
 
     private BodyNode body;

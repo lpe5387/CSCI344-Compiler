@@ -1,3 +1,8 @@
+/**
+ * This class is responsible for the function return node for the parse tree
+ *
+ * @author Luka Eaton
+ */
 public class FunctionReturnNode {
     
     private String voidReturn;
