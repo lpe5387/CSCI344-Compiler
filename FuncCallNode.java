@@ -1,3 +1,8 @@
+/**
+ * This class is responsible for the function call node for the parse tree
+ *
+ * @author Luka Eaton
+ */
 public class FuncCallNode implements JottTree {
     
     private IdNode id;

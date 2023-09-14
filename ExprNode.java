@@ -1,3 +1,8 @@
+/**
+ * This class is responsible for the expression node for the parse tree
+ *
+ * @author Luka Eaton
+ */
 public class ExprNode implements JottTree {
     
     private BoolNode bool;

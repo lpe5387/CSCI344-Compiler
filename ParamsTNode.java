@@ -1,3 +1,8 @@
+/**
+ * This class is responsible for the additional parameters node for the parse tree
+ *
+ * @author Luka Eaton
+ */
 public class ParamsTNode implements JottTree {
 
     private boolean isEmpty;

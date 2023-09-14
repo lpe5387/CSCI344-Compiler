@@ -1,3 +1,8 @@
+/**
+ * This class is responsible for the program node for the parse tree
+ *
+ * @author Luka Eaton
+ */
 public class ProgramNode implements JottTree {
     
     private FuncDefNode funcDef;

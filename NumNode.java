@@ -1,3 +1,8 @@
+/**
+ * This class is responsible for the number node for the parse tree
+ *
+ * @author Luka Eaton
+ */
 public class NumNode {
 
     private String value;

@@ -1,3 +1,8 @@
+/**
+ * This class is responsible for the operation node for the parse tree
+ *
+ * @author Luka Eaton
+ */
 public class OpNode {
 
     private String value;

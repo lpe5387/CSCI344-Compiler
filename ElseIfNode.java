@@ -1,3 +1,8 @@
+/**
+ * This class is responsible for the else if node for the parse tree
+ *
+ * @author Luka Eaton
+ */
 public class ElseIfNode implements JottTree {
     
     private ExprNode expr;

@@ -1,3 +1,8 @@
+/**
+ * This class is responsible for the variable declaration node for the parse tree
+ *
+ * @author Luka Eaton
+ */
 public class VarDecNode implements JottTree {
 
     private TypeNode type;
