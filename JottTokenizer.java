@@ -14,15 +14,6 @@ import java.util.ArrayList;
 
 public class JottTokenizer {
 
-  /**
-   * java JottTokenizer.java Token.java [Insert file path to testcase]
-   * 
-   * @param args
-   */
-  public static void main(String[] args){
-    tokenize(args[1]);
-  }
-
 	/**
    * Takes in a filename and tokenizes that file into Tokens
    * based on the rules of the Jott Language
@@ -138,7 +129,7 @@ public class JottTokenizer {
             tokenStream.add(token);
           case '!':
             //check next char for an =
-            char nextChar = fileString.charAt(i + 1); 
+            nextChar = fileString.charAt(i + 1); 
             if (nextChar == '='){ //if so make it a token
               token = new Token("!=", filename, lineNum, TokenType.REL_OP);
               tokenStream.add(token);
@@ -148,9 +139,9 @@ public class JottTokenizer {
               //TODO error out of here and break
             };
 
-          case: '"':
+          case '"':
             String tok = "\""; //initial " for start of string
-            char nextChar = fileString.charAt(i + 1); //get the next character
+            nextChar = fileString.charAt(i + 1); //get the next character
             tok += nextChar; //add it to the token string, have to do this here in case empty string
             int x = 1;
             //loops through all follwing nums, chars, and spaces
