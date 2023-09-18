@@ -1,7 +1,7 @@
 /**
  * This class is responsible for the string literal node for the parse tree
  *
- * @author Luka Eaton
+ * @author Luka Eaton, lucie lim
  */
 
 import provided.JottTree;

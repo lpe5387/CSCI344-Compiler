@@ -1,12 +1,14 @@
 /**
  * This class is responsible for the number node for the parse tree
  *
- * @author Luka Eaton
+ * @author Luka Eaton, lucie lim
  */
 
 import provided.JottTree;
 
 import java.util.ArrayList;
+import provided.Token;
+import provided.TokenType;
 
 public class FuncHeaderNode implements JottTree {
 
