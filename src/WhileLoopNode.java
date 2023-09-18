@@ -3,6 +3,9 @@
  *
  * @author Luka Eaton
  */
+
+import provided.JottTree;
+
 public class WhileLoopNode implements JottTree {
     
     private ExprNode expr;

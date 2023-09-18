@@ -3,6 +3,9 @@
  *
  * @author Luka Eaton
  */
+
+import provided.JottTree;
+
 public class VarDecNode implements JottTree {
 
     private TypeNode type;

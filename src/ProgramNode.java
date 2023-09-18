@@ -3,6 +3,9 @@
  *
  * @author Luka Eaton
  */
+
+import provided.JottTree;
+
 public class ProgramNode implements JottTree {
     
     private FuncDefNode funcDef;

@@ -3,7 +3,11 @@
  *
  * @author Luka Eaton
  */
-public class TypeNode {
+
+import provided.JottTree;
+import provided.Token;
+
+public class TypeNode implements JottTree {
     
     private Token token;
 

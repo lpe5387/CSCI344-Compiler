@@ -3,6 +3,9 @@
  *
  * @author Luka Eaton
  */
+
+import provided.JottTree;
+
 public class FuncDefNode implements JottTree {
     
     private IdNode id;

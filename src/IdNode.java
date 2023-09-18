@@ -4,6 +4,7 @@
  * @author Luka Eaton
  */
 
+import provided.JottTree;
 import java.util.ArrayList;
 
 public class IdNode implements JottTree {

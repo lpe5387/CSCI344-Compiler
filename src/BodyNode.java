@@ -3,6 +3,9 @@
  *
  * @author Luka Eaton
  */
+
+import provided.JottTree;
+
 public class BodyNode implements JottTree {
     
     private BodyStmtNode bodyStmt;

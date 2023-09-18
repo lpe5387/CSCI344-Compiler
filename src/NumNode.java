@@ -3,7 +3,11 @@
  *
  * @author Luka Eaton
  */
-public class NumNode {
+
+import provided.JottTree;
+import provided.Token;
+
+public class NumNode implements JottTree {
 
     private Token token;
 

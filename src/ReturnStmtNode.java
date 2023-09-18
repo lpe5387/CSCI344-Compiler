@@ -3,6 +3,9 @@
  *
  * @author Luka Eaton
  */
+
+import provided.JottTree;
+
 public class ReturnStmtNode implements JottTree {
 
     private ExprNode expr;

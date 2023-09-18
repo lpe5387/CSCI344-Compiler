@@ -4,9 +4,11 @@
  * @author Luka Eaton
  */
 
+import provided.JottTree;
+
 import java.util.ArrayList;
 
-public class BoolNode {
+public class BoolNode implements JottTree{
     
     private Token token;
 

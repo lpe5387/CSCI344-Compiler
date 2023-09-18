@@ -3,7 +3,11 @@
  *
  * @author Luka Eaton
  */
-public class StringLiteralNode {
+
+import provided.JottTree;
+import provided.Token;
+
+public class StringLiteralNode implements JottTree {
     
     private Token token;
 

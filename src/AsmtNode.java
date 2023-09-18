@@ -3,6 +3,9 @@
  *
  * @author Luka Eaton
  */
+
+import provided.JottTree;
+
 public class AsmtNode implements JottTree {
     
     private TypeNode type;

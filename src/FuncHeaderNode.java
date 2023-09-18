@@ -4,9 +4,11 @@
  * @author Luka Eaton
  */
 
+import provided.JottTree;
+
 import java.util.ArrayList;
 
-public class FuncHeaderNode {
+public class FuncHeaderNode implements JottTree {
 
     private Token token;
 

@@ -3,6 +3,9 @@
  *
  * @author Luka Eaton
  */
+
+import provided.JottTree;
+
 public class ExprNode implements JottTree {
     
     private BoolNode bool;

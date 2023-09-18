@@ -4,9 +4,10 @@
  * @author Luka Eaton
  */
 
+import provided.JottTree;
 import java.util.ArrayList;
 
-public class OpNode {
+public class OpNode implements JottTree {
 
     private Token token;
 

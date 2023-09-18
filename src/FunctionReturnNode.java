@@ -3,7 +3,10 @@
  *
  * @author Luka Eaton
  */
-public class FunctionReturnNode {
+
+import provided.JottTree;
+
+public class FunctionReturnNode implements JottTree {
     
     private String voidReturn;
     private TypeNode type;

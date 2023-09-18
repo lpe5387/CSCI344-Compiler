@@ -3,6 +3,9 @@
  *
  * @author Luka Eaton
  */
+
+import provided.JottTree;
+
 public class ParamsNode implements JottTree {
 
     private boolean isEmpty;
