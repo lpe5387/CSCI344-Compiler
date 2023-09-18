@@ -5,10 +5,10 @@
  */
 public class TypeNode {
     
-    private String value;
+    private Token token;
 
-    public TypeNode(String value){
-        this.value = value;
+    public TypeNode(Token token){
+        this.token = token;
     }
 
     public String convertToJott(){return "";}

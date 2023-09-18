@@ -8,10 +8,10 @@ import java.util.ArrayList;
 
 public class BoolNode {
     
-    private String value;
+    private Token token;
 
-    public BoolNode(String value){
-        this.value = value;
+    public BoolNode(Token token){
+        this.token = token;
     }
 
     /**
@@ -25,7 +25,7 @@ public class BoolNode {
         String tokenValue = token.getToken();
         if(token.getTokenType() == TokenType.ID_KEYWORD && (tokenValue.equals("True") || 
         tokenValue.equals("False"))){
-            BoolNode node = new BoolNode(token.getToken());
+            BoolNode node = new BoolNode(token);
             tokenlist.remove(0); 
             return node;
         }

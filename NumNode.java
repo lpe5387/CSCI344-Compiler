@@ -5,10 +5,10 @@
  */
 public class NumNode {
 
-    private String value;
+    private Token token;
 
-    public NumNode(String value){
-        this.value = value;
+    public NumNode(Token token){
+        this.token = token;
     }
 
     public String convertToJott(){return "";}

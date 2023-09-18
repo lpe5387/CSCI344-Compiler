@@ -8,23 +8,22 @@ import java.util.ArrayList;
 
 public class FuncHeaderNode {
 
-    private String value;
+    private Token token;
 
-    public FuncHeaderNode(String value){
-        this.value = value;
+    public FuncHeaderNode(Token token){
+        this.token = token;
     }
 
     public static FuncHeaderNode ParseFuncHeader(ArrayList<Token> tokenlist) throws SyntaxException{
-        Token token1 = tokenlist.get(0);
-        Token token2 = tokenlist.get(1);
-        if(token1.getToken().equals(":") && token2.getToken().equals(":")){
-            FuncHeaderNode node = new FuncHeaderNode("::");
+        Token token = tokenlist.get(0);
+        if(token.getTokenType() == TokenType.FC_HEADER){
+            FuncHeaderNode node = new FuncHeaderNode(token);
             tokenlist.remove(0);
             tokenlist.remove(0);
             return node;
         }
         else{
-            throw new SyntaxException("Expected '::', got "+token1.getToken()+token2.getToken(), token1.getFilename(), token1.getLineNum());
+            throw new SyntaxException("Expected '::', got "+token.getToken(), token.getFilename(), token.getLineNum());
         }
     }
 
