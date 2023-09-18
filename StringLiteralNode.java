@@ -5,10 +5,10 @@
  */
 public class StringLiteralNode {
     
-    private String value;
+    private Token token;
 
-    public StringLiteralNode(String value){
-        this.value = value;
+    public StringLiteralNode(Token token){
+        this.token = token;
     }
 
     public String convertToJott(){return "";}

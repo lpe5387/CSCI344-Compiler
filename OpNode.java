@@ -8,10 +8,10 @@ import java.util.ArrayList;
 
 public class OpNode {
 
-    private String value;
+    private Token token;
 
-    public OpNode(String value){
-        this.value = value;
+    public OpNode(Token token){
+        this.token = token;
     }
 
     /**
@@ -23,7 +23,7 @@ public class OpNode {
     public static OpNode ParseOp(ArrayList<Token> tokenlist) throws SyntaxException{
         Token token = tokenlist.get(0);
         if(token.getTokenType() == TokenType.REL_OP){
-            OpNode node = new OpNode(token.getToken());
+            OpNode node = new OpNode(token);
             tokenlist.remove(0); 
             return node;
         }

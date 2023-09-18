@@ -8,10 +8,10 @@ import java.util.ArrayList;
 
 public class IdNode implements JottTree {
  
-    private String value;
+    private Token token;
 
-    public IdNode(String value){
-        this.value = value;
+    public IdNode(Token token){
+        this.token = token;
     }
 
     /**
@@ -23,7 +23,7 @@ public class IdNode implements JottTree {
     public static IdNode ParseId(ArrayList<Token> tokenlist) throws SyntaxException{
         Token token = tokenlist.get(0);
         if(token.getTokenType() == TokenType.ID_KEYWORD){
-            IdNode node = new IdNode(token.getToken());
+            IdNode node = new IdNode(token);
             tokenlist.remove(0); 
             return node;
         }
