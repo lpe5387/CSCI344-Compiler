@@ -4,16 +4,10 @@
  * @author Luka Eaton, lucie lim
  */
 
-<<<<<<< HEAD
 import provided.JottTree;
 import provided.Token;
 
 public class TypeNode implements JottTree {
-=======
-import provided.Token;
-
-public class TypeNode {
->>>>>>> a1980726fc9301d03afc51fb61de385298a2ca1c
     
     private Token token;
 
