@@ -4,10 +4,7 @@
  * @author Luka Eaton, lucie lim
  */
 
-import provided.JottTree;
 import java.util.ArrayList;
-import provided.Token;
-import provided.TokenType;
 
 public class IdNode implements JottTree {
  
