@@ -33,7 +33,6 @@ public class JottTokenizer {
       //turns file into a string
       String fileString = Files.readString(file);
       String charStream = "";
-      TokenType type = TokenType.ASSIGN; //placeholder to initalize variable
       int lineNum = 1;
 
       int endOfFile = fileString.length();
@@ -136,7 +135,7 @@ public class JottTokenizer {
               i++;
             }
             else{//otherwise its an error as an ! can only be followed by an =
-              //TODO error out of here and break
+              throw new SyntaxException("Invalid token \"" + nextChar + "\"" + ", expected '='.", filename, lineNum);//error out here and break
             };
 
           case '"':
@@ -163,7 +162,7 @@ public class JottTokenizer {
               i += x;
             }
             else{ //if we end with anything else error, if we reach here with a num, char, or space something has gone very wrong
-              //error out and break
+              throw new SyntaxException("Invalid token \"" + nextChar + "\"" + ", expected '\"'.", filename, lineNum);//error out here and break
             };
 
           case ';':
