@@ -1,8 +1,11 @@
 /**
  * This class is responsible for the type node for the parse tree
  *
- * @author Luka Eaton
+ * @author Luka Eaton, lucie lim
  */
+
+import provided.Token;
+
 public class TypeNode {
     
     private Token token;

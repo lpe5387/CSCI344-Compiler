@@ -5,6 +5,8 @@
  */
 
 import java.util.ArrayList;
+import provided.Token;
+import provided.TokenType;
 
 public class OpNode {
 

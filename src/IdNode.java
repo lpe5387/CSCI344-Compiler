@@ -1,10 +1,12 @@
 /**
  * This class is responsible for the ID node for the parse tree
  *
- * @author Luka Eaton
+ * @author Luka Eaton, lucie lim
  */
 
 import java.util.ArrayList;
+import provided.Token;
+import provided.TokenType;
 
 public class IdNode implements JottTree {
  
