@@ -54,145 +54,194 @@ public class JottTokenizer {
             charStream = charStream + ",";
             Token token = new Token(charStream, filename, lineNum, TokenType.COMMA);
             tokenStream.add(token);
+            break;
           case '[':
             charStream = charStream + "[";
             token = new Token(charStream, filename, lineNum, TokenType.L_BRACKET);
             tokenStream.add(token);
+            break;
           case ']':
             charStream = charStream + "]";          
             token = new Token(charStream, filename, lineNum, TokenType.R_BRACKET);
             tokenStream.add(token);
+            break;
           case '{':
             charStream = charStream + "{";
             token = new Token(charStream, filename, lineNum, TokenType.L_BRACE);
-            tokenStream.add(token);       
+            tokenStream.add(token);
+            break;
           case '}':
             charStream = charStream + "}";
             token = new Token(charStream, filename, lineNum, TokenType.R_BRACE);
             tokenStream.add(token);
+            break;
           case '=':
-            // check to see if the next char is a another = sign
-            char nextChar = fileString.charAt(i+1);
-            if ( nextChar == '=' ) {
-              token = new Token("==", filename, lineNum, TokenType.REL_OP);
-              tokenStream.add(token);
-              //update position in the file string 
-              i++;
-            } else {
+            if(i+1 >= endOfFile){
               token = new Token("=", filename, lineNum, TokenType.ASSIGN);
               tokenStream.add(token);
             }
-            //clean up char stream
-            charStream = "";
+            else {
+              // check to see if the next char is a another = sign
+              char nextChar = fileString.charAt(i+1);
+              if ( nextChar == '=' ) {
+                token = new Token("==", filename, lineNum, TokenType.REL_OP);
+                tokenStream.add(token);
+                //update position in the file string
+                i++;
+              } else {
+                token = new Token("=", filename, lineNum, TokenType.ASSIGN);
+                tokenStream.add(token);
+              }
+            }
+            break;
           case '<':
-            nextChar = fileString.charAt(i+1);
-            if ( nextChar == '=' ) {
-              //add the equal to the current char which could be < or > into a string
-              charStream = ch + "=";
-              //put that string into the tokenizer
-              token = new Token(charStream, filename, lineNum, TokenType.REL_OP);
-              tokenStream.add(token);
-              i++;
-            } else {
+            if(i+1 >= endOfFile){
               token = new Token("<", filename, lineNum, TokenType.REL_OP);
               tokenStream.add(token);
             }
-            //clean up char stream 
-            charStream = "";
-
+            else{
+              char nextChar = fileString.charAt(i+1);
+              if ( nextChar == '=' ) {
+                //add the equal to the current char which could be < or > into a string
+                charStream = ch + "=";
+                //put that string into the tokenizer
+                token = new Token(charStream, filename, lineNum, TokenType.REL_OP);
+                tokenStream.add(token);
+                i++;
+              } else {
+                token = new Token("<", filename, lineNum, TokenType.REL_OP);
+                tokenStream.add(token);
+              }
+            }
+            break;
           case '>':
-            nextChar = fileString.charAt(i+1);
-            if ( nextChar == '=' ) {
-              //add the equal to the current char which could be < or > into a string
-              charStream = ch + "=";
-              //put that string into the tokenizer
-              token = new Token(charStream, filename, lineNum, TokenType.REL_OP);
-              tokenStream.add(token);
-              i++;
-            } else {
+            if(i+1 >= endOfFile){
               token = new Token(">", filename, lineNum, TokenType.REL_OP);
               tokenStream.add(token);
             }
-            //clean up char stream 
-            charStream = "";
+            else{
+              char nextChar = fileString.charAt(i+1);
+              if ( nextChar == '=' ) {
+                //add the equal to the current char which could be < or > into a string
+                charStream = ch + "=";
+                //put that string into the tokenizer
+                token = new Token(charStream, filename, lineNum, TokenType.REL_OP);
+                tokenStream.add(token);
+                i++;
+              } else {
+                token = new Token(">", filename, lineNum, TokenType.REL_OP);
+                tokenStream.add(token);
+              }
+            }
+            break;
           case '/':
             token = new Token("/", filename, lineNum, TokenType.MATH_OP);
             tokenStream.add(token);
+            break;
           case '+':
             token = new Token("+", filename, lineNum, TokenType.MATH_OP);
             tokenStream.add(token);
+            break;
           case '-':
             token = new Token("-", filename, lineNum, TokenType.MATH_OP);
             tokenStream.add(token);
+            break;
           case '*':
             token = new Token("*", filename, lineNum, TokenType.MATH_OP);
             tokenStream.add(token);
+            break;
           case '!':
-            //check next char for an =
-            nextChar = fileString.charAt(i + 1); 
-            if (nextChar == '='){ //if so make it a token
-              token = new Token("!=", filename, lineNum, TokenType.REL_OP);
-              tokenStream.add(token);
-              i++;
+            if(i+1 >= endOfFile){
+              throw new SyntaxException("Invalid token \"!\"" + ", expected '=' afterwards.", filename, lineNum);
             }
-            else{//otherwise its an error as an ! can only be followed by an =
-              throw new SyntaxException("Invalid token \"" + nextChar + "\"" + ", expected '='.", filename, lineNum);//error out here and break
-            };
-
-          case '"':
-            String tok = "\""; //initial " for start of string
-            nextChar = fileString.charAt(i + 1); //get the next character
-            tok += nextChar; //add it to the token string, have to do this here in case empty string
-            int x = 1;
-            //loops through all follwing nums, chars, and spaces
-            while(Character.isDigit(nextChar) || Character.isAlphabetic(nextChar) || nextChar == ' '){ 
-              if (x != 1){ 
-                tok += nextChar; //add character to string
+            else{
+              //check next char for an =
+              char nextChar = fileString.charAt(i + 1);
+              if (nextChar == '='){ //if so make it a token
+                token = new Token("!=", filename, lineNum, TokenType.REL_OP);
+                tokenStream.add(token);
+                i++;
               }
-              x++; //increase count
-              nextChar = fileString.charAt(i + x); //get next character
+              else{//otherwise its an error as an ! can only be followed by an =
+                throw new SyntaxException("Invalid token \"" + nextChar + "\"" + ", expected '='.", filename, lineNum);//error out here and break
+              }
             }
-            //catching the ending "
-            if (x != 1){
-              tok += "\"";
+            break;
+          case '"':
+            if(i+1 >= endOfFile){
+              throw new SyntaxException("Invalid token \' \" \'" + ", needs a closing \' \" \' after completed string.", filename, lineNum);
             }
-            x++;
-            //if we end with a " end normally
-            if (nextChar == '"'){
-              token = new Token(tok, filename, lineNum, TokenType.STRING);
-              i += x;
+            else{
+              String tok = "\""; //initial " for start of string
+              char nextChar = fileString.charAt(i + 1); //get the next character
+              tok += nextChar; //add it to the token string, have to do this here in case empty string
+              int x = 1;
+              //loops through all follwing nums, chars, and spaces
+              while(Character.isDigit(nextChar) || Character.isAlphabetic(nextChar) || nextChar == ' '){
+                if (x != 1){
+                  tok += nextChar; //add character to string
+                }
+                x++; //increase count
+                nextChar = fileString.charAt(i + x); //get next character
+              }
+              //catching the ending "
+              if (x != 1){
+                tok += "\"";
+              }
+              x++;
+              //if we end with a " end normally
+              if (nextChar == '"'){
+                token = new Token(tok, filename, lineNum, TokenType.STRING);
+                tokenStream.add(token);
+                i += x;
+              }
+              else{ //if we end with anything else error, if we reach here with a num, char, or space something has gone very wrong
+                throw new SyntaxException("Invalid token \"" + nextChar + "\"" + ", expected '\"'.", filename, lineNum);//error out here and break
+              }
             }
-            else{ //if we end with anything else error, if we reach here with a num, char, or space something has gone very wrong
-              throw new SyntaxException("Invalid token \"" + nextChar + "\"" + ", expected '\"'.", filename, lineNum);//error out here and break
-            };
-
+            break;
           case ';':
             token = new Token(";", filename, lineNum, TokenType.SEMICOLON);
             tokenStream.add(token);
+            break;
           case ':':
-            nextChar = fileString.charAt(i + 1);
-            if(nextChar == ':'){
-              token = new Token("::", filename, lineNum, TokenType.FC_HEADER);
-              i++;
-            } else {
+            if(i+1 >= endOfFile){
               token = new Token(":", filename, lineNum, TokenType.COLON);
-            }
               tokenStream.add(token);
+            }
+            else{
+              char nextChar = fileString.charAt(i + 1);
+              if(nextChar == ':'){
+                token = new Token("::", filename, lineNum, TokenType.FC_HEADER);
+                tokenStream.add(token);
+                i++;
+              } else {
+                token = new Token(":", filename, lineNum, TokenType.COLON);
+                tokenStream.add(token);
+              }
+            }
+            break;
           case '.':
-            i++; // looks ahead one
-            ch = fileString.charAt(i);
-            if(!Character.isDigit(ch)){
-              throw new SyntaxException("Invalid token \""+ch+"\""+", expected int.", filename, lineNum);
+            if(i+1 >= endOfFile){
+              throw new SyntaxException("Invalid token \' . \'" + ", a digit must follow.", filename, lineNum);
             }
-            charStream += '.';
-            while((Character.isDigit(ch)) && i < endOfFile){
-              charStream += ch;
-              i++;
+            else{
+              i++; // looks ahead one
               ch = fileString.charAt(i);
+              if(!Character.isDigit(ch)){
+                throw new SyntaxException("Invalid token \""+ch+"\""+", expected int.", filename, lineNum);
+              }
+              charStream += '.';
+              while((Character.isDigit(ch)) && i < endOfFile){
+                charStream += ch;
+                i++;
+                ch = fileString.charAt(i);
+              }
+              token = new Token(charStream, filename, lineNum, TokenType.NUMBER);
+              tokenStream.add(token);
             }
-            token = new Token(charStream, filename, lineNum, TokenType.NUMBER);
-            tokenStream.add(token);
-          case '0':
+            break;
+          case '0', '1', '2', '3', '4', '5', '6', '7', '8', '9':
             while( (Character.isDigit(ch) || ch == '.') && i < endOfFile){
               if(ch == '.'){
                 decimal++;
@@ -202,135 +251,12 @@ public class JottTokenizer {
               }
               charStream = charStream + ch;
               i++;
+              if(i == endOfFile) break;
               ch = fileString.charAt(i);
             }
             token = new Token(charStream, filename, lineNum, TokenType.NUMBER);
             tokenStream.add(token);
-          case '1':
-            while( (Character.isDigit(ch) || ch == '.') && i < endOfFile){
-              if(ch == '.'){
-                decimal++;
-              }
-              if(decimal > 1){
-                break;
-              }
-              charStream = charStream + ch;
-              i++;
-              ch = fileString.charAt(i);
-            }
-            token = new Token(charStream, filename, lineNum, TokenType.NUMBER);
-            tokenStream.add(token);
-          case '2':
-            while( (Character.isDigit(ch) || ch == '.') && i < endOfFile){
-              if(ch == '.'){
-                decimal++;
-              }
-              if(decimal > 1){
-                break;
-              }
-              charStream = charStream + ch;
-              i++;
-              ch = fileString.charAt(i);
-            }
-            token = new Token(charStream, filename, lineNum, TokenType.NUMBER);
-            tokenStream.add(token);
-          case '3':
-            while( (Character.isDigit(ch) || ch == '.') && i < endOfFile){
-              if(ch == '.'){
-                decimal++;
-              }
-              if(decimal > 1){
-                break;
-              }
-              charStream = charStream + ch;
-              i++;
-              ch = fileString.charAt(i);
-            }
-            token = new Token(charStream, filename, lineNum, TokenType.NUMBER);
-            tokenStream.add(token);
-          case '4':
-            while( (Character.isDigit(ch) || ch == '.') && i < endOfFile){
-              if(ch == '.'){
-                decimal++;
-              }
-              if(decimal > 1){
-                break;
-              }
-              charStream = charStream + ch;
-              i++;
-              ch = fileString.charAt(i);
-            }
-            token = new Token(charStream, filename, lineNum, TokenType.NUMBER);
-            tokenStream.add(token);
-          case '5':
-            while( (Character.isDigit(ch) || ch == '.') && i < endOfFile){
-              if(ch == '.'){
-                decimal++;
-              }
-              if(decimal > 1){
-                break;
-              }
-              charStream = charStream + ch;
-              i++;
-              ch = fileString.charAt(i);
-            }
-            token = new Token(charStream, filename, lineNum, TokenType.NUMBER);
-            tokenStream.add(token);
-          case '6':
-            while( (Character.isDigit(ch) || ch == '.') && i < endOfFile){
-              if(ch == '.'){
-                decimal++;
-              }
-              if(decimal > 1){
-                break;
-              }
-              charStream = charStream + ch;
-              i++;
-              ch = fileString.charAt(i);
-            }
-            token = new Token(charStream, filename, lineNum, TokenType.NUMBER);
-            tokenStream.add(token);
-          case '7':
-            while( (Character.isDigit(ch) || ch == '.') && i < endOfFile){
-              if(ch == '.'){
-                decimal++;
-              }
-              if(decimal > 1){
-                break;
-              }
-              charStream = charStream + ch;
-              i++;
-              ch = fileString.charAt(i);
-            }
-            token = new Token(charStream, filename, lineNum, TokenType.NUMBER);
-            tokenStream.add(token);
-          case '8':
-            while( (Character.isDigit(ch) || ch == '.') && i < endOfFile){
-              if(ch == '.'){
-                decimal++;
-              }
-              if(decimal > 1){
-                break;
-              }
-              charStream = charStream + ch;
-              i++;
-              ch = fileString.charAt(i);
-            }
-            token = new Token(charStream, filename, lineNum, TokenType.NUMBER);
-            tokenStream.add(token);
-          case '9':
-            while( (Character.isDigit(ch) || ch == '.') && i < endOfFile){
-              if(ch == '.'){
-                decimal++;
-              }
-              if(decimal > 1){
-                break;
-              }
-              charStream = charStream + ch;
-              i++;
-              ch = fileString.charAt(i);
-            }
-            token = new Token(charStream, filename, lineNum, TokenType.NUMBER);
+            break;
           case '#':
             while(ch != '\n' && i < endOfFile){
               i++;
@@ -345,22 +271,26 @@ public class JottTokenizer {
             if(Character.isAlphabetic(ch) && charStream == ""){
               charStream = charStream + ch;
               i++;
-              ch = fileString.charAt(i);
-              while( (Character.isAlphabetic(ch) || Character.isDigit(ch)) && i < endOfFile){
-                charStream = charStream + ch;
-                i++;
+              if(i < endOfFile){
                 ch = fileString.charAt(i);
+                while( (Character.isAlphabetic(ch) || Character.isDigit(ch)) && i < endOfFile){
+                  charStream = charStream + ch;
+                  i++;
+                  if(i >= endOfFile) break;
+                  ch = fileString.charAt(i);
+                }
               }
               token = new Token(charStream, filename, lineNum, TokenType.ID_KEYWORD);
               tokenStream.add(token);
             }
-            if(charStream != ""){
-              //resetting state goes here
-              charStream = "";
-              decimal = 0;
-            }
         }
-          
+
+        if(charStream != ""){
+          //resetting state goes here
+          charStream = "";
+          decimal = 0;
+        }
+
       }
 
     } catch(IOException ioe){
@@ -382,7 +312,7 @@ public class JottTokenizer {
       System.out.println(syne.toString());
     }
 
-		return null;
+		return tokenStream;
 	}
 
 }
