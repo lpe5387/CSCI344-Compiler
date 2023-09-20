@@ -1,4 +1,5 @@
-package treeNodes; /**
+package treeNodes;
+/**
  * This class is responsible for the boolean node for the parse tree
  *
  * @author Luka Eaton, lucie lim
@@ -6,6 +7,10 @@ package treeNodes; /**
 
 
 import java.util.ArrayList;
+import provided.JottTree;
+import provided.Token;
+import provided.TokenType;
+import exceptions.SyntaxException;
 
 public class BoolNode implements JottTree{
     

@@ -6,6 +6,7 @@ package treeNodes;
  * @author Luka Eaton
  */
 
+import provided.JottTree;
 
 public class ReturnStmtNode implements JottTree {
 

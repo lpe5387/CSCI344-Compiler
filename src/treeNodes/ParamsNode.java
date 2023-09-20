@@ -6,6 +6,7 @@ package treeNodes;
  * @author Luka Eaton, lucie lim
  */
 
+import provided.JottTree;
 
 public class ParamsNode implements JottTree {
 

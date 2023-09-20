@@ -6,6 +6,9 @@ package treeNodes;
  * @author Luka Eaton, lucie lim
  */
 
+import provided.JottTree;
+import provided.Token;
+
 public class TypeNode implements JottTree {
     
     private Token token;

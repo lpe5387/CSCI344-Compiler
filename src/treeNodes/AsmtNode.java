@@ -6,7 +6,7 @@ package treeNodes;
  * @author Luka Eaton
  */
 
-
+import provided.JottTree;
 
 public class AsmtNode implements JottTree {
     

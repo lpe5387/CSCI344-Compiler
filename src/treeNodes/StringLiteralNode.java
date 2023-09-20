@@ -6,6 +6,8 @@ package treeNodes;
  * @author Luka Eaton, lucie lim
  */
 
+import provided.JottTree;
+import provided.Token;
 
 public class StringLiteralNode implements JottTree {
     

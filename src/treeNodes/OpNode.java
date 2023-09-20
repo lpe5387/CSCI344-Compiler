@@ -5,6 +5,10 @@ package treeNodes; /**
  */
 
 import java.util.ArrayList;
+import provided.JottTree;
+import provided.Token;
+import provided.TokenType;
+import exceptions.SyntaxException;
 
 public class OpNode implements JottTree {
 
