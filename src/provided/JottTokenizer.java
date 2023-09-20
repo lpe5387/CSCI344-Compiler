@@ -293,6 +293,8 @@ public class JottTokenizer {
 
       }
 
+      return tokenStream;
+
     } catch(IOException ioe){
 
       //handles IOExce
@@ -312,7 +314,7 @@ public class JottTokenizer {
       System.out.println(syne.toString());
     }
 
-		return tokenStream;
+		return null;
 	}
 
 }
