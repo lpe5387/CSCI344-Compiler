@@ -152,7 +152,7 @@ public class JottTokenizer {
             break;
           case '!':
             if(i+1 >= endOfFile){
-              throw new SyntaxException("Invalid token \"!\"" + ", expected '=' afterwards.", filename, lineNum);
+              throw new SyntaxException("Invalid token '!'" + ", expected '=' afterwards.", filename, lineNum);
             }
             else{
               //check next char for an =
@@ -163,13 +163,13 @@ public class JottTokenizer {
                 i++;
               }
               else{//otherwise its an error as an ! can only be followed by an =
-                throw new SyntaxException("Invalid token \"" + nextChar + "\"" + ", expected '='.", filename, lineNum);//error out here and break
+                throw new SyntaxException("Invalid token '" + nextChar + "'" + ", expected '=' after a '!'.", filename, lineNum);//error out here and break
               }
             }
             break;
           case '"':
             if(i+1 >= endOfFile){
-              throw new SyntaxException("Invalid token \' \" \'" + ", needs a closing \' \" \' after completed string.", filename, lineNum);
+              throw new SyntaxException("Invalid token ' \" '" + ", needs a closing ' \" ' to complete the string.", filename, lineNum);
             }
             else{
               String tok = "\""; //initial " for start of string
@@ -182,6 +182,7 @@ public class JottTokenizer {
                   tok += nextChar; //add character to string
                 }
                 x++; //increase count
+                if(i+x >= endOfFile) break;
                 nextChar = fileString.charAt(i + x); //get next character
               }
               //catching the ending "
@@ -195,8 +196,8 @@ public class JottTokenizer {
                 tokenStream.add(token);
                 i += x;
               }
-              else{ //if we end with anything else error, if we reach here with a num, char, or space something has gone very wrong
-                throw new SyntaxException("Invalid token \"" + nextChar + "\"" + ", expected '\"'.", filename, lineNum);//error out here and break
+              else{ //if we end with anything else error, if we reach here with a num, char, or space we are at EOF
+                throw new SyntaxException("Expected a closing '\"'.", filename, lineNum);//error out here and break
               }
             }
             break;
@@ -223,18 +224,19 @@ public class JottTokenizer {
             break;
           case '.':
             if(i+1 >= endOfFile){
-              throw new SyntaxException("Invalid token \' . \'" + ", a digit must follow.", filename, lineNum);
+              throw new SyntaxException("Invalid token '.'" + ", a digit must follow.", filename, lineNum);
             }
             else{
               i++; // looks ahead one
               ch = fileString.charAt(i);
               if(!Character.isDigit(ch)){
-                throw new SyntaxException("Invalid token \""+ch+"\""+", expected int.", filename, lineNum);
+                throw new SyntaxException("Invalid token '"+ch+"' , expected a digit.", filename, lineNum);
               }
               charStream += '.';
               while((Character.isDigit(ch)) && i < endOfFile){
                 charStream += ch;
                 i++;
+                if(i >= endOfFile) break;
                 ch = fileString.charAt(i);
               }
               token = new Token(charStream, filename, lineNum, TokenType.NUMBER);
@@ -251,15 +253,17 @@ public class JottTokenizer {
               }
               charStream = charStream + ch;
               i++;
-              if(i == endOfFile) break;
+              if(i >= endOfFile) break;
               ch = fileString.charAt(i);
             }
+            if(i < endOfFile) i--;
             token = new Token(charStream, filename, lineNum, TokenType.NUMBER);
             tokenStream.add(token);
             break;
           case '#':
             while(ch != '\n' && i < endOfFile){
               i++;
+              if(i >= endOfFile) break;
               ch = fileString.charAt(i);
             }
           case '\n':
@@ -279,6 +283,7 @@ public class JottTokenizer {
                   if(i >= endOfFile) break;
                   ch = fileString.charAt(i);
                 }
+                if(i < endOfFile) i--;
               }
               token = new Token(charStream, filename, lineNum, TokenType.ID_KEYWORD);
               tokenStream.add(token);
