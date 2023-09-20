@@ -1,18 +1,18 @@
+package treeNodes;
+
 /**
- * This class is responsible for the function call node for the parse tree
+ * This class is responsible for the return statement node for the parse tree
  *
  * @author Luka Eaton
  */
 
 
-public class FuncCallNode implements JottTree {
-    
-    private IdNode id;
-    private ParamsNode params;
+public class ReturnStmtNode implements JottTree {
 
-    public FuncCallNode(IdNode id, ParamsNode params){
-        this.id = id;
-        this.params = params;
+    private ExprNode expr;
+
+    public ReturnStmtNode(ExprNode expr){
+        this.expr = expr;
     }
 
     public String convertToJott(){return "";}

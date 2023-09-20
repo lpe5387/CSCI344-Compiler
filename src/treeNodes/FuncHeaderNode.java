@@ -1,4 +1,4 @@
-/**
+package treeNodes; /**
  * This class is responsible for the number node for the parse tree
  *
  * @author Luka Eaton, lucie lim
@@ -14,7 +14,7 @@ public class FuncHeaderNode implements JottTree {
         this.token = token;
     }
 
-    public static FuncHeaderNode ParseFuncHeader(ArrayList<Token> tokenlist) throws SyntaxException{
+    public static FuncHeaderNode ParseFuncHeader(ArrayList<Token> tokenlist) throws SyntaxException {
         Token token = tokenlist.get(0);
         if(token.getTokenType() == TokenType.FC_HEADER){
             FuncHeaderNode node = new FuncHeaderNode(token);

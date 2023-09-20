@@ -1,26 +1,20 @@
+package treeNodes;
+
 /**
- * This class is responsible for the assignment node for the parse tree
+ * This class is responsible for the variable declaration node for the parse tree
  *
  * @author Luka Eaton
  */
 
 
+public class VarDecNode implements JottTree {
 
-public class AsmtNode implements JottTree {
-    
     private TypeNode type;
     private IdNode id;
-    private ExprNode expr;
 
-    public AsmtNode(IdNode id, ExprNode expr){
-        this.id = id;
-        this.expr = expr;
-    }
-
-    public AsmtNode(TypeNode type, IdNode id, ExprNode expr){
+    public VarDecNode(TypeNode type, IdNode id){
         this.type = type;
         this.id = id;
-        this.expr = expr;
     }
 
     public String convertToJott(){return "";}
@@ -32,6 +26,5 @@ public class AsmtNode implements JottTree {
     public String convertToPython(){return "";}
     
     public boolean validateTree(){return true;}
-
 
 }

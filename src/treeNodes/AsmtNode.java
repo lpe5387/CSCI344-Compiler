@@ -1,21 +1,28 @@
+package treeNodes;
+
 /**
- * This class is responsible for the additional function definition parameters node for the parse tree
+ * This class is responsible for the assignment node for the parse tree
  *
  * @author Luka Eaton
  */
 
 
-public class FuncDefParamsTNode implements JottTree {
+
+public class AsmtNode implements JottTree {
     
-    private IdNode id;
     private TypeNode type;
+    private IdNode id;
+    private ExprNode expr;
 
-    private FuncDefParamsTNode funcDefParamsT;
-
-    public FuncDefParamsTNode(IdNode id, TypeNode type, FuncDefParamsTNode funcDefParamsT){
+    public AsmtNode(IdNode id, ExprNode expr){
         this.id = id;
+        this.expr = expr;
+    }
+
+    public AsmtNode(TypeNode type, IdNode id, ExprNode expr){
         this.type = type;
-        this.funcDefParamsT = funcDefParamsT;
+        this.id = id;
+        this.expr = expr;
     }
 
     public String convertToJott(){return "";}
@@ -27,5 +34,6 @@ public class FuncDefParamsTNode implements JottTree {
     public String convertToPython(){return "";}
     
     public boolean validateTree(){return true;}
+
 
 }

@@ -1,16 +1,18 @@
+package treeNodes;
+
 /**
- * This class is responsible for the string literal node for the parse tree
+ * This class is responsible for the program node for the parse tree
  *
- * @author Luka Eaton, lucie lim
+ * @author Luka Eaton
  */
 
 
-public class StringLiteralNode implements JottTree {
+public class ProgramNode implements JottTree {
     
-    private Token token;
+    private FuncDefNode funcDef;
 
-    public StringLiteralNode(Token token){
-        this.token = token;
+    public ProgramNode(FuncDefNode funcDef){
+        this.funcDef = funcDef;
     }
 
     public String convertToJott(){return "";}

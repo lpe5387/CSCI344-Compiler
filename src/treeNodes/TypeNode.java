@@ -1,16 +1,17 @@
+package treeNodes;
+
 /**
- * This class is responsible for the return statement node for the parse tree
+ * This class is responsible for the type node for the parse tree
  *
- * @author Luka Eaton
+ * @author Luka Eaton, lucie lim
  */
 
+public class TypeNode implements JottTree {
+    
+    private Token token;
 
-public class ReturnStmtNode implements JottTree {
-
-    private ExprNode expr;
-
-    public ReturnStmtNode(ExprNode expr){
-        this.expr = expr;
+    public TypeNode(Token token){
+        this.token = token;
     }
 
     public String convertToJott(){return "";}

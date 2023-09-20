@@ -1,4 +1,4 @@
-
+package provided;
 
 /**
  * This class is responsible for tokenizing Jott code.
@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import exceptions.SyntaxException;
 
 public class JottTokenizer {
 
@@ -377,8 +378,8 @@ public class JottTokenizer {
       //handles SecExe
       System.out.println(sece.toString());
       
-    } catch(SyntaxException synex){
-      System.out.println(synex.toString());
+    } catch(SyntaxException syne){
+      System.out.println(syne.toString());
     }
 
 		return null;

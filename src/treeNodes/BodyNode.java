@@ -1,3 +1,5 @@
+package treeNodes;
+
 /**
  * This class is responsible for the body node for the parse tree
  *

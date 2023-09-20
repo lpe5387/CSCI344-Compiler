@@ -1,16 +1,18 @@
+package treeNodes;
+
 /**
- * This class is responsible for the number node for the parse tree
+ * This class is responsible for the else node for the parse tree
  *
- * @author Luka Eaton, lucie lim
+ * @author Luka Eaton
  */
 
 
-public class NumNode implements JottTree {
+public class ElseNode implements JottTree {
 
-    private Token token;
+    private BodyNode body;
 
-    public NumNode(Token token){
-        this.token = token;
+    public ElseNode(BodyNode body){
+        this.body = body;
     }
 
     public String convertToJott(){return "";}

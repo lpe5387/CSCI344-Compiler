@@ -1,4 +1,4 @@
-/**
+package treeNodes; /**
  * This class is responsible for the boolean node for the parse tree
  *
  * @author Luka Eaton, lucie lim
@@ -18,10 +18,10 @@ public class BoolNode implements JottTree{
     /**
      * Function to parse a Boolean node for the parse tree.
      * @param tokenlist the list of tokens made from the Tokenizer
-     * @return BoolNode
+     * @return treeNodes.BoolNode
      * @throws SyntaxException
      */
-    public static BoolNode ParseBool(ArrayList<Token> tokenlist) throws SyntaxException{
+    public static BoolNode ParseBool(ArrayList<Token> tokenlist) throws SyntaxException {
         Token token = tokenlist.get(0);
         String tokenValue = token.getToken();
         if(token.getTokenType() == TokenType.ID_KEYWORD && (tokenValue.equals("True") || 

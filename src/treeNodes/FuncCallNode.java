@@ -1,18 +1,20 @@
+package treeNodes;
+
 /**
- * This class is responsible for the variable declaration node for the parse tree
+ * This class is responsible for the function call node for the parse tree
  *
  * @author Luka Eaton
  */
 
 
-public class VarDecNode implements JottTree {
-
-    private TypeNode type;
+public class FuncCallNode implements JottTree {
+    
     private IdNode id;
+    private ParamsNode params;
 
-    public VarDecNode(TypeNode type, IdNode id){
-        this.type = type;
+    public FuncCallNode(IdNode id, ParamsNode params){
         this.id = id;
+        this.params = params;
     }
 
     public String convertToJott(){return "";}

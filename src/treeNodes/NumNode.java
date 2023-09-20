@@ -1,16 +1,18 @@
+package treeNodes;
+
 /**
- * This class is responsible for the program node for the parse tree
+ * This class is responsible for the number node for the parse tree
  *
- * @author Luka Eaton
+ * @author Luka Eaton, lucie lim
  */
 
 
-public class ProgramNode implements JottTree {
-    
-    private FuncDefNode funcDef;
+public class NumNode implements JottTree {
 
-    public ProgramNode(FuncDefNode funcDef){
-        this.funcDef = funcDef;
+    private Token token;
+
+    public NumNode(Token token){
+        this.token = token;
     }
 
     public String convertToJott(){return "";}

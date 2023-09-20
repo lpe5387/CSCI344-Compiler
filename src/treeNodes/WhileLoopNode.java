@@ -1,22 +1,21 @@
+package treeNodes;
+
 /**
- * This class is responsible for the additional parameters node for the parse tree
+ * This class is responsible for the while loop node for the parse tree
  *
  * @author Luka Eaton
  */
 
 
-public class ParamsTNode implements JottTree {
-
-    private boolean isEmpty;
-
+public class WhileLoopNode implements JottTree {
+    
     private ExprNode expr;
 
-    private ParamsTNode paramsT;
+    private BodyNode body;
 
-    public ParamsTNode(ExprNode expr, ParamsTNode paramsT){
+    public WhileLoopNode(ExprNode expr, BodyNode body){
         this.expr = expr;
-        this.paramsT = paramsT;
-        this.isEmpty = false;
+        this.body = body;
     }
 
     public String convertToJott(){return "";}
@@ -28,5 +27,6 @@ public class ParamsTNode implements JottTree {
     public String convertToPython(){return "";}
     
     public boolean validateTree(){return true;}
+
 
 }

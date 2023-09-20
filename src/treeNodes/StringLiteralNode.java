@@ -1,14 +1,17 @@
+package treeNodes;
+
 /**
- * This class is responsible for the type node for the parse tree
+ * This class is responsible for the string literal node for the parse tree
  *
  * @author Luka Eaton, lucie lim
  */
 
-public class TypeNode implements JottTree {
+
+public class StringLiteralNode implements JottTree {
     
     private Token token;
 
-    public TypeNode(Token token){
+    public StringLiteralNode(Token token){
         this.token = token;
     }
 

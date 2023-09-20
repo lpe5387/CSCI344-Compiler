@@ -1,9 +1,10 @@
+import provided.*;
 import java.util.ArrayList;
 
 /**
  *  This is the main file to run the program
  * 
- *  @author: Lucie Lim, 
+ *  @author: Lucie Lim, Dara Prak
  */
 
 public class JottMain {
