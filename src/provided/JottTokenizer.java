@@ -3,7 +3,7 @@ package provided;
 /**
  * This class is responsible for tokenizing Jott code.
  * 
- * @author Issac Kim, lucie lim, Dara Prak, Andrew Dantone
+ * @author Issac Kim, lucie lim, Dara Prak, Andrew Dantone, Luka Eaton
  **/
 
 import java.io.IOException;
@@ -316,7 +316,7 @@ public class JottTokenizer {
       System.out.println(sece.toString());
       
     } catch(SyntaxException syne){
-      System.out.println(syne.toString());
+      syne.printErrorMessage();
     }
 
 		return null;
