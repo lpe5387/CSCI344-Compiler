@@ -197,7 +197,7 @@ public class JottTokenizer {
                 i += x;
               }
               else{ //if we end with anything else error, if we reach here with a num, char, or space we are at EOF
-                throw new SyntaxException("Expected a closing '\"'.", filename, lineNum);//error out here and break
+                throw new SyntaxException("Invalid token '\"'" + ", expected a closing '\"'.", filename, lineNum);//error out here and break
               }
             }
             break;
