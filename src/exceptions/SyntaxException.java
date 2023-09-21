@@ -19,7 +19,7 @@ public class SyntaxException extends Exception{
     }
 
     public void printErrorMessage(){
-        System.out.println("Syntax Error:\n"+this.errorMessage+"\n"+this.filename+":"+this.lineNum+"\n");
+        System.err.println("Syntax Error:\n"+this.errorMessage+"\n"+this.filename+":"+this.lineNum+"\n");
     }
 
 }
