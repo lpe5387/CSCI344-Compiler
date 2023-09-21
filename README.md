@@ -1,11 +1,7 @@
-# CSCI344-Compiler
+# CSCI344-Compiler: Phase 1
 
-This file contains provided code, testers, and test cases.
-
-provided shouls be a top level package in your src directory
-JottParserTester and JottTokenizerTester classes should be in a package call testers.
-
-the testCases directories should be in the working directory of your project. 
+For Phase 1 to run correctly with JottTokenizerTester.java, JottTokenizer.java should be in the "provided" package,
+and SyntaxException.java should be in a package called "exceptions". Both are in "src".
 
 Authors:
 Issac Kim,
