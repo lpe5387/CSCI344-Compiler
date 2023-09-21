@@ -1,6 +1,6 @@
 package provided;
 
-/**
+/*
  * This class is responsible for tokenizing Jott code.
  * 
  * @author Issac Kim, lucie lim, Dara Prak, Andrew Dantone, Luka Eaton
@@ -23,7 +23,7 @@ public class JottTokenizer {
    */
   public static ArrayList<Token> tokenize(String filename){
 
-    ArrayList<Token> tokenStream = new ArrayList<Token>();
+    ArrayList<Token> tokenStream = new ArrayList<>();
 
     //turns String filename into Path file
     Path file = Paths.get(filename);
@@ -39,20 +39,22 @@ public class JottTokenizer {
       int endOfFile = fileString.length();
       int decimal = 0;
 
+      Token token;
+
       //goes through whole file string
       for ( int i = 0; i < endOfFile; i++ ) {
 
         char ch = fileString.charAt(i);
 
         switch(ch){
-          /**
+          /*
            * Initial case:
            *  charStream = ""
            *  decimal = 0
            */
           case ',':
             charStream = charStream + ",";
-            Token token = new Token(charStream, filename, lineNum, TokenType.COMMA);
+            token = new Token(charStream, filename, lineNum, TokenType.COMMA);
             tokenStream.add(token);
             break;
           case '[':
@@ -272,13 +274,13 @@ public class JottTokenizer {
           case ' ':
 
           default:
-            if(Character.isAlphabetic(ch) && charStream == ""){
+            if(Character.isAlphabetic(ch) && charStream.isEmpty()){
               charStream = charStream + ch;
               i++;
               if(i < endOfFile){
                 ch = fileString.charAt(i);
                 while( (Character.isAlphabetic(ch) || Character.isDigit(ch)) && i < endOfFile){
-                  charStream = charStream + ch;
+                  charStream += ch;
                   i++;
                   if(i >= endOfFile) break;
                   ch = fileString.charAt(i);
@@ -290,7 +292,7 @@ public class JottTokenizer {
             }
         }
 
-        if(charStream != ""){
+        if(!(charStream.isEmpty())){
           //resetting state goes here
           charStream = "";
           decimal = 0;
