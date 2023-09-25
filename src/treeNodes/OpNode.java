@@ -1,7 +1,7 @@
 package treeNodes; /**
  * This class is responsible for the operation node for the parse tree
  *
- * @author Luka Eaton
+ * @author Luka Eaton Issac Kim
  */
 
 import java.util.ArrayList;
@@ -26,13 +26,14 @@ public class OpNode implements JottTree {
      */
     public static OpNode ParseOp(ArrayList<Token> tokenlist) throws SyntaxException {
         Token token = tokenlist.get(0);
-        if(token.getTokenType() == TokenType.REL_OP){
+        TokenType tokenType = token.getTokenType();
+        if(tokenType == TokenType.REL_OP || tokenType == TokenType.MATH_OP){
             OpNode node = new OpNode(token);
             tokenlist.remove(0); 
             return node;
         }
         else{
-            throw new SyntaxException("Expected a Relational Operator, got "+token.getToken(), token.getFilename(), token.getLineNum());
+            throw new SyntaxException("Expected a Relational Operator, got "+ token.getToken(), token.getFilename(), token.getLineNum());
         }
     }
 
