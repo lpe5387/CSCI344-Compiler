@@ -23,16 +23,6 @@ public class BodyStmtNode implements JottTree {
         this.bodyStmt = bodystmt;
     }
 
-    public BodyStmtNode(VarDecNode varDec, BodyStmtNode bodyStmt){
-        this.varDec = varDec;
-        this.bodyStmt = bodyStmt;
-    }
-
-    public BodyStmtNode(FuncCallNode func, BodyStmtNode bodyStmt){
-        this.func = func;
-        this.bodyStmt = bodyStmt;
-    }
-
     public String convertToJott(){return "";}
 
     public String convertToJava(String className){return "";}
