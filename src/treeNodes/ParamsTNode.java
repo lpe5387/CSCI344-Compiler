@@ -18,20 +18,26 @@ public class ParamsTNode implements JottTree {
 
     private ExprNode expr;
 
+    private ParamsTNode paramsT;
+
     private Token comma;
 
-    public ParamsTNode(Token comma, ExprNode expr){
+    public ParamsTNode(Token comma, ExprNode expr, ParamsTNode paramsT){
         this.comma = comma;
         this.expr = expr;
+        this.paramsT = paramsT;
         this.isEmpty = false;
     }
 
     public static ParamsTNode ParseParamT(ArrayList<Token> tokenlist) throws SyntaxException{
         Token token = tokenlist.get(0);
         if(token.getTokenType() == TokenType.COMMA) {
-            tokenlist.remove(0);
+            tokenlist.remove(0);//n
             ExprNode expr = ParseExpr(tokenlist);// expr node maker
-            ParamsTNode node = new ParamsTNode(token, expr);
+            ParamsTNode node = new ParamsTNode(token, expr, null);
+            if(tokenlist.get(0).getTokenType() == TokenType.COMMA) {
+                node = new ParamsTNode(token, expr, ParseParamT(tokenlist));
+            }
             return node;
         } else {
             throw new SyntaxException("Expected a Comma Operator, got " + token.getToken(), token.getFilename(), token.getLineNum());
