@@ -2,7 +2,7 @@ package treeNodes;
 /**
  * This class is responsible for the boolean node for the parse tree
  *
- * @author Luka Eaton, lucie lim
+ * @author Luka Eaton, lucie lim, Issac Kim
  */
 
 
@@ -36,8 +36,7 @@ public class BoolNode implements JottTree{
             return node;
         }
         else{
-            throw new SyntaxException("Expected a Boolean value, got "+token.getTokenType()+
-            " ("+token.getToken()+")", token.getFilename(), token.getLineNum());
+            throw new SyntaxException("Expected a Boolean value, got "+token.getTokenType(), token.getFilename(), token.getLineNum());
         }
     }
 
