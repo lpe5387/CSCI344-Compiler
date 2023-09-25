@@ -23,7 +23,6 @@ public class FuncHeaderNode implements JottTree {
         if(token.getTokenType() == TokenType.FC_HEADER){
             FuncHeaderNode node = new FuncHeaderNode(token);
             tokenlist.remove(0);
-            tokenlist.remove(0);
             return node;
         }
         else{
