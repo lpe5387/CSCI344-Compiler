@@ -7,8 +7,14 @@ package treeNodes;
  */
 
 import provided.JottTree;
-
+import java.util.ArrayList;
+import provided.Token;
+import exceptions.SyntaxException;
 public abstract class ExprNode implements JottTree {
+
+    public static ExprNode ParseExpr(ArrayList<Token> tokenList){
+        return null;
+    }
 
     public String convertToJott(){return "";}
 

@@ -33,7 +33,7 @@ public class ParamsTNode implements JottTree {
         Token token = tokenlist.get(0);
         if(token.getTokenType() == TokenType.COMMA) {
             tokenlist.remove(0);//needed to set up tokenlist for ParseExpr() <- logic error here, figure this out  later
-            ExprNode expr = ParseExpr(tokenlist);// expr node maker
+            ExprNode expr = ExprNode.ParseExpr(tokenlist);// expr node maker
             ParamsTNode node = new ParamsTNode(token, expr, null);//base node
             if(tokenlist.get(0).getTokenType() == TokenType.COMMA) {
                 node = new ParamsTNode(token, expr, ParseParamT(tokenlist));//if next token is of comma type, can be a second ParamsTNode <- logic error may be here, check later
