@@ -8,7 +8,7 @@ package treeNodes;
 
 import provided.JottTree;
 
-public class ExprNode implements JottTree {
+public abstract class ExprNode implements JottTree {
 
     public String convertToJott(){return "";}
 
