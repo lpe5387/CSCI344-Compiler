@@ -3,25 +3,19 @@ package treeNodes;
 /**
  * This class is responsible for the body statement node for the parse tree
  *
- * @author Luka Eaton
+ * @author Luka Eaton, Dara Prak
  */
 
 import provided.JottTree;
 
-public class BodyStmtNode implements JottTree {
+public abstract class BodyStmtNode implements JottTree {
 
     private IfStmtNode ifStmt;
     private WhileLoopNode whileLoop;
     private AsmtNode asmt;
     private VarDecNode varDec;
     private FuncCallNode func;
-
     private BodyStmtNode bodyStmt;
-
-    public BodyStmtNode(IfStmtNode ifStmt, BodyStmtNode bodyStmt){
-        this.ifStmt = ifStmt;
-        this.bodyStmt = bodyStmt;
-    }
 
     public BodyStmtNode(WhileLoopNode whileLoop, BodyStmtNode bodyStmt){
         this.whileLoop = whileLoop;
@@ -42,6 +36,10 @@ public class BodyStmtNode implements JottTree {
     public BodyStmtNode(FuncCallNode func, BodyStmtNode bodyStmt){
         this.func = func;
         this.bodyStmt = bodyStmt;
+    }
+
+    public static BodyStmtNode parseBodyStmt {
+
     }
 
     public String convertToJott(){return "";}
