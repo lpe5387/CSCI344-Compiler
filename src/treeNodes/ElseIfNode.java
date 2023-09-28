@@ -14,12 +14,10 @@ public class ElseIfNode implements JottTree {
 
     private BodyNode body;
 
-    private ElseIfNode elseIf;
 
-    public ElseIfNode(ExprNode expr, BodyNode body, ElseIfNode elseIf){
+    public ElseIfNode(ExprNode expr, BodyNode body){
         this.expr = expr;
         this.body = body;
-        this.elseIf = elseIf;
     }
 
     public String convertToJott(){return "";}

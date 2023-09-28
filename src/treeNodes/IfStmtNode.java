@@ -8,19 +8,21 @@ package treeNodes;
 
 import provided.JottTree;
 
+import java.util.ArrayList;
+
 public class IfStmtNode implements JottTree {
     
     private ExprNode expr;
 
     private BodyNode body;
 
-    private ElseIfNode elseIf;
+    private ArrayList<ElseIfNode> elseIfList;
     private ElseNode elseStmt;
 
-    public IfStmtNode(ExprNode expr, BodyNode body, ElseIfNode elseIf, ElseNode elseStmt){
+    public IfStmtNode(ExprNode expr, BodyNode body, ArrayList<ElseIfNode> elseIfList, ElseNode elseStmt){
         this.expr = expr;
         this.body = body;
-        this.elseIf = elseIf;
+        this.elseIfList = elseIfList;
         this.elseStmt = elseStmt;
     }
 
