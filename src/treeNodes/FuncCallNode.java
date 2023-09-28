@@ -8,7 +8,7 @@ package treeNodes;
 
 import provided.JottTree;
 
-public class FuncCallNode implements JottTree {
+public class FuncCallNode implements JottTree, BodyStmtNode {
     
     private IdNode id;
     private ParamsNode params;

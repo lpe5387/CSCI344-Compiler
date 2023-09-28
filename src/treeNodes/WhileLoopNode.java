@@ -8,7 +8,7 @@ package treeNodes;
 
 import provided.JottTree;
 
-public class WhileLoopNode implements JottTree {
+public class WhileLoopNode implements JottTree, BodyStmtNode {
     
     private ExprNode expr;
 

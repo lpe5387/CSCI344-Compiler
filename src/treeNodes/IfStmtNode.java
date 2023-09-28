@@ -8,7 +8,7 @@ package treeNodes;
 
 import provided.JottTree;
 
-public class IfStmtNode implements JottTree {
+public class IfStmtNode implements JottTree, BodyStmtNode {
     
     private ExprNode expr;
 
