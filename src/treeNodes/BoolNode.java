@@ -12,7 +12,7 @@ import provided.Token;
 import provided.TokenType;
 import exceptions.SyntaxException;
 
-public class BoolNode implements JottTree{
+public class BoolNode implements JottTree, ExprNode {
     
     private Token token;
 

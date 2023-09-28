@@ -1,20 +1,17 @@
 package treeNodes;
 
-/**
- * This class is responsible for the number node for the parse tree
- *
- * @author Luka Eaton, lucie lim
- */
-
 import provided.JottTree;
-import provided.Token;
 
-public class NumNode implements JottTree, ExprNode {
+public class OperationNode implements JottTree, ExprNode {
 
-    private Token token;
+    private ExprNode expr1;
+    private OpNode op;
+    private ExprNode expr2;
 
-    public NumNode(Token token){
-        this.token = token;
+    public OperationNode(ExprNode expr1, OpNode op, ExprNode expr2){
+        this.expr1 = expr1;
+        this.op = op;
+        this.expr2 = expr2;
     }
 
     public String convertToJott(){return "";}
@@ -24,7 +21,7 @@ public class NumNode implements JottTree, ExprNode {
     public String convertToC(){return "";}
 
     public String convertToPython(){return "";}
-    
+
     public boolean validateTree(){return true;}
 
 }
