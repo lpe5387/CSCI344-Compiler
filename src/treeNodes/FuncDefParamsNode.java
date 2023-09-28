@@ -7,18 +7,19 @@ package treeNodes;
  */
 
 import provided.JottTree;
+import java.util.ArrayList;
 
 public class FuncDefParamsNode implements JottTree {
     
     private IdNode id;
     private TypeNode type;
 
-    private FuncDefParamsTNode funcDefParamsT;
+    private ArrayList<FuncDefParamsTNode> funcDefParamsTList;
 
-    public FuncDefParamsNode(IdNode id, TypeNode type, FuncDefParamsTNode funcDefParamsT){
+    public FuncDefParamsNode(IdNode id, TypeNode type, ArrayList<FuncDefParamsTNode> funcDefParamsTList){
         this.id = id;
         this.type = type;
-        this.funcDefParamsT = funcDefParamsT;
+        this.funcDefParamsTList = funcDefParamsTList;
     }
 
     public String convertToJott(){return "";}
