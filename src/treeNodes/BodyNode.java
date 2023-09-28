@@ -7,14 +7,15 @@ package treeNodes;
  */
 
 import provided.JottTree;
+import java.util.ArrayList;
 
 public class BodyNode implements JottTree {
     
-    private BodyStmtNode bodyStmt;
+    private ArrayList<BodyStmtNode> bodyStmtList;
     private ReturnStmtNode returnStmt;
 
-    public BodyNode(BodyStmtNode bodyStmt, ReturnStmtNode returnStmt){
-        this.bodyStmt = bodyStmt;
+    public BodyNode(ArrayList<BodyStmtNode> bodyStmtList, ReturnStmtNode returnStmt){
+        this.bodyStmtList = bodyStmtList;
         this.returnStmt = returnStmt;
     }
 
