@@ -8,12 +8,14 @@ package treeNodes;
 
 import provided.JottTree;
 
+import java.util.ArrayList;
+
 public class ProgramNode implements JottTree {
     
-    private FuncDefNode funcDef;
+    private ArrayList<FuncDefNode> funcDefList;
 
-    public ProgramNode(FuncDefNode funcDef){
-        this.funcDef = funcDef;
+    public ProgramNode(ArrayList<FuncDefNode> funcDefList){
+        this.funcDefList = funcDefList;
     }
 
     public String convertToJott(){return "";}

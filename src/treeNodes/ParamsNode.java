@@ -7,6 +7,7 @@ package treeNodes;
  */
 
 import provided.JottTree;
+import java.util.ArrayList;
 
 public class ParamsNode implements JottTree {
 
@@ -14,15 +15,15 @@ public class ParamsNode implements JottTree {
 
     private ExprNode expr;
 
-    private ParamsTNode paramsT;
+    private ArrayList<ParamsTNode> paramsTList;
 
     public ParamsNode(){
         this.isEmpty = true;
     }
 
-    public ParamsNode(ExprNode expr, ParamsTNode paramsT){
+    public ParamsNode(ExprNode expr, ArrayList<ParamsTNode> paramsTList){
         this.expr = expr;
-        this.paramsT = paramsT;
+        this.paramsTList = paramsTList;
         this.isEmpty = false;
     }
 

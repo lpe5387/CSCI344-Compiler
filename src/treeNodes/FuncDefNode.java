@@ -15,14 +15,11 @@ public class FuncDefNode implements JottTree {
     private FunctionReturnNode returnType;
     private BodyNode body;
 
-    private FuncDefNode nextFuncDef;
-
-    public FuncDefNode(IdNode id, FuncDefParamsNode funcDefParams, FunctionReturnNode returnType, BodyNode body, FuncDefNode nextFuncDef){
+    public FuncDefNode(IdNode id, FuncDefParamsNode funcDefParams, FunctionReturnNode returnType, BodyNode body){
         this.id = id;
         this.funcDefParams = funcDefParams;
         this.returnType = returnType;
         this.body = body;
-        this.nextFuncDef = nextFuncDef;
     }
 
     public String convertToJott(){return "";}
