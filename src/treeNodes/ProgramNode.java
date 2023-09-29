@@ -7,7 +7,9 @@ package treeNodes;
  */
 
 import provided.JottTree;
+import provided.Token;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ProgramNode implements JottTree {
@@ -16,6 +18,15 @@ public class ProgramNode implements JottTree {
 
     public ProgramNode(ArrayList<FuncDefNode> funcDefList){
         this.funcDefList = funcDefList;
+    }
+
+    public static ProgramNode parseProgram(ArrayList<Token> tokenlist){
+        ArrayList<FuncDefNode> funcDefList = new ArrayList<>();
+        while(!tokenlist.isEmpty()){
+            FuncDefNode funcDef = FuncDefNode.ParseFuncDef(tokenlist);
+            funcDefList.add(funcDef);
+        }
+        return new ProgramNode(funcDefList);
     }
 
     public String convertToJott(){return "";}
