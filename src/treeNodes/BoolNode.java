@@ -12,7 +12,7 @@ import provided.Token;
 import provided.TokenType;
 import exceptions.SyntaxException;
 
-public class BoolNode implements JottTree{
+public class BoolNode implements JottTree, ExprNode {
     
     private Token token;
 
@@ -26,7 +26,7 @@ public class BoolNode implements JottTree{
      * @return treeNodes.BoolNode
      * @throws SyntaxException
      */
-    public static BoolNode ParseBool(ArrayList<Token> tokenlist) throws SyntaxException {
+    public static BoolNode parseBool(ArrayList<Token> tokenlist) throws SyntaxException {
         Token token = tokenlist.get(0);
         String tokenValue = token.getToken();
         if(token.getTokenType() == TokenType.ID_KEYWORD && (tokenValue.equals("True") || 

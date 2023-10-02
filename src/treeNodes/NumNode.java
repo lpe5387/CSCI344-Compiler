@@ -9,7 +9,7 @@ package treeNodes;
 import provided.JottTree;
 import provided.Token;
 
-public class NumNode implements JottTree {
+public class NumNode implements JottTree, ExprNode {
 
     private Token token;
 

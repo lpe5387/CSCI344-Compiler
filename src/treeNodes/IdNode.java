@@ -10,7 +10,7 @@ import provided.Token;
 import provided.TokenType;
 import exceptions.SyntaxException;
 
-public class IdNode implements JottTree {
+public class IdNode implements JottTree, ExprNode {
  
     private Token token;
 
@@ -24,7 +24,7 @@ public class IdNode implements JottTree {
      * @return treeNodes.IdNode
      * @throws SyntaxException
      */
-    public static IdNode ParseId(ArrayList<Token> tokenlist) throws SyntaxException {
+    public static IdNode parseId(ArrayList<Token> tokenlist) throws SyntaxException {
         Token token = tokenlist.get(0);
         if(token.getTokenType() == TokenType.ID_KEYWORD){
             IdNode node = new IdNode(token);

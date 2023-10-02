@@ -6,7 +6,11 @@ package treeNodes;
  * @author Luka Eaton, lucie lim
  */
 
+import java.util.ArrayList;
 import provided.JottTree;
+import provided.Token;
+import provided.TokenType;
+import exceptions.SyntaxException;
 
 public class ParamsNode implements JottTree {
 
@@ -14,16 +18,26 @@ public class ParamsNode implements JottTree {
 
     private ExprNode expr;
 
-    private ParamsTNode paramsT;
+    private ArrayList<ParamsTNode> paramsTList;
 
     public ParamsNode(){
         this.isEmpty = true;
     }
 
-    public ParamsNode(ExprNode expr, ParamsTNode paramsT){
+    public ParamsNode(ExprNode expr, ArrayList<ParamsTNode> paramsTList){
         this.expr = expr;
-        this.paramsT = paramsT;
+        this.paramsTList = paramsTList;
         this.isEmpty = false;
+    }
+
+    public static ParamsNode ParseParam(ArrayList<Token> tokenlist) throws Exception{
+        ExprNode expr = ExprNode.parseExpr(tokenlist); //gets exprNode
+        ArrayList<ParamsTNode> paramsTList = new ArrayList<>(); //initializes an array of ParamsTNodes
+        while(tokenlist.get(0).getTokenType() == TokenType.COMMA){ //while token after first expr node/ParamsTNode is a comma that means  there is another ParamsTNode
+            paramsTList.add(ParamsTNode.ParseParamT(tokenlist)); //add next ParamsTNode to list
+        }
+        ParamsNode node = new ParamsNode(expr, paramsTList);
+        return node;
     }
 
     public String convertToJott(){return "";}

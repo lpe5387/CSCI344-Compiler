@@ -6,19 +6,43 @@ package treeNodes;
  * @author Luka Eaton
  */
 
+import java.util.ArrayList;
 import provided.JottTree;
+import provided.Token;
+import provided.TokenType;
+import exceptions.SyntaxException;
 
 public class FuncDefParamsNode implements JottTree {
     
     private IdNode id;
     private TypeNode type;
 
-    private FuncDefParamsTNode funcDefParamsT;
+    private ArrayList<FuncDefParamsTNode> funcDefParamsTList;
 
-    public FuncDefParamsNode(IdNode id, TypeNode type, FuncDefParamsTNode funcDefParamsT){
+    public FuncDefParamsNode(IdNode id, TypeNode type, ArrayList<FuncDefParamsTNode> funcDefParamsTList){
         this.id = id;
         this.type = type;
-        this.funcDefParamsT = funcDefParamsT;
+        this.funcDefParamsTList = funcDefParamsTList;
+    }
+
+    public static FuncDefParamsNode ParseFuncDefParams(ArrayList<Token> tokenlist){
+        Token token = tokenlist.get(0);
+        if(token.getTokenType() == TokenType.ID_KEYWORD){
+            IdNode idNode = IdNode.ParseId(tokenlist);
+            token = tokenlist.get(0);
+            if(token.getTokenType() == TokenType.COLON) {
+                TypeNode type = TypeNode.parseType(tokenlist);
+                ArrayList<FuncDefParamsTNode> funcDefParamsTNodes = new ArrayList<>();
+                while (tokenlist.get(0).getTokenType() == TokenType.COMMA) {
+                    funcDefParamsTNodes.add(FuncDefParamsTNode.ParseFuncDefParamsT(tokenlist));
+                }
+                FuncDefParamsNode node = new FuncDefParamsNode(idNode, type, funcDefParamsTNodes);
+                return node;
+            }
+        } else {
+            return null;
+        }
+
     }
 
     public String convertToJott(){return "";}

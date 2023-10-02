@@ -1,29 +1,33 @@
 package treeNodes;
 
 /**
- * This class is responsible for the expression node for the parse tree
+ * This interface is responsible for the expression node for the parse tree
  *
  * @author Luka Eaton
  */
 
-import provided.JottTree;
 import java.util.ArrayList;
 import provided.Token;
 import exceptions.SyntaxException;
-public abstract class ExprNode implements JottTree {
+import provided.TokenType;
 
-    public static ExprNode ParseExpr(ArrayList<Token> tokenList){
-        return null;
+public interface ExprNode {
+
+    public static ExprNode parseExpr(ArrayList<Token> tokenlist) throws SyntaxException {
+        Token token = tokenlist.get(1);
+        ExprNode expr;
+        // if the second token is a math op / rel op, we are dealing with an operation
+        if(token.getTokenType() == TokenType.MATH_OP || token.getTokenType() == TokenType.REL_OP){
+            expr = OperationNode.parseOperation(tokenlist);
+        }
+        token = tokenlist.get(0);
+        if(token.getToken().equals("True") || token.getToken().equals("False")) expr = BoolNode.parseBool(tokenlist);
+        else if(token.getTokenType() == TokenType.ID_KEYWORD) expr = IdNode.parseId(tokenlist);
+        else if(token.getTokenType() == TokenType.NUMBER) expr = NumNode.parseNum(tokenlist);
+        else if(token.getTokenType() == TokenType.STRING) expr = StringLiteralNode.parseStringLiteral(tokenlist);
+        else if(token.getTokenType() == TokenType.FC_HEADER) expr = FuncCallNode.parseFuncCall(tokenlist);
+        else throw new SyntaxException("Expected an Id, Number, Function call, Boolean, or String. Got: "+token.getToken(), token.getFilename(), token.getLineNum());
+        return expr;
     }
-
-    public String convertToJott(){return "";}
-
-    public String convertToJava(String className){return "";}
-
-    public String convertToC(){return "";}
-
-    public String convertToPython(){return "";}
-    
-    public boolean validateTree(){return true;}
 
 }

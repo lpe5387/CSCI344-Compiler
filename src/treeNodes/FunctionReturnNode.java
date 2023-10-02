@@ -6,19 +6,32 @@ package treeNodes;
  * @author Luka Eaton
  */
 
+import exceptions.SyntaxException;
 import provided.JottTree;
+import provided.Token;
+import java.util.ArrayList;
 
 public class FunctionReturnNode implements JottTree {
     
-    private String voidReturn;
+    private Token voidReturn;
     private TypeNode type;
 
-    public FunctionReturnNode(String voidReturn){
+    public FunctionReturnNode(Token voidReturn){
         this.voidReturn = voidReturn;
     }
 
     public FunctionReturnNode(TypeNode type){
         this.type = type;
+    }
+
+    public static FunctionReturnNode ParseFuncReturn(ArrayList<Token> tokenlist) throws SyntaxException {
+        Token token = tokenlist.get(0);
+        if(token.getToken().equals("Void")){
+            tokenlist.remove(0);
+            return new FunctionReturnNode(token);
+        }
+        TypeNode type = TypeNode.parseType(tokenlist);
+        return new FunctionReturnNode(type);
     }
 
     public String convertToJott(){return "";}

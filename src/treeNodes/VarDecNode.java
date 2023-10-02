@@ -3,12 +3,16 @@ package treeNodes;
 /**
  * This class is responsible for the variable declaration node for the parse tree
  *
- * @author Luka Eaton
+ * @author Luka Eaton, Lucie Lim
  */
 
+import exceptions.SyntaxException;
 import provided.JottTree;
+import provided.Token;
+import provided.TokenType;
+import java.util.ArrayList;
 
-public class VarDecNode implements JottTree {
+public class VarDecNode implements JottTree, BodyStmtNode {
 
     private TypeNode type;
     private IdNode id;
@@ -16,6 +20,36 @@ public class VarDecNode implements JottTree {
     public VarDecNode(TypeNode type, IdNode id){
         this.type = type;
         this.id = id;
+    }
+
+    public VarDecNode parseVarDec ( ArrayList<Token> tokenList ) throws SyntaxException {
+        TypeNode typeNode;
+        IdNode idNode;
+        Token token = tokenList.get(0);
+
+        //see if we can make a typeNode from the 1st token
+        if (token.getTokenType() == TokenType.ID_KEYWORD) {
+            typeNode = TypeNode.parseType(tokenList);
+            //get the next token and see if its an id type
+            token = tokenList.get(0);
+            if (token.getTokenType() == TokenType.ID_KEYWORD) {
+                idNode = IdNode.parseId(tokenList);
+            } else throw new SyntaxException("Expected an Id. Got: "+ token.getToken(),
+                    token.getFilename(), token.getLineNum());
+        } else throw new SyntaxException("Expected a Type. Got: "+ token.getToken(),
+                token.getFilename(), token.getLineNum());
+
+        //gets the ; token
+        token = tokenList.get(0);
+        //check if its ;
+        if (token.getTokenType() != TokenType.SEMICOLON) {
+            throw new SyntaxException("Expected a ; Got: " + token.getToken(),
+                    token.getFilename(), token.getLineNum());
+        }
+        //remove the token from the list
+        tokenList.remove(0);
+
+        return new VarDecNode( typeNode, idNode);
     }
 
     public String convertToJott(){return "";}
