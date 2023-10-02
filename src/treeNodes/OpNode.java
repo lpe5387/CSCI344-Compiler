@@ -24,7 +24,7 @@ public class OpNode implements JottTree {
      * @return treeNodes.OpNode
      * @throws SyntaxException
      */
-    public static OpNode ParseOp(ArrayList<Token> tokenlist) throws SyntaxException {
+    public static OpNode parseOp(ArrayList<Token> tokenlist) throws SyntaxException {
         Token token = tokenlist.get(0);
         TokenType tokenType = token.getTokenType();
         if(tokenType == TokenType.REL_OP || tokenType == TokenType.MATH_OP){

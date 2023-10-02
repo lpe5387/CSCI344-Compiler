@@ -26,7 +26,7 @@ public class BoolNode implements JottTree, ExprNode {
      * @return treeNodes.BoolNode
      * @throws SyntaxException
      */
-    public static BoolNode ParseBool(ArrayList<Token> tokenlist) throws SyntaxException {
+    public static BoolNode parseBool(ArrayList<Token> tokenlist) throws SyntaxException {
         Token token = tokenlist.get(0);
         String tokenValue = token.getToken();
         if(token.getTokenType() == TokenType.ID_KEYWORD && (tokenValue.equals("True") || 
