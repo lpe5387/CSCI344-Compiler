@@ -91,7 +91,12 @@ public class AsmtNode implements JottTree, BodyStmtNode {
 
     }
 
-    public String convertToJott(){return "";}
+    public String convertToJott(){
+        if (this.type == null) {
+            return this.id.convertToJott() + " = " + this.expr.convertToJott() + ";";
+        }
+        return this.type.convertToJott() + this.id.convertToJott() + " = " + this.expr.convertToJott() + ";";
+    }
 
     public String convertToJava(String className){return "";}
 

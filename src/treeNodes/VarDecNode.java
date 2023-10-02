@@ -52,7 +52,9 @@ public class VarDecNode implements JottTree, BodyStmtNode {
         return new VarDecNode( typeNode, idNode);
     }
 
-    public String convertToJott(){return "";}
+    public String convertToJott(){
+        return this.type.convertToJott() + this.id.convertToJott() + ";";
+    }
 
     public String convertToJava(String className){return "";}
 

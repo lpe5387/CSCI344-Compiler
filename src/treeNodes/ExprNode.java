@@ -30,4 +30,6 @@ public interface ExprNode {
         return expr;
     }
 
+    //TODO: make a convert to jott funct
+
 }

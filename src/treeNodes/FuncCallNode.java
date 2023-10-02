@@ -62,7 +62,9 @@ public class FuncCallNode implements JottTree, ExprNode, BodyStmtNode {
         return new FuncCallNode(funcHeaderNode, idNode, paramsNode);
     }
 
-    public String convertToJott(){return "";}
+    public String convertToJott(){
+        return this.funcHeaderNode.convertToJott() + this.id.convertToJott() + " [ " + params.convertToJott() + " ] ";
+    }
 
     public String convertToJava(String className){return "";}
 
