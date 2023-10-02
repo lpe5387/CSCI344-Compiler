@@ -31,7 +31,7 @@ public class ParamsNode implements JottTree {
     }
 
     public static ParamsNode ParseParam(ArrayList<Token> tokenlist) throws Exception{
-        ExprNode expr = ExprNode.ParseExpr(tokenlist); //gets exprNode
+        ExprNode expr = ExprNode.parseExpr(tokenlist); //gets exprNode
         ArrayList<ParamsTNode> paramsTList = new ArrayList<>(); //initializes an array of ParamsTNodes
         while(tokenlist.get(0).getTokenType() == TokenType.COMMA){ //while token after first expr node/ParamsTNode is a comma that means  there is another ParamsTNode
             paramsTList.add(ParamsTNode.ParseParamT(tokenlist)); //add next ParamsTNode to list
