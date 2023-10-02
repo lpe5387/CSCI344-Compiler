@@ -34,7 +34,9 @@ public class OperationNode implements JottTree, ExprNode {
         return new OperationNode(left, op, right);
     }
 
-    public String convertToJott(){return "";}
+    public String convertToJott(){
+        return ExprNode.convertToJott(this.left) + this.op.convertToJott() + ExprNode.convertToJott(this.right);
+    }
 
     public String convertToJava(String className){return "";}
 
