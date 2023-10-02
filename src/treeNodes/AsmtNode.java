@@ -8,7 +8,7 @@ package treeNodes;
 
 import provided.JottTree;
 
-public class AsmtNode implements JottTree {
+public class AsmtNode implements JottTree, BodyStmtNode {
     
     private TypeNode type;
     private IdNode id;

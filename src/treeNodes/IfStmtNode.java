@@ -10,7 +10,7 @@ import provided.JottTree;
 
 import java.util.ArrayList;
 
-public class IfStmtNode implements JottTree {
+public class IfStmtNode implements JottTree, BodyStmtNode {
     
     private ExprNode expr;
 
