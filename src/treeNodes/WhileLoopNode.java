@@ -45,7 +45,7 @@ public class WhileLoopNode implements JottTree, BodyStmtNode {
                 }
                 tokenlist.remove(0);
 
-                exprNode = ExprNode.ParseExpr(tokenlist);
+                exprNode = ExprNode.parseExpr(tokenlist);
 
                 // end of ]
                 token = tokenlist.get(0);
