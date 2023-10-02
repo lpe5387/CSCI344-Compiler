@@ -3,10 +3,13 @@ package treeNodes;
 /**
  * This class is responsible for the body node for the parse tree
  *
- * @author Luka Eaton
+ * @author Luka Eaton, Dara Prak
  */
 
+import exceptions.SyntaxException;
 import provided.JottTree;
+import provided.Token;
+
 import java.util.ArrayList;
 
 public class BodyNode implements JottTree {
@@ -19,6 +22,12 @@ public class BodyNode implements JottTree {
         this.returnStmt = returnStmt;
     }
 
+    public BodyNode parseBody(ArrayList<Token> tokenList) throws SyntaxException {
+        Token token = tokenList.get(0);
+        for(BodyStmtNode bodyStmt: bodyStmtList) {
+
+        }
+    }
     public String convertToJott(){return "";}
 
     public String convertToJava(String className){return "";}
