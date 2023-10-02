@@ -18,58 +18,73 @@ public class AsmtNode implements JottTree, BodyStmtNode {
     private TypeNode type;
     private IdNode id;
     private ExprNode expr;
-    private Token token;
 
-    public AsmtNode(IdNode id, Token token, ExprNode expr){
+    public AsmtNode(IdNode id, ExprNode expr){
         this.id = id;
-        this.token = token;
         this.expr = expr;
     }
 
-    public AsmtNode(TypeNode type, IdNode id, Token token, ExprNode expr){
+    public AsmtNode(TypeNode type, IdNode id, ExprNode expr){
         this.type = type;
         this.id = id;
-        this.token = token;
         this.expr = expr;
     }
 
-    public static AsmtNode parseAsmtNode(ArrayList<Token> tokenlist) throws SyntaxException {
+    public static AsmtNode parseAsmt(ArrayList<Token> tokenList) throws SyntaxException {
         TypeNode typeNode;
         IdNode idNode;
         ExprNode exprNode;
-        Token token = tokenlist.get(0);
-        Token lookAhead = tokenlist.get(1);
+        Token token = tokenList.get(0);
+        Token lookAhead = tokenList.get(1);
 
         //check the content of the token
         if (token.getTokenType() == TokenType.ID_KEYWORD && lookAhead.getTokenType() == TokenType.ASSIGN) {
-            idNode = IdNode.ParseId(tokenlist);
+            idNode = IdNode.parseId(tokenList);
 
-            // gets and removes the "=" token
-            token = tokenlist.get(0);
-            tokenlist.remove(0);
+            // removes the "=" token
+            token = tokenList.get(0);
+            if (token.getTokenType() != TokenType.ASSIGN) {
+                throw new SyntaxException("Expected a = Got: " + token.getToken(),
+                        token.getFilename(), token.getLineNum());
+            }
+            tokenList.remove(0);
 
             //make expr node
-            exprNode = ExprNode.ParseExpr(tokenlist);
+            exprNode = ExprNode.parseExpr(tokenList);
 
             //removes ;
-            tokenlist.remove(0);
+            token = tokenList.get(0);
+            if (token.getTokenType() != TokenType.SEMICOLON) {
+                throw new SyntaxException("Expected a ; Got: " + token.getToken(),
+                        token.getFilename(), token.getLineNum());
+            }
+            tokenList.remove(0);
 
-            return new AsmtNode(idNode, token, exprNode);
+            return new AsmtNode(idNode, exprNode);
 
         } else if (token.getTokenType() == TokenType.ID_KEYWORD) {
-            typeNode = TypeNode.parseType(tokenlist);
-            idNode = IdNode.ParseId(tokenlist);
+            typeNode = TypeNode.parseType(tokenList);
+            idNode = IdNode.parseId(tokenList);
 
-            // get the "="
-            token = tokenlist.get(0);
-            tokenlist.remove(0);
+            // remove the "="
+            token = tokenList.get(0);
+            if (token.getTokenType() != TokenType.ASSIGN) {
+                throw new SyntaxException("Expected a = Got: " + token.getToken(),
+                        token.getFilename(), token.getLineNum());
+            }
+            tokenList.remove(0);
 
-            exprNode = ExprNode.ParseExpr(tokenlist);
+            exprNode = ExprNode.parseExpr(tokenList);
 
             // remove the ;
-            tokenlist.remove(0);
+            token = tokenList.get(0);
+            if (token.getTokenType() != TokenType.SEMICOLON) {
+                throw new SyntaxException("Expected a ; Got: " + token.getToken(),
+                        token.getFilename(), token.getLineNum());
+            }
+            tokenList.remove(0);
 
-            return new AsmtNode(typeNode, idNode, token, exprNode);
+            return new AsmtNode(typeNode, idNode, exprNode);
 
         } else throw new SyntaxException("Expected a type or id. Got: "+ token.getToken(),
                 token.getFilename(), token.getLineNum());

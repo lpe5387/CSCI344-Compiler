@@ -16,15 +16,13 @@ public class VarDecNode implements JottTree, BodyStmtNode {
 
     private TypeNode type;
     private IdNode id;
-    private Token token;
 
-    public VarDecNode(TypeNode type, IdNode id, Token token){
+    public VarDecNode(TypeNode type, IdNode id){
         this.type = type;
         this.id = id;
-        this.token = token;
     }
 
-    public VarDecNode parseVarDecNode ( ArrayList<Token> tokenList ) throws SyntaxException {
+    public VarDecNode parseVarDec ( ArrayList<Token> tokenList ) throws SyntaxException {
         TypeNode typeNode;
         IdNode idNode;
         Token token = tokenList.get(0);
@@ -34,9 +32,8 @@ public class VarDecNode implements JottTree, BodyStmtNode {
             typeNode = TypeNode.parseType(tokenList);
             //get the next token and see if its an id type
             token = tokenList.get(0);
-            // see if we can make an idNode
             if (token.getTokenType() == TokenType.ID_KEYWORD) {
-                idNode = IdNode.ParseId(tokenList);
+                idNode = IdNode.parseId(tokenList);
             } else throw new SyntaxException("Expected an Id. Got: "+ token.getToken(),
                     token.getFilename(), token.getLineNum());
         } else throw new SyntaxException("Expected a Type. Got: "+ token.getToken(),
@@ -52,7 +49,7 @@ public class VarDecNode implements JottTree, BodyStmtNode {
         //remove the token from the list
         tokenList.remove(0);
 
-        return new VarDecNode( typeNode, idNode, token );
+        return new VarDecNode( typeNode, idNode);
     }
 
     public String convertToJott(){return "";}
