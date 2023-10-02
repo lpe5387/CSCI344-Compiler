@@ -24,7 +24,7 @@ public class FuncCallNode implements JottTree, ExprNode, BodyStmtNode {
         this.params = params;
     }
 
-    public FuncCallNode parseFuncCall (ArrayList<Token> tokenArrayList) throws SyntaxException{
+    public static FuncCallNode parseFuncCall (ArrayList<Token> tokenArrayList) throws SyntaxException{
         FuncHeaderNode funcHeaderNode;
         IdNode idNode;
         ParamsNode paramsNode = null;

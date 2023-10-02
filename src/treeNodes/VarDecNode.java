@@ -22,7 +22,7 @@ public class VarDecNode implements JottTree, BodyStmtNode {
         this.id = id;
     }
 
-    public VarDecNode parseVarDec ( ArrayList<Token> tokenList ) throws SyntaxException {
+    public static VarDecNode parseVarDec ( ArrayList<Token> tokenList ) throws SyntaxException {
         TypeNode typeNode;
         IdNode idNode;
         Token token = tokenList.get(0);
