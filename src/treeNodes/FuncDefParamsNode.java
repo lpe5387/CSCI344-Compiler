@@ -6,8 +6,11 @@ package treeNodes;
  * @author Luka Eaton
  */
 
-import provided.JottTree;
 import java.util.ArrayList;
+import provided.JottTree;
+import provided.Token;
+import provided.TokenType;
+import exceptions.SyntaxException;
 
 public class FuncDefParamsNode implements JottTree {
     
@@ -20,6 +23,10 @@ public class FuncDefParamsNode implements JottTree {
         this.id = id;
         this.type = type;
         this.funcDefParamsTList = funcDefParamsTList;
+    }
+
+    public static FuncDefParamsNode ParseFuncDefParams(ArrayList<Token> tokenlist){
+
     }
 
     public String convertToJott(){return "";}
