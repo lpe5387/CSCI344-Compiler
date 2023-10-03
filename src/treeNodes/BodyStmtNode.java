@@ -1,6 +1,7 @@
 package treeNodes;
 
 import exceptions.SyntaxException;
+import provided.JottTree;
 import provided.Token;
 import provided.TokenType;
 
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  * @author Luka Eaton, Dara Prak
  */
 
-public interface BodyStmtNode {
+public interface BodyStmtNode extends JottTree { //TODO: make children just implement this
 
     public static BodyStmtNode parseBodyStmt(ArrayList<Token> tokenList) throws SyntaxException {
         Token first = tokenList.get(0);
@@ -28,19 +29,20 @@ public interface BodyStmtNode {
                         firstAfterFuncCall.getFilename(), firstAfterFuncCall.getLineNum());
             }
         }
-        String firstString = first.getToken();
-        if (firstString.equals("if")) {
+
+        else if (first.getToken().equals("if")) {
             return IfStmtNode.parseIfStmt(tokenList);
         }
-        if (firstString.equals("while")) {
+        else if (first.getToken().equals("while")) {
             return WhileLoopNode.parseWhileLoop(tokenList);
         }
-        Token second = tokenList.get(1);
-        Token third = tokenList.get(2);
-        if (second.getToken().equals("=") || third.getToken().equals("=")) {
+        else if (tokenList.get(1).getToken().equals("=") || tokenList.get(2).getToken().equals("=")) {
             return AsmtNode.parseAsmt(tokenList);
-        } else {
+        } else if (first.getToken().equals("Double") || first.getToken().equals("Integer") ||
+                first.getToken().equals("String") || first.getToken().equals("Boolean")) {
             return VarDecNode.parseVarDec(tokenList);
+        } else {
+            return null; // not a body statement
         }
     }
 

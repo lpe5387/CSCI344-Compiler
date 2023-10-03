@@ -25,13 +25,17 @@ public class BodyNode implements JottTree {
     public static BodyNode parseBody(ArrayList<Token> tokenList) throws SyntaxException {
         BodyStmtNode bodyStmt;
         ArrayList<BodyStmtNode> stmtList = new ArrayList<>();
-        while(!tokenList.isEmpty()) {
+        while(true) {
             bodyStmt = BodyStmtNode.parseBodyStmt(tokenList);
+            if(bodyStmt == null) {
+                break;
+            }
             stmtList.add(bodyStmt);
         }
-        ReturnStmtNode.parseReturnStmt(tokenList);
+        ReturnStmtNode returnStmt = ReturnStmtNode.parseReturnStmt(tokenList);
+        return new BodyNode(stmtList, returnStmt);
     }
-    public String convertToJott(){return "";}
+    public String convertToJott(){return "";} //TODO null check for ReturnStmtNode
 
     public String convertToJava(String className){return "";}
 
