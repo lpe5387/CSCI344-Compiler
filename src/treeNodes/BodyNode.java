@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class BodyNode implements JottTree {
     
-    private ArrayList<BodyStmtNode> bodyStmtList;
+    private static ArrayList<BodyStmtNode> bodyStmtList;
     private ReturnStmtNode returnStmt;
 
     public BodyNode(ArrayList<BodyStmtNode> bodyStmtList, ReturnStmtNode returnStmt){
@@ -22,11 +22,14 @@ public class BodyNode implements JottTree {
         this.returnStmt = returnStmt;
     }
 
-    public BodyNode parseBody(ArrayList<Token> tokenList) throws SyntaxException {
-        Token token = tokenList.get(0);
-        for(BodyStmtNode bodyStmt: bodyStmtList) {
-
+    public static BodyNode parseBody(ArrayList<Token> tokenList) throws SyntaxException {
+        BodyStmtNode bodyStmt;
+        ArrayList<BodyStmtNode> stmtList = new ArrayList<>();
+        while(!tokenList.isEmpty()) {
+            bodyStmt = BodyStmtNode.parseBodyStmt(tokenList);
+            stmtList.add(bodyStmt);
         }
+        ReturnStmtNode.parseReturnStmt(tokenList);
     }
     public String convertToJott(){return "";}
 

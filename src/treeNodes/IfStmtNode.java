@@ -14,7 +14,7 @@ import provided.TokenType;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class IfStmtNode implements JottTree {
+public class IfStmtNode implements JottTree, BodyStmtNode {
 
     private ExprNode expr;
 
