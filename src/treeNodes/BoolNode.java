@@ -40,7 +40,9 @@ public class BoolNode implements JottTree, ExprNode {
         }
     }
 
-    public String convertToJott(){return "";}
+    public String convertToJott() {
+        return this.token.getToken();
+    }
 
     public String convertToJava(String className){return "";}
 

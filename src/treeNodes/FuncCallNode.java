@@ -14,24 +14,21 @@ import java.util.ArrayList;
 
 public class FuncCallNode implements JottTree, ExprNode, BodyStmtNode {
 
-    private FuncHeaderNode funcHeaderNode;
     private IdNode id;
     private ParamsNode params;
 
-    public FuncCallNode(FuncHeaderNode funcHeaderNode, IdNode id, ParamsNode params) {
-        this.funcHeaderNode = funcHeaderNode;
+    public FuncCallNode(IdNode id, ParamsNode params) {
         this.id = id;
         this.params = params;
     }
 
     public static FuncCallNode parseFuncCall (ArrayList<Token> tokenArrayList) throws SyntaxException{
-        FuncHeaderNode funcHeaderNode;
         IdNode idNode;
         ParamsNode paramsNode = null;
         Token token = tokenArrayList.get(0);
 
         if (token.getTokenType() == TokenType.FC_HEADER) {
-            funcHeaderNode = FuncHeaderNode.parseFuncHeader(tokenArrayList);
+            tokenArrayList.remove(0);
             token = tokenArrayList.get(0);
             if (token.getTokenType() == TokenType.ID_KEYWORD) {
                 idNode = IdNode.parseId(tokenArrayList);
@@ -59,11 +56,11 @@ public class FuncCallNode implements JottTree, ExprNode, BodyStmtNode {
         } else throw new SyntaxException("Expected a Function Header. Got: "+ token.getToken(),
                 token.getFilename(), token.getLineNum());
 
-        return new FuncCallNode(funcHeaderNode, idNode, paramsNode);
+        return new FuncCallNode(idNode, paramsNode);
     }
 
     public String convertToJott(){
-        return this.funcHeaderNode.convertToJott() + this.id.convertToJott() + " [ " + params.convertToJott() + " ] ";
+        return "::" + this.id.convertToJott() + " [ " + params.convertToJott() + " ] ";
     }
 
     public String convertToJava(String className){return "";}

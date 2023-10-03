@@ -3,7 +3,7 @@ package treeNodes;
 /**
  * This class is responsible for the additional parameters node for the parse tree
  *
- * @author Luka Eaton, Issac Kim
+ * @author Luka Eaton, Issac Kim, Lucie Lim
  */
 
 import java.util.ArrayList;
@@ -14,8 +14,6 @@ import exceptions.SyntaxException;
 
 public class ParamsTNode implements JottTree {
 
-    private boolean isEmpty;
-
     private ExprNode expr;
 
     private Token comma;
@@ -23,7 +21,6 @@ public class ParamsTNode implements JottTree {
     public ParamsTNode(Token comma, ExprNode expr){
         this.comma = comma;
         this.expr = expr;
-        this.isEmpty = false;
     }
 
     public static ParamsTNode ParseParamT(ArrayList<Token> tokenlist) throws SyntaxException{
@@ -38,7 +35,9 @@ public class ParamsTNode implements JottTree {
         }
     }
 
-    public String convertToJott(){return "";}
+    public String convertToJott(){
+        return ", " + ExprNode.convertToJott(this.expr);
+    }
 
     public String convertToJava(String className){return "";}
 
