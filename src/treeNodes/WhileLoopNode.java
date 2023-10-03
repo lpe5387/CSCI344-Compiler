@@ -79,7 +79,7 @@ public class WhileLoopNode implements JottTree, BodyStmtNode {
     }
 
     public String convertToJott(){
-         return "while [ " + this.expr.convertToJott() + " ] { " + this.body.convertToJott() + " }";
+         return "while [ " + ExprNode.convertToJott(this.expr) + " ] { " + this.body.convertToJott() + " }";
     }
 
     public String convertToJava(String className){return "";}

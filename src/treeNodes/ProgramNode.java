@@ -29,7 +29,13 @@ public class ProgramNode implements JottTree {
         return new ProgramNode(funcDefList);
     }
 
-    public String convertToJott(){return "";}
+    public String convertToJott(){
+        String programString = "";
+        for(FuncDefNode funcDef : funcDefList){
+            programString += funcDef.convertToJott();
+        }
+        return programString;
+    }
 
     public String convertToJava(String className){return "";}
 

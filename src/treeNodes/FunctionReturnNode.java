@@ -22,6 +22,7 @@ public class FunctionReturnNode implements JottTree {
 
     public FunctionReturnNode(TypeNode type){
         this.type = type;
+        this.voidReturn = null;
     }
 
     public static FunctionReturnNode ParseFuncReturn(ArrayList<Token> tokenlist) throws SyntaxException {
@@ -34,7 +35,12 @@ public class FunctionReturnNode implements JottTree {
         return new FunctionReturnNode(type);
     }
 
-    public String convertToJott(){return "";}
+    public String convertToJott(){
+        if(this.voidReturn != null){
+            return "Void";
+        }
+        else return this.type.convertToJott();
+    }
 
     public String convertToJava(String className){return "";}
 
