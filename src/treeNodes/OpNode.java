@@ -1,7 +1,7 @@
 package treeNodes; /**
  * This class is responsible for the operation node for the parse tree
  *
- * @author Luka Eaton Issac Kim
+ * @author Luka Eaton Issac Kim lucie lim
  */
 
 import java.util.ArrayList;
@@ -37,7 +37,8 @@ public class OpNode implements JottTree {
         }
     }
 
-    public String convertToJott(){return "";}
+    public String convertToJott(){
+        return this.token.getToken();}
 
     public String convertToJava(String className){return "";}
 
