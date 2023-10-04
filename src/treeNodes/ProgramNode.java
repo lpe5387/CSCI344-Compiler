@@ -6,6 +6,7 @@ package treeNodes;
  * @author Luka Eaton
  */
 
+import exceptions.SyntaxException;
 import provided.JottTree;
 import provided.Token;
 
@@ -20,10 +21,10 @@ public class ProgramNode implements JottTree {
         this.funcDefList = funcDefList;
     }
 
-    public static ProgramNode parseProgram(ArrayList<Token> tokenlist){
+    public static ProgramNode parseProgram(ArrayList<Token> tokenlist) throws SyntaxException {
         ArrayList<FuncDefNode> funcDefList = new ArrayList<>();
         while(!tokenlist.isEmpty()){
-            FuncDefNode funcDef = FuncDefNode.ParseFuncDef(tokenlist);
+            FuncDefNode funcDef = FuncDefNode.parseFuncDef(tokenlist);
             funcDefList.add(funcDef);
         }
         return new ProgramNode(funcDefList);

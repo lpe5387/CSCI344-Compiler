@@ -28,17 +28,17 @@ public class FuncDefNode implements JottTree {
         this.body = body;
     }
 
-    public static FuncDefNode ParseFuncDef(ArrayList<Token> tokenlist){
+    public static FuncDefNode parseFuncDef(ArrayList<Token> tokenlist) throws SyntaxException {
         Token token = tokenlist.get(0);
         if(Objects.equals(token.getToken(), "def")){
             tokenlist.remove(0);
             token = tokenlist.get(0);
             if(token.getTokenType() == TokenType.ID_KEYWORD){
-                IdNode idNode =IdNode.ParseId(tokenlist);
+                IdNode idNode =IdNode.parseId(tokenlist);
                 token = tokenlist.get(0);
                 if(token.getTokenType() == TokenType.L_BRACE) {
                     tokenlist.remove(0);
-                    FuncDefParamsNode funcDefParams = FuncDefParamsNode.ParseFuncDefParams(tokenlist);
+                    FuncDefParamsNode funcDefParams = FuncDefParamsNode.parseFuncDefParams(tokenlist);
                     token = tokenlist.get(0);
                     if(token.getTokenType() == TokenType.R_BRACE) {
                         tokenlist.remove(0);

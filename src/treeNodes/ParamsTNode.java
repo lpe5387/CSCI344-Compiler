@@ -23,7 +23,7 @@ public class ParamsTNode implements JottTree {
         this.expr = expr;
     }
 
-    public static ParamsTNode ParseParamT(ArrayList<Token> tokenlist) throws SyntaxException{
+    public static ParamsTNode parseParamT(ArrayList<Token> tokenlist) throws SyntaxException{
         Token token = tokenlist.get(0);
         if(token.getTokenType() == TokenType.COMMA) {
             tokenlist.remove(0);

@@ -22,7 +22,7 @@ public class FuncDefParamsTNode implements JottTree {
         this.type = type;
     }
 
-    public static FuncDefParamsTNode ParseFuncDefParamsT(ArrayList<Token> tokenlist){
+    public static FuncDefParamsTNode ParseFuncDefParamsT(ArrayList<Token> tokenlist) throws SyntaxException {
         Token token = tokenlist.get(0);//check if comma
         if(token.getTokenType() == TokenType.COMMA){
 
@@ -32,7 +32,7 @@ public class FuncDefParamsTNode implements JottTree {
             if(token.getTokenType() == TokenType.ID_KEYWORD){
 
                 tokenlist.remove(0);//remove comma from tokenlist
-                IdNode idNode = IdNode.ParseId(tokenlist); //replace w/ actual iD parser
+                IdNode idNode = IdNode.parseId(tokenlist); //replace w/ actual iD parser
                 token = tokenlist.get(0);
 
                 if(token.getTokenType() == TokenType.COLON){

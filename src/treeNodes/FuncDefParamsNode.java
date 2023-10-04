@@ -25,10 +25,10 @@ public class FuncDefParamsNode implements JottTree {
         this.funcDefParamsTList = funcDefParamsTList;
     }
 
-    public static FuncDefParamsNode ParseFuncDefParams(ArrayList<Token> tokenlist) {
+    public static FuncDefParamsNode parseFuncDefParams(ArrayList<Token> tokenlist) throws SyntaxException {
         Token token = tokenlist.get(0);
         if(token.getTokenType() == TokenType.ID_KEYWORD){
-            IdNode idNode = IdNode.ParseId(tokenlist);
+            IdNode idNode = IdNode.parseId(tokenlist);
             token = tokenlist.get(0);
             if(token.getTokenType() == TokenType.COLON) {
                 TypeNode type = TypeNode.parseType(tokenlist);
