@@ -38,11 +38,12 @@ public class FuncDefParamsNode implements JottTree {
                 }
                 FuncDefParamsNode node = new FuncDefParamsNode(idNode, type, funcDefParamsTNodes);
                 return node;
+            } else {
+                throw new SyntaxException("Expected :, got " + token.getTokenType(), token.getFilename(), token.getLineNum());
             }
         } else {
-            return null;
+            throw new SyntaxException("Expected a ID/Keyword, got " + token.getTokenType(), token.getFilename(), token.getLineNum());
         }
-
     }
 
     public String convertToJott(){return "";}

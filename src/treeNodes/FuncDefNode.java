@@ -53,12 +53,27 @@ public class FuncDefNode implements JottTree {
                                 token = tokenlist.get(0);
                                 if(token.getTokenType() == TokenType.R_BRACKET){
                                     FuncDefNode node = new FuncDefNode(idNode, funcDefParams, returnType, body);
+                                    return node;
+                                } else {
+                                    throw new SyntaxException("Expected }, got " + token.getTokenType(), token.getFilename(), token.getLineNum());
                                 }
+                            } else {
+                                throw new SyntaxException("Expected {, got " + token.getTokenType(), token.getFilename(), token.getLineNum());
                             }
+                        }  else {
+                            throw new SyntaxException("Expected :, got " + token.getTokenType(), token.getFilename(), token.getLineNum());
                         }
+                    } else {
+                        throw new SyntaxException("Expected ], got " + token.getTokenType(), token.getFilename(), token.getLineNum());
                     }
+                } else {
+                    throw new SyntaxException("Expected [, got " + token.getTokenType(), token.getFilename(), token.getLineNum());
                 }
+            } else {
+                throw new SyntaxException("Expected a ID/Keyword, got " + token.getTokenType(), token.getFilename(), token.getLineNum());
             }
+        } else {
+            throw new SyntaxException("Expected \"def\", got " + token.getTokenType(), token.getFilename(), token.getLineNum());
         }
     }
 
