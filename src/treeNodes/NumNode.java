@@ -24,7 +24,7 @@ public class NumNode implements JottTree, ExprNode {
     public static NumNode parseNum(ArrayList<Token> tokenList) throws SyntaxException {
         Token first = tokenList.get(0);
         if(first.getTokenType() != TokenType.NUMBER) {
-            throw new SyntaxException("Expected ';' Got: "+ first.getToken(), first.getFilename(), first.getLineNum());
+            throw new SyntaxException("Expected a number, Got: "+ first.getToken(), first.getFilename(), first.getLineNum());
         }
         tokenList.remove(0);
         return new NumNode(first);

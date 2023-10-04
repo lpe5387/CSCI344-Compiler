@@ -22,7 +22,7 @@ public class FuncDefParamsTNode implements JottTree {
         this.type = type;
     }
 
-    public static FuncDefParamsTNode ParseFuncDefParamsT(ArrayList<Token> tokenlist) throws SyntaxException {
+    public static FuncDefParamsTNode parseFuncDefParamsT(ArrayList<Token> tokenlist) throws SyntaxException {
         Token token = tokenlist.get(0);//check if comma
         if(token.getTokenType() == TokenType.COMMA){
 
