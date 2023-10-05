@@ -24,10 +24,17 @@ public class OperationNode implements JottTree, ExprNode {
 
     public static OperationNode parseOperation(ArrayList<Token> tokenlist) throws SyntaxException {
         Token token = tokenlist.get(0);
+        Token token1 = tokenlist.get(1);
         ExprNode left;
         if(token.getTokenType() == TokenType.ID_KEYWORD) left = IdNode.parseId(tokenlist);
         else if(token.getTokenType() == TokenType.NUMBER) left = NumNode.parseNum(tokenlist);
         else if(token.getTokenType() == TokenType.FC_HEADER) left = FuncCallNode.parseFuncCall(tokenlist);
+        else if(token.getTokenType() == TokenType.MATH_OP && token1.getTokenType() == TokenType.NUMBER){
+            Token signedNum = new Token(token.getToken()+token1.getToken(), token1.getFilename(), token1.getLineNum(), TokenType.NUMBER);
+            tokenlist.remove(0);
+            tokenlist.remove(0);
+            left = new NumNode(signedNum);
+        }
         else throw new SyntaxException("Expected an Id, Number, or Function call. Got: "+token.getToken(), token.getFilename(), token.getLineNum());
         OpNode op = OpNode.parseOp(tokenlist);
         ExprNode right = ExprNode.parseExpr(tokenlist);
