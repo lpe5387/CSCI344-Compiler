@@ -148,7 +148,27 @@ public class IfStmtNode implements JottTree, BodyStmtNode {
         return new IfStmtNode(expr, body, elseIfList, finalElse);
     }
 
-    public String convertToJott(){return "";} //TODO
+    public String convertToJott(){
+        String str = "if["; //starting if
+        str += ExprNode.convertToJott(this.expr); //condition for the if
+        str += "]{\n"; //end if start body
+        str += BodyStmtNode.convertToJott(); //body statement
+        str += "}\n"; //end body
+        //
+        //loop through else if statements, the list can be empty that just means no else ifs are present
+        //
+        while(!this.elseIfLst.isEmpty()){ //while the list is not empty
+            str += elseIfLst.get(0).convertToJott();
+            elseIfLst.remove(0);
+        }
+        //
+        //there is allowed to be no else statement, in that case elseStmt will be null
+        //
+        if(this.elseStmt != null){
+            str += this.elseStmt.convertToJott();
+        }
+        return str;
+    }
 
     public String convertToJava(String className){return "";}
 
