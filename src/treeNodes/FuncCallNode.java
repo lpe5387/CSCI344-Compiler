@@ -12,7 +12,7 @@ import provided.Token;
 import provided.TokenType;
 import java.util.ArrayList;
 
-public class FuncCallNode implements JottTree, ExprNode, BodyStmtNode {
+public class FuncCallNode implements ExprNode, BodyStmtNode {
 
     private IdNode id;
     private ParamsNode params;

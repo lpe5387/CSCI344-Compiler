@@ -10,7 +10,7 @@ import provided.TokenType;
 
 import java.util.ArrayList;
 
-public class OperationNode implements JottTree, ExprNode {
+public class OperationNode implements ExprNode {
 
     private ExprNode left;
     private OpNode op;

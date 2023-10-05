@@ -13,7 +13,7 @@ import provided.Token;
 import exceptions.SyntaxException;
 import provided.TokenType;
 
-public interface ExprNode {
+public interface ExprNode extends JottTree {
 
     public static ExprNode parseExpr(ArrayList<Token> tokenlist) throws SyntaxException {
         Token token = tokenlist.get(1);

@@ -13,7 +13,7 @@ import provided.TokenType;
 
 import java.util.ArrayList;
 
-public class StringLiteralNode implements JottTree, ExprNode {
+public class StringLiteralNode implements ExprNode {
 
     private String text;
     private Token token;

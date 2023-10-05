@@ -13,7 +13,7 @@ import provided.TokenType;
 
 import java.util.ArrayList;
 
-public class NumNode implements JottTree, ExprNode {
+public class NumNode implements ExprNode {
 
     private Token token;
 

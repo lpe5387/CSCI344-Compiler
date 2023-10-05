@@ -13,7 +13,7 @@ import provided.TokenType;
 
 import java.util.ArrayList;
 
-public class AsmtNode implements JottTree, BodyStmtNode {
+public class AsmtNode implements BodyStmtNode {
     
     private TypeNode type;
     private IdNode id;

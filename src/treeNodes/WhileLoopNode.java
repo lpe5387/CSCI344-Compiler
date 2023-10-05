@@ -13,7 +13,7 @@ import provided.TokenType;
 
 import java.util.ArrayList;
 
-public class WhileLoopNode implements JottTree, BodyStmtNode {
+public class WhileLoopNode implements BodyStmtNode {
 
     /**
      * Idk what to do about the brackets, do i keep the private attributes of it?

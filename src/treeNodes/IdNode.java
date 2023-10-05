@@ -10,7 +10,7 @@ import provided.Token;
 import provided.TokenType;
 import exceptions.SyntaxException;
 
-public class IdNode implements JottTree, ExprNode {
+public class IdNode implements ExprNode {
  
     private Token token;
 

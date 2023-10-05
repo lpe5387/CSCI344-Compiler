@@ -3,7 +3,7 @@ package treeNodes;
 /**
  * This class is responsible for the return statement node for the parse tree
  *
- * @author Luka Eaton
+ * @author Luka Eaton, Dara Prak
  */
 
 import exceptions.SyntaxException;

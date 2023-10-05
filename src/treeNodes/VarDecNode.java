@@ -12,7 +12,7 @@ import provided.Token;
 import provided.TokenType;
 import java.util.ArrayList;
 
-public class VarDecNode implements JottTree, BodyStmtNode {
+public class VarDecNode implements BodyStmtNode {
 
     private TypeNode type;
     private IdNode id;
