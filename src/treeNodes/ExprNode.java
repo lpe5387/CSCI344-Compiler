@@ -33,32 +33,4 @@ public interface ExprNode extends JottTree {
         return expr;
     }
 
-    //TODO: make a convert to jott funct
-    public static String convertToJott(ExprNode expr){
-        if(expr instanceof IdNode){
-            IdNode id = (IdNode)expr;
-            return id.convertToJott();
-        }
-        else if(expr instanceof NumNode){
-            NumNode num = (NumNode)expr;
-            return num.convertToJott();
-        }
-        else if(expr instanceof BoolNode){
-            BoolNode bool = (BoolNode)expr;
-            return bool.convertToJott();
-        }
-        else if(expr instanceof FuncCallNode){
-            FuncCallNode funcCall = (FuncCallNode) expr;
-            return funcCall.convertToJott();
-        }
-        else if(expr instanceof StringLiteralNode){
-            StringLiteralNode stringLiteral = (StringLiteralNode) expr;
-            return stringLiteral.convertToJott();
-        }
-        else{
-            OperationNode operation = (OperationNode)expr;
-            return operation.convertToJott();
-        }
-    }
-
 }

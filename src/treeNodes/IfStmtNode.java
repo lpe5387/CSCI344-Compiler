@@ -150,9 +150,9 @@ public class IfStmtNode implements BodyStmtNode {
 
     public String convertToJott(){
         String str = "if["; //starting if
-        str += ExprNode.convertToJott(this.expr); //condition for the if
+        str += this.expr.convertToJott(); //condition for the if
         str += "]{\n"; //end if start body
-        str += BodyStmtNode.convertToJott(); //body statement
+        str += this.body.convertToJott(); //body statement
         str += "}\n"; //end body
         //
         //loop through else if statements, the list can be empty that just means no else ifs are present

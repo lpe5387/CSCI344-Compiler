@@ -36,7 +36,7 @@ public class OperationNode implements ExprNode {
     }
 
     public String convertToJott(){
-        return ExprNode.convertToJott(this.left) + this.op.convertToJott() + ExprNode.convertToJott(this.right);
+        return this.left.convertToJott() + this.op.convertToJott() + this.right.convertToJott();
     }
 
     public String convertToJava(String className){return "";}
