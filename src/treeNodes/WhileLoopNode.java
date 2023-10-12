@@ -15,11 +15,6 @@ import java.util.ArrayList;
 
 public class WhileLoopNode implements BodyStmtNode {
 
-    /**
-     * Idk what to do about the brackets, do i keep the private attributes of it?
-     * I think no because it seems very inefficient and repetitive
-     */
-
     private ExprNode expr;
     private BodyNode body;
 
