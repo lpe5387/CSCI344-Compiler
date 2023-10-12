@@ -44,7 +44,9 @@ public class ReturnStmtNode implements JottTree {
             }
         }
     }
-    public String convertToJott(){return "";}
+    public String convertToJott() {
+        return "return" + this.expr.convertToJott();
+    }
 
     public String convertToJava(String className){return "";}
 

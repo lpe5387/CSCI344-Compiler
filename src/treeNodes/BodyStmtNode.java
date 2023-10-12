@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * @author Luka Eaton, Dara Prak
  */
 
-public interface BodyStmtNode extends JottTree { //TODO: make children just implement this
+public interface BodyStmtNode extends JottTree {
 
     public static BodyStmtNode parseBodyStmt(ArrayList<Token> tokenList) throws SyntaxException {
         Token first = tokenList.get(0);
@@ -45,5 +45,4 @@ public interface BodyStmtNode extends JottTree { //TODO: make children just impl
             return null; // not a body statement
         }
     }
-
 }

@@ -30,7 +30,9 @@ public class NumNode implements ExprNode {
         return new NumNode(first);
     }
 
-    public String convertToJott(){return "";}
+    public String convertToJott() {
+        return this.token.getToken();
+    }
 
     public String convertToJava(String className){return "";}
 
