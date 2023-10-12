@@ -29,12 +29,6 @@ public interface ExprNode extends JottTree {
         else if(token.getTokenType() == TokenType.NUMBER) expr = NumNode.parseNum(tokenlist);
         else if(token.getTokenType() == TokenType.STRING) expr = StringLiteralNode.parseStringLiteral(tokenlist);
         else if(token.getTokenType() == TokenType.FC_HEADER) expr = FuncCallNode.parseFuncCall(tokenlist);
-        else if(token.getTokenType() == TokenType.MATH_OP && token1.getTokenType() == TokenType.NUMBER){
-            Token signedNum = new Token(token.getToken()+token1.getToken(), token1.getFilename(), token1.getLineNum(), TokenType.NUMBER);
-            tokenlist.remove(0);
-            tokenlist.remove(0);
-            expr = new NumNode(signedNum);
-        }
         else throw new SyntaxException("Expected an Id, Number, Function call, Boolean, or String. Got: "+token.getToken(), token.getFilename(), token.getLineNum());
         return expr;
     }
