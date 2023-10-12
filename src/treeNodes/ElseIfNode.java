@@ -101,7 +101,7 @@ public class ElseIfNode implements JottTree {
         String str = "elseif["; //starting elseif
         str += ExprNode.convertToJott(this.expr); //condition for the elseif
         str += "]{\n"; //end if start body
-        str += BodyStmtNode.convertToJott(); //body statement
+        //str += BodyStmtNode.convertToJott(); //body statement
         str += "}\n"; //end body
         return str;
     }

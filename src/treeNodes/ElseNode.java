@@ -69,7 +69,7 @@ public class ElseNode implements JottTree {
 
     public String convertToJott(){
         String str = "else{\n";
-        str += this.body.convertToJott();
+        //str += this.body.convertToJott();
         str += "}\n";
         return str;
     }
