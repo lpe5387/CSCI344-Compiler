@@ -38,7 +38,7 @@ public class FuncDefNode implements JottTree {
                 token = tokenlist.get(0);
                 if(token.getTokenType() == TokenType.L_BRACE) {
                     tokenlist.remove(0);
-                    FuncDefParamsNode funcDefParams = FuncDefParamsNode.parseFuncDefParams(tokenlist);//account for next token being ] and no params
+                    FuncDefParamsNode funcDefParams = FuncDefParamsNode.parseFuncDefParams(tokenlist);
                     token = tokenlist.get(0);
                     if(token.getTokenType() == TokenType.R_BRACE) {
                         tokenlist.remove(0);

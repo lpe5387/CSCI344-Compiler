@@ -43,7 +43,7 @@ public class FuncDefParamsNode implements JottTree {
                 throw new SyntaxException("Expected :, got " + token.getTokenType(), token.getFilename(), token.getLineNum());
             }
         } else {
-            throw new SyntaxException("Expected a ID/Keyword, got " + token.getTokenType(), token.getFilename(), token.getLineNum());
+            return null; //if no ID then no params
         }
     }
 
