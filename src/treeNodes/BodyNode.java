@@ -14,8 +14,8 @@ import java.util.ArrayList;
 
 public class BodyNode implements JottTree {
     
-    private static ArrayList<BodyStmtNode> bodyStmtList;
-    private ReturnStmtNode returnStmt;
+    private ArrayList<BodyStmtNode> bodyStmtList;
+    private ReturnStmtNode returnStmt; // null if no explicit return statement (epsilon in grammar)
 
     public BodyNode(ArrayList<BodyStmtNode> bodyStmtList, ReturnStmtNode returnStmt){
         this.bodyStmtList = bodyStmtList;
@@ -35,7 +35,18 @@ public class BodyNode implements JottTree {
         ReturnStmtNode returnStmt = ReturnStmtNode.parseReturnStmt(tokenList);
         return new BodyNode(stmtList, returnStmt);
     }
-    public String convertToJott(){return "";} //TODO null check for ReturnStmtNode
+    public String convertToJott() {
+        String jottString = "";
+        for(BodyStmtNode bodyStmt : this.bodyStmtList) {
+            jottString += bodyStmt.convertToJott();
+        }
+        if(this.returnStmt == null) {
+            return jottString;
+        } else {
+            jottString += this.returnStmt.convertToJott();
+            return jottString;
+        }
+    }
 
     public String convertToJava(String className){return "";}
 

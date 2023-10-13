@@ -36,7 +36,7 @@ public class ParamsTNode implements JottTree {
     }
 
     public String convertToJott(){
-        return ", " + ExprNode.convertToJott(this.expr);
+        return ", " + this.expr.convertToJott();
     }
 
     public String convertToJava(String className){return "";}
