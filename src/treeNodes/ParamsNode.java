@@ -40,7 +40,13 @@ public class ParamsNode implements JottTree {
         return node;
     }
 
-    public String convertToJott(){return "";}
+    public String convertToJott(){
+        StringBuilder toString = new StringBuilder(this.expr.convertToJott());
+        for (ParamsTNode i : this.paramsTList){
+            toString.append(i.convertToJott());
+        }
+        return toString.toString();
+    }
 
     public String convertToJava(String className){return "";}
 

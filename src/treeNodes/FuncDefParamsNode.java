@@ -47,7 +47,14 @@ public class FuncDefParamsNode implements JottTree {
         }
     }
 
-    public String convertToJott(){return "";}
+    public String convertToJott(){
+        StringBuilder toString = new StringBuilder(this.id.convertToJott());
+        toString.append(":");
+        for (FuncDefParamsTNode i : this.funcDefParamsTList){
+            toString.append(i.convertToJott());
+        }
+        return toString.toString();
+    }
 
     public String convertToJava(String className){return "";}
 

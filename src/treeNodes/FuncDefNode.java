@@ -38,7 +38,7 @@ public class FuncDefNode implements JottTree {
                 token = tokenlist.get(0);
                 if(token.getTokenType() == TokenType.L_BRACE) {
                     tokenlist.remove(0);
-                    FuncDefParamsNode funcDefParams = FuncDefParamsNode.parseFuncDefParams(tokenlist);
+                    FuncDefParamsNode funcDefParams = FuncDefParamsNode.parseFuncDefParams(tokenlist);//account for next token being ] and no params
                     token = tokenlist.get(0);
                     if(token.getTokenType() == TokenType.R_BRACE) {
                         tokenlist.remove(0);
@@ -77,7 +77,12 @@ public class FuncDefNode implements JottTree {
         }
     }
 
-    public String convertToJott(){return "";}
+    public String convertToJott(){
+        String toString = "def " + this.id.convertToJott() + "["
+                + this.funcDefParams.convertToJott() + "]:" + this.returnType.convertToJott()
+                + "{" + this.body.convertToJott() + "}";
+        return toString;
+    }
 
     public String convertToJava(String className){return "";}
 
