@@ -27,17 +27,19 @@ public class BoolNode implements ExprNode {
      * @throws SyntaxException
      */
     public static BoolNode parseBool(ArrayList<Token> tokenlist) throws SyntaxException {
-        Token token = tokenlist.get(0);
-        String tokenValue = token.getToken();
-        if(token.getTokenType() == TokenType.ID_KEYWORD && (tokenValue.equals("True") || 
-        tokenValue.equals("False"))){
-            BoolNode node = new BoolNode(token);
-            tokenlist.remove(0); 
-            return node;
+        if(!tokenlist.isEmpty()) {
+            Token token = tokenlist.get(0);
+            String tokenValue = token.getToken();
+            if (token.getTokenType() == TokenType.ID_KEYWORD && (tokenValue.equals("True") ||
+                    tokenValue.equals("False"))) {
+                BoolNode node = new BoolNode(token);
+                tokenlist.remove(0);
+                return node;
+            } else {
+                throw new SyntaxException("Expected a Boolean value, got " + token.getTokenType(), token.getFilename(), token.getLineNum());
+            }
         }
-        else{
-            throw new SyntaxException("Expected a Boolean value, got "+token.getTokenType(), token.getFilename(), token.getLineNum());
-        }
+        else throw new SyntaxException("Expected an expression. Reached EOF");
     }
 
     public String convertToJott() {

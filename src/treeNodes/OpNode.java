@@ -25,16 +25,18 @@ public class OpNode implements JottTree {
      * @throws SyntaxException
      */
     public static OpNode parseOp(ArrayList<Token> tokenlist) throws SyntaxException {
-        Token token = tokenlist.get(0);
-        TokenType tokenType = token.getTokenType();
-        if(tokenType == TokenType.REL_OP || tokenType == TokenType.MATH_OP){
-            OpNode node = new OpNode(token);
-            tokenlist.remove(0); 
-            return node;
+        if(!tokenlist.isEmpty()) {
+            Token token = tokenlist.get(0);
+            TokenType tokenType = token.getTokenType();
+            if (tokenType == TokenType.REL_OP || tokenType == TokenType.MATH_OP) {
+                OpNode node = new OpNode(token);
+                tokenlist.remove(0);
+                return node;
+            } else {
+                throw new SyntaxException("Expected a Relational Operator, got " + token.getToken(), token.getFilename(), token.getLineNum());
+            }
         }
-        else{
-            throw new SyntaxException("Expected a Relational Operator, got "+ token.getToken(), token.getFilename(), token.getLineNum());
-        }
+        else throw new SyntaxException("Expected an expression. Reached EOF");
     }
 
     public String convertToJott(){

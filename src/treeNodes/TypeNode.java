@@ -36,19 +36,21 @@ public class TypeNode implements JottTree {
     }
 
     public static TypeNode parseType(ArrayList<Token> tokenlist) throws SyntaxException{
-        Token tok = tokenlist.get(0); //grab the token
-        if(tok.getTokenType() != TokenType.ID_KEYWORD){ //if not an ID_KEYWORD, reject
-            throw new SyntaxException("Expected a ID KEYWORD, got: " + tok.getTokenType(), tok.getFilename(), tok.getLineNum());
+        if(!tokenlist.isEmpty()) {
+            Token tok = tokenlist.get(0); //grab the token
+            if (tok.getTokenType() != TokenType.ID_KEYWORD) { //if not an ID_KEYWORD, reject
+                throw new SyntaxException("Expected a ID KEYWORD, got: " + tok.getTokenType(), tok.getFilename(), tok.getLineNum());
+            }
+            //Check if the text matches a valid name
+            else if (tok.getToken().equals(TypeNodeNames.Double.name()) || tok.getToken().equals(TypeNodeNames.Integer.name())
+                    || tok.getToken().equals(TypeNodeNames.String.name()) || tok.getToken().equals(TypeNodeNames.Boolean.name())) {
+                tokenlist.remove(0); //pop the token from the list
+                return new TypeNode(tok); //make the node and return it
+            } else { //the token text doesn't match a legal name, reject
+                throw new SyntaxException("Invalid ID KEYWORD: " + tok.getToken(), tok.getFilename(), tok.getLineNum());
+            }
         }
-        //Check if the text matches a valid name
-        else if(tok.getToken().equals(TypeNodeNames.Double.name()) || tok.getToken().equals(TypeNodeNames.Integer.name())
-                || tok.getToken().equals(TypeNodeNames.String.name()) || tok.getToken().equals(TypeNodeNames.Boolean.name()) ){
-            tokenlist.remove(0); //pop the token from the list
-            return new TypeNode(tok); //make the node and return it
-        }
-        else{ //the token text doesn't match a legal name, reject
-            throw new SyntaxException("Invalid ID KEYWORD: " + tok.getToken(), tok.getFilename(), tok.getLineNum());
-        }
+        else throw new SyntaxException("Expected an expression. Reached EOF");
     }
 
     public Token getToken() {return token;}

@@ -24,15 +24,18 @@ public class ParamsTNode implements JottTree {
     }
 
     public static ParamsTNode parseParamT(ArrayList<Token> tokenlist) throws SyntaxException{
-        Token token = tokenlist.get(0);
-        if(token.getTokenType() == TokenType.COMMA) {
-            tokenlist.remove(0);
-            ExprNode expr = ExprNode.parseExpr(tokenlist);// expr node maker
-            ParamsTNode node = new ParamsTNode(token, expr);//base node
-            return node;
-        } else {
-            throw new SyntaxException("Expected a Comma Operator, got " + token.getToken(), token.getFilename(), token.getLineNum());
+        if(!tokenlist.isEmpty()) {
+            Token token = tokenlist.get(0);
+            if (token.getTokenType() == TokenType.COMMA) {
+                tokenlist.remove(0);
+                ExprNode expr = ExprNode.parseExpr(tokenlist);// expr node maker
+                ParamsTNode node = new ParamsTNode(token, expr);//base node
+                return node;
+            } else {
+                throw new SyntaxException("Expected a Comma Operator, got " + token.getToken(), token.getFilename(), token.getLineNum());
+            }
         }
+        else throw new SyntaxException("Expected an expression. Reached EOF");
     }
 
     public String convertToJott(){
