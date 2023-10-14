@@ -191,7 +191,6 @@ public class JottTokenizer {
               if (x != 1){
                 tok += "\"";
               }
-              x++;
               //if we end with a " end normally
               if (nextChar == '"'){
                 token = new Token(tok, filename, lineNum, TokenType.STRING);
