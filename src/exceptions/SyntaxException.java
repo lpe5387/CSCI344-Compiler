@@ -18,10 +18,17 @@ public class SyntaxException extends Exception{
         this.lineNum = lineNum;
     }
 
+    public SyntaxException(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
+
     public String getErrorMessage(){ return errorMessage;}
 
     public void printErrorMessage(){
-        System.err.println("Syntax Error:\n"+this.errorMessage+"\n"+this.filename+":"+this.lineNum+"\n");
+        if(this.filename == null)
+            System.err.println("Syntax Error:\n"+this.errorMessage);
+        else
+            System.err.println("Syntax Error:\n"+this.errorMessage+"\n"+this.filename+":"+this.lineNum+"\n");
     }
 
 }
