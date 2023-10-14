@@ -36,44 +36,44 @@ public class FuncDefNode implements JottTree {
             if(token.getTokenType() == TokenType.ID_KEYWORD){
                 IdNode idNode =IdNode.parseId(tokenlist);
                 token = tokenlist.get(0);
-                if(token.getTokenType() == TokenType.L_BRACE) {
+                if(token.getTokenType() == TokenType.L_BRACKET) {
                     tokenlist.remove(0);
                     FuncDefParamsNode funcDefParams = FuncDefParamsNode.parseFuncDefParams(tokenlist);
                     token = tokenlist.get(0);
-                    if(token.getTokenType() == TokenType.R_BRACE) {
+                    if(token.getTokenType() == TokenType.R_BRACKET) {
                         tokenlist.remove(0);
                         token = tokenlist.get(0);
                         if (token.getTokenType() == TokenType.COLON) {
                             tokenlist.remove(0);
                             FunctionReturnNode returnType = FunctionReturnNode.ParseFuncReturn(tokenlist);
                             token = tokenlist.get(0);
-                            if(token.getTokenType() == TokenType.L_BRACKET){
+                            if(token.getTokenType() == TokenType.L_BRACE){
                                 tokenlist.remove(0);
                                 BodyNode body = BodyNode.parseBody(tokenlist);
                                 token = tokenlist.get(0);
-                                if(token.getTokenType() == TokenType.R_BRACKET){
+                                if(token.getTokenType() == TokenType.R_BRACE){
                                     FuncDefNode node = new FuncDefNode(idNode, funcDefParams, returnType, body);
                                     return node;
                                 } else {
-                                    throw new SyntaxException("Expected }, got " + token.getTokenType(), token.getFilename(), token.getLineNum());
+                                    throw new SyntaxException("Expected }, got " + token.getToken(), token.getFilename(), token.getLineNum());
                                 }
                             } else {
-                                throw new SyntaxException("Expected {, got " + token.getTokenType(), token.getFilename(), token.getLineNum());
+                                throw new SyntaxException("Expected {, got " + token.getToken(), token.getFilename(), token.getLineNum());
                             }
                         }  else {
-                            throw new SyntaxException("Expected :, got " + token.getTokenType(), token.getFilename(), token.getLineNum());
+                            throw new SyntaxException("Expected :, got " + token.getToken(), token.getFilename(), token.getLineNum());
                         }
                     } else {
-                        throw new SyntaxException("Expected ], got " + token.getTokenType(), token.getFilename(), token.getLineNum());
+                        throw new SyntaxException("Expected ], got " + token.getToken(), token.getFilename(), token.getLineNum());
                     }
                 } else {
-                    throw new SyntaxException("Expected [, got " + token.getTokenType(), token.getFilename(), token.getLineNum());
+                    throw new SyntaxException("Expected [, got " + token.getToken(), token.getFilename(), token.getLineNum());
                 }
             } else {
-                throw new SyntaxException("Expected a ID/Keyword, got " + token.getTokenType(), token.getFilename(), token.getLineNum());
+                throw new SyntaxException("Expected a ID/Keyword, got " + token.getToken(), token.getFilename(), token.getLineNum());
             }
         } else {
-            throw new SyntaxException("Expected \"def\", got " + token.getTokenType(), token.getFilename(), token.getLineNum());
+            throw new SyntaxException("Expected \"def\", got " + token.getToken(), token.getFilename(), token.getLineNum());
         }
     }
 
