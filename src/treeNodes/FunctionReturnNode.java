@@ -26,13 +26,16 @@ public class FunctionReturnNode implements JottTree {
     }
 
     public static FunctionReturnNode ParseFuncReturn(ArrayList<Token> tokenlist) throws SyntaxException {
-        Token token = tokenlist.get(0);
-        if(token.getToken().equals("Void")){
-            tokenlist.remove(0);
-            return new FunctionReturnNode(token);
+        if(!tokenlist.isEmpty()) {
+            Token token = tokenlist.get(0);
+            if (token.getToken().equals("Void")) {
+                tokenlist.remove(0);
+                return new FunctionReturnNode(token);
+            }
+            TypeNode type = TypeNode.parseType(tokenlist);
+            return new FunctionReturnNode(type);
         }
-        TypeNode type = TypeNode.parseType(tokenlist);
-        return new FunctionReturnNode(type);
+        else throw new SyntaxException("Expected an expression. Reached EOF");
     }
 
     public String convertToJott(){

@@ -23,16 +23,19 @@ public class OperationNode implements ExprNode {
     }
 
     public static OperationNode parseOperation(ArrayList<Token> tokenlist) throws SyntaxException {
-        Token token = tokenlist.get(0);
-        Token token1 = tokenlist.get(1);
-        ExprNode left;
-        if(token.getTokenType() == TokenType.ID_KEYWORD) left = IdNode.parseId(tokenlist);
-        else if(token.getTokenType() == TokenType.NUMBER) left = NumNode.parseNum(tokenlist);
-        else if(token.getTokenType() == TokenType.FC_HEADER) left = FuncCallNode.parseFuncCall(tokenlist);
-        else throw new SyntaxException("Expected an Id, Number, or Function call. Got: "+token.getToken(), token.getFilename(), token.getLineNum());
-        OpNode op = OpNode.parseOp(tokenlist);
-        ExprNode right = ExprNode.parseExpr(tokenlist);
-        return new OperationNode(left, op, right);
+        if(!tokenlist.isEmpty()) {
+            Token token = tokenlist.get(0);
+            ExprNode left;
+            if (token.getTokenType() == TokenType.ID_KEYWORD) left = IdNode.parseId(tokenlist);
+            else if (token.getTokenType() == TokenType.NUMBER) left = NumNode.parseNum(tokenlist);
+            else if (token.getTokenType() == TokenType.FC_HEADER) left = FuncCallNode.parseFuncCall(tokenlist);
+            else
+                throw new SyntaxException("Expected an Id, Number, or Function call. Got: " + token.getToken(), token.getFilename(), token.getLineNum());
+            OpNode op = OpNode.parseOp(tokenlist);
+            ExprNode right = ExprNode.parseExpr(tokenlist);
+            return new OperationNode(left, op, right);
+        }
+        else throw new SyntaxException("Expected an expression. Reached EOF");
     }
 
     public String convertToJott(){
