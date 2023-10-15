@@ -21,7 +21,8 @@ public interface ExprNode extends JottTree {
             ExprNode expr;
             // if the second token is a math op / rel op, we are dealing with an operation
             if (token.getTokenType() == TokenType.MATH_OP || token.getTokenType() == TokenType.REL_OP) {
-                expr = OperationNode.parseOperation(tokenlist);
+                expr = OperationNode.parseOperation(tokenlist, null);
+                return expr;
             }
         }
         if(!tokenlist.isEmpty()) {
@@ -32,7 +33,15 @@ public interface ExprNode extends JottTree {
             else if (token.getTokenType() == TokenType.ID_KEYWORD) expr = IdNode.parseId(tokenlist);
             else if (token.getTokenType() == TokenType.NUMBER) expr = NumNode.parseNum(tokenlist);
             else if (token.getTokenType() == TokenType.STRING) expr = StringLiteralNode.parseStringLiteral(tokenlist);
-            else if (token.getTokenType() == TokenType.FC_HEADER) expr = FuncCallNode.parseFuncCall(tokenlist);
+            else if (token.getTokenType() == TokenType.FC_HEADER){
+                expr = FuncCallNode.parseFuncCall(tokenlist);
+                if(!tokenlist.isEmpty()){
+                    token = tokenlist.get(0);
+                    if(token.getTokenType() == TokenType.MATH_OP || token.getTokenType() == TokenType.REL_OP){
+                        expr = OperationNode.parseOperation(tokenlist, expr);
+                    }
+                }
+            }
             else
                 throw new SyntaxException("Expected an Id, Number, Function call, Boolean, or String. Got: " + token.getToken(), token.getFilename(), token.getLineNum());
             return expr;

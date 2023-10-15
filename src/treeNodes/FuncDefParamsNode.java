@@ -50,6 +50,7 @@ public class FuncDefParamsNode implements JottTree {
     public String convertToJott(){
         StringBuilder toString = new StringBuilder(this.id.convertToJott());
         toString.append(":");
+        toString.append(this.type.convertToJott());
         for (FuncDefParamsTNode i : this.funcDefParamsTList){
             toString.append(i.convertToJott());
         }

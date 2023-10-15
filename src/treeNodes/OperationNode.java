@@ -22,11 +22,12 @@ public class OperationNode implements ExprNode {
         this.right = right;
     }
 
-    public static OperationNode parseOperation(ArrayList<Token> tokenlist) throws SyntaxException {
+    public static OperationNode parseOperation(ArrayList<Token> tokenlist, ExprNode funcCall) throws SyntaxException {
         if(!tokenlist.isEmpty()) {
             Token token = tokenlist.get(0);
             ExprNode left;
-            if (token.getTokenType() == TokenType.ID_KEYWORD) left = IdNode.parseId(tokenlist);
+            if(funcCall != null) left = funcCall;
+            else if (token.getTokenType() == TokenType.ID_KEYWORD) left = IdNode.parseId(tokenlist);
             else if (token.getTokenType() == TokenType.NUMBER) left = NumNode.parseNum(tokenlist);
             else if (token.getTokenType() == TokenType.FC_HEADER) left = FuncCallNode.parseFuncCall(tokenlist);
             else

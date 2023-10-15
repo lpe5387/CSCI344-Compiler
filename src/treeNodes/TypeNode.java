@@ -59,16 +59,16 @@ public class TypeNode implements JottTree {
 
     public String convertToJott(){
         if (this.getName().equals(TypeNodeNames.Double)){
-            return TypeNodeNames.Double.name();
+            return TypeNodeNames.Double.name()+" ";
         }
         else if (this.getName().equals(TypeNodeNames.Integer)){
-            return TypeNodeNames.Integer.name();
+            return TypeNodeNames.Integer.name()+" ";
         }
         else if (this.getName().equals(TypeNodeNames.String)){
-            return TypeNodeNames.String.name();
+            return TypeNodeNames.String.name()+" ";
         }
         else if (this.getName().equals(TypeNodeNames.Boolean)){
-            return TypeNodeNames.Boolean.name();
+            return TypeNodeNames.Boolean.name()+" ";
         }
         else {return "ERROR";} //there has tto be a better thing to do than this
     }
