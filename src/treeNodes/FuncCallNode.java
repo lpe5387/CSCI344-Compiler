@@ -60,7 +60,7 @@ public class FuncCallNode implements ExprNode, BodyStmtNode {
     }
 
     public String convertToJott(){
-        return "::" + this.id.convertToJott() + " [ " + params.convertToJott() + " ] ";
+        return "::" + this.id.convertToJott() + "[" + params.convertToJott() + "]";
     }
 
     public String convertToJava(String className){return "";}

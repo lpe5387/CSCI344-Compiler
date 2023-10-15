@@ -39,6 +39,8 @@ public class BodyNode implements JottTree {
         String jottString = "";
         for(BodyStmtNode bodyStmt : this.bodyStmtList) {
             jottString += bodyStmt.convertToJott();
+            if(bodyStmt instanceof FuncCallNode)
+                jottString += ";";
         }
         if(this.returnStmt == null) {
             return jottString;

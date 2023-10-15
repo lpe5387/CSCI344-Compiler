@@ -36,7 +36,7 @@ public interface BodyStmtNode extends JottTree {
         else if (first.getToken().equals("while")) {
             return WhileLoopNode.parseWhileLoop(tokenList);
         }
-        else if (tokenList.get(1).getToken().equals("=") || tokenList.get(2).getToken().equals("=")) {
+        else if (tokenList.size() >= 3 && (tokenList.get(1).getToken().equals("=") || tokenList.get(2).getToken().equals("="))) {
             return AsmtNode.parseAsmt(tokenList);
         } else if (first.getToken().equals("Double") || first.getToken().equals("Integer") ||
                 first.getToken().equals("String") || first.getToken().equals("Boolean")) {
