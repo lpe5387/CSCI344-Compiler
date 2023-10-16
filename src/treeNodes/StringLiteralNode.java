@@ -24,13 +24,18 @@ public class StringLiteralNode implements ExprNode {
     }
 
     public static StringLiteralNode parseStringLiteral(ArrayList<Token> tokenlist) throws SyntaxException{
-        Token tok = tokenlist.get(0); //grab the token
-        if(tok.getTokenType() != TokenType.STRING){ //if not an ID_KEYWORD, reject
-            throw new SyntaxException("Expected a STRING, got: " + tok.getTokenType(), tok.getFilename(), tok.getLineNum());
+        if (!tokenlist.isEmpty()) {
+            Token tok = tokenlist.get(0); //grab the token
+            if (tok.getTokenType() != TokenType.STRING) { //if not an ID_KEYWORD, reject
+                throw new SyntaxException("Expected a STRING, got: " + tok.getTokenType(), tok.getFilename(), tok.getLineNum());
+            }
+            //its a string to pop the token and make the node
+            tokenlist.remove(0);
+            return new StringLiteralNode(tok);
         }
-        //its a string to pop the token and make the node
-        tokenlist.remove(0);
-        return new StringLiteralNode(tok);
+        else{
+            throw new SyntaxException("Unexpected End Of File");
+        }
     }
 
     public String convertToJott(){

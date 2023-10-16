@@ -50,7 +50,9 @@ public class TypeNode implements JottTree {
                 throw new SyntaxException("Invalid ID KEYWORD: " + tok.getToken(), tok.getFilename(), tok.getLineNum());
             }
         }
-        else throw new SyntaxException("Expected an expression. Reached EOF");
+        else {
+            throw new SyntaxException("Unexpected End Of File");
+        }
     }
 
     public Token getToken() {return token;}
