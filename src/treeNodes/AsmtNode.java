@@ -35,6 +35,9 @@ public class AsmtNode implements BodyStmtNode {
         IdNode idNode;
         ExprNode exprNode;
         Token token = tokenList.get(0);
+        if(tokenList.size() < 3){
+            throw new SyntaxException("Unexpected end of file");
+        }
         Token lookAhead = tokenList.get(1);
 
         //check the content of the token
