@@ -47,7 +47,7 @@ public interface ExprNode extends JottTree {
             return expr;
         }
         else
-            throw new SyntaxException("Expected an expression. Reached EOF");
+            throw new SyntaxException("Unexpected end of file");
     }
 
 }

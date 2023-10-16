@@ -35,7 +35,7 @@ public class FunctionReturnNode implements JottTree {
             TypeNode type = TypeNode.parseType(tokenlist);
             return new FunctionReturnNode(type);
         }
-        else throw new SyntaxException("Expected an expression. Reached EOF");
+        else throw new SyntaxException("Unexpected end of file");
     }
 
     public String convertToJott(){

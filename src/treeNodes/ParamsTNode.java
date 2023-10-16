@@ -35,7 +35,7 @@ public class ParamsTNode implements JottTree {
                 throw new SyntaxException("Expected a Comma Operator, got " + token.getToken(), token.getFilename(), token.getLineNum());
             }
         }
-        else throw new SyntaxException("Expected an expression. Reached EOF");
+        else throw new SyntaxException("Unexpected end of file");
     }
 
     public String convertToJott(){

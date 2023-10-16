@@ -35,7 +35,7 @@ public class IdNode implements ExprNode {
                 throw new SyntaxException("Expected an ID/Keyword, got " + token.getTokenType(), token.getFilename(), token.getLineNum());
             }
         }
-        else throw new SyntaxException("Expected an expression. Reached EOF");
+        else throw new SyntaxException("Unexpected end of file");
     }
 
     public String convertToJott(){

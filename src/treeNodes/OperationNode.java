@@ -36,7 +36,7 @@ public class OperationNode implements ExprNode {
             ExprNode right = ExprNode.parseExpr(tokenlist);
             return new OperationNode(left, op, right);
         }
-        else throw new SyntaxException("Expected an expression. Reached EOF");
+        else throw new SyntaxException("Unexpected end of file");
     }
 
     public String convertToJott(){

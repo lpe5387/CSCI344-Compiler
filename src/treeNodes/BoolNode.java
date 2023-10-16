@@ -39,7 +39,7 @@ public class BoolNode implements ExprNode {
                 throw new SyntaxException("Expected a Boolean value, got " + token.getTokenType(), token.getFilename(), token.getLineNum());
             }
         }
-        else throw new SyntaxException("Expected an expression. Reached EOF");
+        else throw new SyntaxException("Unexpected end of file");
     }
 
     public String convertToJott() {
