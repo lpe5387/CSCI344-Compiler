@@ -22,6 +22,9 @@ public class ReturnStmtNode implements JottTree {
     }
 
     public static ReturnStmtNode parseReturnStmt(ArrayList<Token> tokenList) throws SyntaxException {
+        if(tokenList.isEmpty()) {
+            throw new SyntaxException("Unexpected end of file");
+        }
         Token first = tokenList.get(0);
         if(first.getToken().equals("return")) {
             tokenList.remove(0);
@@ -35,12 +38,11 @@ public class ReturnStmtNode implements JottTree {
                         firstAfterExpr.getFilename(), firstAfterExpr.getLineNum());
             }
         } else {
-            Token last = tokenList.get(0);
-            if(last.getTokenType() == TokenType.R_BRACE) {
-                return null;
+            if(first.getTokenType() == TokenType.R_BRACE) {
+                return null; // equivalent to epsilon in grammar
             } else {
-                throw new SyntaxException("Expected Return Statement, Got: "+ last.getToken(),
-                        last.getFilename(), last.getLineNum());
+                throw new SyntaxException("Expected Return Statement, Got: "+ first.getToken(),
+                        first.getFilename(), first.getLineNum());
             }
         }
     }

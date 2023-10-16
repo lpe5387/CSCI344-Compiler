@@ -22,6 +22,9 @@ public class NumNode implements ExprNode {
     }
 
     public static NumNode parseNum(ArrayList<Token> tokenList) throws SyntaxException {
+        if(tokenList.isEmpty()) {
+            throw new SyntaxException("Unexpected end of file");
+        }
         Token first = tokenList.get(0);
         if(first.getTokenType() != TokenType.NUMBER) {
             throw new SyntaxException("Expected a number, Got: "+ first.getToken(), first.getFilename(), first.getLineNum());
