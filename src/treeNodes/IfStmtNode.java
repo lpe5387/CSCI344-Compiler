@@ -149,7 +149,7 @@ public class IfStmtNode implements BodyStmtNode {
                 //the if block throws the exception if it doesn't since that means there was an actual error
                 //
                 String eMsg = e.getErrorMessage();
-                if (!eMsg.contains("Expected a ID KEYWORD,") | !eMsg.contains("Expected the word \"elseif\",")){
+                if (!eMsg.contains("Expected a ID KEYWORD,") && !eMsg.contains("Expected the word \"elseif\",")){
                     throw e;
                 }
                 looping = false;
