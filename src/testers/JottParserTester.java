@@ -66,6 +66,7 @@ public class JottParserTester {
         testCases.add(new TestCase("lone minus (error)", "loneMinus.jott", true ));
         testCases.add(new TestCase("else without if (error)", "elseNoIf.jott", true ));
         testCases.add(new TestCase("missing closing } (error)", "missingClosing.jott", true ));
+        testCases.add(new TestCase("valid if statement", "validIfReturn.jott", false));
     }
 
     private boolean parserTest(TestCase test, String orginalJottCode){
