@@ -26,12 +26,21 @@ public class WhileLoopNode implements BodyStmtNode {
     public static WhileLoopNode parseWhileLoop (ArrayList<Token> tokenlist) throws SyntaxException {
         ExprNode exprNode = null;
         BodyNode bodyNode = null;
+
+        //check if the tokenlist is not empty
+        if (tokenlist.isEmpty()) {
+            throw new SyntaxException("Unexpected end of file");
+        }
+
         Token token = tokenlist.get(0);
 
         if (token.getTokenType() == TokenType.ID_KEYWORD) {
             if (token.getToken().equals("while")) {
                 tokenlist.remove(0);
 
+                if (tokenlist.isEmpty()) {
+                    throw new SyntaxException("Unexpected end of file");
+                }
                 // start of [
                 token = tokenlist.get(0);
                 if (token.getTokenType() != TokenType.L_BRACKET) {
@@ -42,6 +51,9 @@ public class WhileLoopNode implements BodyStmtNode {
 
                 exprNode = ExprNode.parseExpr(tokenlist);
 
+                if (tokenlist.isEmpty()) {
+                    throw new SyntaxException("Unexpected end of file");
+                }
                 // end of ]
                 token = tokenlist.get(0);
                 if (token.getTokenType() != TokenType.R_BRACKET) {
@@ -49,6 +61,10 @@ public class WhileLoopNode implements BodyStmtNode {
                             token.getFilename(), token.getLineNum());
                 }
                 tokenlist.remove(0);
+
+                if (tokenlist.isEmpty()) {
+                    throw new SyntaxException("Unexpected end of file");
+                }
 
                 // start of {
                 token = tokenlist.get(0);
@@ -59,6 +75,10 @@ public class WhileLoopNode implements BodyStmtNode {
                 tokenlist.remove(0);
 
                 bodyNode = BodyNode.parseBody(tokenlist);
+
+                if (tokenlist.isEmpty()) {
+                    throw new SyntaxException("Unexpected end of file");
+                }
 
                 // end of }
                 token = tokenlist.get(0);

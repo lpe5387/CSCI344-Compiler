@@ -25,19 +25,38 @@ public class VarDecNode implements BodyStmtNode {
     public static VarDecNode parseVarDec ( ArrayList<Token> tokenList ) throws SyntaxException {
         TypeNode typeNode;
         IdNode idNode;
+
+        //check if the tokenlist is not empty
+        if (tokenList.isEmpty()) {
+            throw new SyntaxException("Unexpected end of file");
+        }
+
         Token token = tokenList.get(0);
 
         //see if we can make a typeNode from the 1st token
         if (token.getTokenType() == TokenType.ID_KEYWORD) {
             typeNode = TypeNode.parseType(tokenList);
+
+            //check if the tokenlist is not empty
+            if (tokenList.isEmpty()) {
+                throw new SyntaxException("Unexpected end of file");
+            }
+
             //get the next token and see if its an id type
             token = tokenList.get(0);
+
             if (token.getTokenType() == TokenType.ID_KEYWORD) {
                 idNode = IdNode.parseId(tokenList);
             } else throw new SyntaxException("Expected an Id. Got: "+ token.getToken(),
                     token.getFilename(), token.getLineNum());
+
         } else throw new SyntaxException("Expected a Type. Got: "+ token.getToken(),
                 token.getFilename(), token.getLineNum());
+
+        //check if the token list is not empty
+        if (tokenList.isEmpty()) {
+            throw new SyntaxException("Unexpected end of file");
+        }
 
         //gets the ; token
         token = tokenList.get(0);
