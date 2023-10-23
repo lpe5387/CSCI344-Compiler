@@ -29,27 +29,49 @@ public class FuncDefNode implements JottTree {
     }
 
     public static FuncDefNode parseFuncDef(ArrayList<Token> tokenlist) throws SyntaxException {
+        //this is my magnum opus
+        if(tokenlist.isEmpty()){
+            throw new SyntaxException("Unexpected end of file");
+        }
         Token token = tokenlist.get(0);
         if(Objects.equals(token.getToken(), "def")){
             tokenlist.remove(0);
+            if(tokenlist.isEmpty()){
+                throw new SyntaxException("Unexpected end of file");
+            }
             token = tokenlist.get(0);
             if(token.getTokenType() == TokenType.ID_KEYWORD){
                 IdNode idNode =IdNode.parseId(tokenlist);
+                if(tokenlist.isEmpty()){
+                    throw new SyntaxException("Unexpected end of file");
+                }
                 token = tokenlist.get(0);
                 if(token.getTokenType() == TokenType.L_BRACKET) {
                     tokenlist.remove(0);
                     FuncDefParamsNode funcDefParams = FuncDefParamsNode.parseFuncDefParams(tokenlist);
+                    if(tokenlist.isEmpty()){
+                        throw new SyntaxException("Unexpected end of file");
+                    }
                     token = tokenlist.get(0);
                     if(token.getTokenType() == TokenType.R_BRACKET) {
                         tokenlist.remove(0);
+                        if(tokenlist.isEmpty()){
+                            throw new SyntaxException("Unexpected end of file");
+                        }
                         token = tokenlist.get(0);
                         if (token.getTokenType() == TokenType.COLON) {
                             tokenlist.remove(0);
                             FunctionReturnNode returnType = FunctionReturnNode.ParseFuncReturn(tokenlist);
+                            if(tokenlist.isEmpty()){
+                                throw new SyntaxException("Unexpected end of file");
+                            }
                             token = tokenlist.get(0);
                             if(token.getTokenType() == TokenType.L_BRACE){
                                 tokenlist.remove(0);
                                 BodyNode body = BodyNode.parseBody(tokenlist);
+                                if(tokenlist.isEmpty()){
+                                    throw new SyntaxException("Unexpected end of file");
+                                }
                                 token = tokenlist.get(0);
                                 if(token.getTokenType() == TokenType.R_BRACE){
                                     tokenlist.remove(0);

@@ -25,13 +25,29 @@ public class FuncCallNode implements ExprNode, BodyStmtNode {
     public static FuncCallNode parseFuncCall (ArrayList<Token> tokenArrayList) throws SyntaxException{
         IdNode idNode;
         ParamsNode paramsNode = null;
+        //check if the tokenlist is not empty
+        if (tokenArrayList.isEmpty()) {
+            throw new SyntaxException("Unexpected end of file");
+        }
         Token token = tokenArrayList.get(0);
 
         if (token.getTokenType() == TokenType.FC_HEADER) {
             tokenArrayList.remove(0);
+
+            //check if the tokenlist is not empty
+            if (tokenArrayList.isEmpty()) {
+                throw new SyntaxException("Unexpected end of file");
+            }
+
             token = tokenArrayList.get(0);
+
             if (token.getTokenType() == TokenType.ID_KEYWORD) {
                 idNode = IdNode.parseId(tokenArrayList);
+
+                //check if the tokenlist is not empty
+                if (tokenArrayList.isEmpty()) {
+                    throw new SyntaxException("Unexpected end of file");
+                }
 
                 // start of [
                 token = tokenArrayList.get(0);
@@ -43,6 +59,10 @@ public class FuncCallNode implements ExprNode, BodyStmtNode {
 
                 paramsNode = ParamsNode.parseParams(tokenArrayList);
 
+                //check if the tokenlist is not empty
+                if (tokenArrayList.isEmpty()) {
+                    throw new SyntaxException("Unexpected end of file");
+                }
                 // start of ]
                 token = tokenArrayList.get(0);
                 if (token.getTokenType() != TokenType.R_BRACKET) {

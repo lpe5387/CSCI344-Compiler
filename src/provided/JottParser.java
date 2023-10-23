@@ -4,7 +4,7 @@ package provided;
  * This class is responsible for paring Jott Tokens
  * into a Jott parse tree.
  *
- * @author
+ * @author Luka Eaton
  */
 
 import exceptions.SyntaxException;

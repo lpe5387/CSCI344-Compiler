@@ -34,16 +34,29 @@ public class AsmtNode implements BodyStmtNode {
         TypeNode typeNode;
         IdNode idNode;
         ExprNode exprNode;
-        Token token = tokenList.get(0);
-        if(tokenList.size() < 2){
+
+        //before getting a token from the token list we check if the list is empty
+        if (tokenList.isEmpty()) {
             throw new SyntaxException("Unexpected end of file");
         }
+
+        Token token = tokenList.get(0);
+
+        //before we look ahead we also check if theres enough tokens to look ahead
+        if ( tokenList.size() < 2 ) {
+            throw new SyntaxException("Unexpected end of file");
+        }
+
         Token lookAhead = tokenList.get(1);
 
         //check the content of the token
         if (token.getTokenType() == TokenType.ID_KEYWORD && lookAhead.getTokenType() == TokenType.ASSIGN) {
             idNode = IdNode.parseId(tokenList);
 
+            //check if the tokenlist is not empty
+            if (tokenList.isEmpty()) {
+                throw new SyntaxException("Unexpected end of file");
+            }
             // removes the "=" token
             token = tokenList.get(0);
             if (token.getTokenType() != TokenType.ASSIGN) {
@@ -55,6 +68,10 @@ public class AsmtNode implements BodyStmtNode {
             //make expr node
             exprNode = ExprNode.parseExpr(tokenList);
 
+            //check if the tokenlist is not empty
+            if (tokenList.isEmpty()) {
+                throw new SyntaxException("Unexpected end of file");
+            }
             //removes ;
             token = tokenList.get(0);
             if (token.getTokenType() != TokenType.SEMICOLON) {
@@ -69,6 +86,10 @@ public class AsmtNode implements BodyStmtNode {
             typeNode = TypeNode.parseType(tokenList);
             idNode = IdNode.parseId(tokenList);
 
+            //check if the tokenlist is not empty
+            if (tokenList.isEmpty()) {
+                throw new SyntaxException("Unexpected end of file");
+            }
             // remove the "="
             token = tokenList.get(0);
             if (token.getTokenType() != TokenType.ASSIGN) {
@@ -79,6 +100,10 @@ public class AsmtNode implements BodyStmtNode {
 
             exprNode = ExprNode.parseExpr(tokenList);
 
+            //check if the tokenlist is not empty
+            if (tokenList.isEmpty()) {
+                throw new SyntaxException("Unexpected end of file");
+            }
             // remove the ;
             token = tokenList.get(0);
             if (token.getTokenType() != TokenType.SEMICOLON) {

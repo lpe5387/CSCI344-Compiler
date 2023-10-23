@@ -26,9 +26,15 @@ public class FuncDefParamsNode implements JottTree {
     }
 
     public static FuncDefParamsNode parseFuncDefParams(ArrayList<Token> tokenlist) throws SyntaxException {
+        if(tokenlist.isEmpty()){
+            throw new SyntaxException("Unexpected end of file");
+        }
         Token token = tokenlist.get(0);
         if(token.getTokenType() == TokenType.ID_KEYWORD){
             IdNode idNode = IdNode.parseId(tokenlist);
+            if(tokenlist.isEmpty()){
+                throw new SyntaxException("Unexpected end of file");
+            }
             token = tokenlist.get(0);
             if(token.getTokenType() == TokenType.COLON) {
                 tokenlist.remove(0);
