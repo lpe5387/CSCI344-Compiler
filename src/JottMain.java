@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  *  This is the main file to run the program
  * 
- *  @author: Lucie Lim, Dara Prak
+ *  @author: Lucie Lim, Dara Prak, Andrew Dantone
  */
 
 public class JottMain {
@@ -31,6 +31,7 @@ public class JottMain {
             else {
                 boolean valid = false;
                 try{
+                    //TODO: make sure this actually checks for the file
                     Path file = Paths.get(args[0]);
                     file = file.toAbsolutePath(); //redundancy in file pathing where CSCI344 repeated
                     valid = true; //if we get here without breaking we are good to run the program
