@@ -122,4 +122,15 @@ public class FuncDefNode implements JottTree {
     
     public boolean validateTree(){return true;}
 
+    public IdNode getId() {
+        return this.id;
+    }
+
+    public FunctionReturnNode getReturnType() {
+        return this.returnType;
+    }
+
+    public FuncDefParamsNode getFuncDefParams() {
+        return this.funcDefParams;
+    }
 }

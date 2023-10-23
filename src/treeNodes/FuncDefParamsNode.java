@@ -71,4 +71,7 @@ public class FuncDefParamsNode implements JottTree {
     
     public boolean validateTree(){return true;}
 
+    public IdNode getId() {
+        return this.id;
+    }
 }

@@ -50,4 +50,7 @@ public class IdNode implements ExprNode {
     
     public boolean validateTree(){return true;}
 
+    public Token getToken() {
+        return this.token;
+    }
 }

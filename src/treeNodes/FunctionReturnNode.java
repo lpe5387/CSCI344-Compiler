@@ -53,4 +53,12 @@ public class FunctionReturnNode implements JottTree {
     
     public boolean validateTree(){return true;}
 
+    public Token getVoidReturn() {
+        return this.voidReturn;
+    }
+
+    public TypeNode getTypeNode() {
+        return this.type;
+    }
+
 }
