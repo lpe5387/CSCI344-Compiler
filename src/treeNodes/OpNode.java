@@ -50,4 +50,7 @@ public class OpNode implements JottTree {
     
     public boolean validateTree(){return true;}
 
+    public Token getToken() {
+        return this.token;
+    }
 }

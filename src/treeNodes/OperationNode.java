@@ -51,4 +51,11 @@ public class OperationNode implements ExprNode {
 
     public boolean validateTree(){return true;}
 
+    public ExprNode getRight() {
+        return this.right;
+    }
+
+    public OpNode getOp() {
+        return this.op;
+    }
 }

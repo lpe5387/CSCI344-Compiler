@@ -6,6 +6,7 @@ package treeNodes;
  * @author Luka Eaton, Lucie Lim
  */
 
+import exceptions.SemanticException;
 import exceptions.SyntaxException;
 import provided.JottTree;
 import provided.Token;
@@ -17,15 +18,18 @@ public class WhileLoopNode implements BodyStmtNode {
 
     private ExprNode expr;
     private BodyNode body;
+    private Token whileLoopStart;
 
-    public WhileLoopNode(ExprNode expr, BodyNode body){
+    public WhileLoopNode(ExprNode expr, BodyNode body, Token whileLoopStart){
         this.expr = expr;
         this.body = body;
+        this.whileLoopStart = whileLoopStart;
     }
 
     public static WhileLoopNode parseWhileLoop (ArrayList<Token> tokenlist) throws SyntaxException {
         ExprNode exprNode = null;
         BodyNode bodyNode = null;
+        Token whileLoopStart = null;
 
         //check if the tokenlist is not empty
         if (tokenlist.isEmpty()) {
@@ -36,6 +40,7 @@ public class WhileLoopNode implements BodyStmtNode {
 
         if (token.getTokenType() == TokenType.ID_KEYWORD) {
             if (token.getToken().equals("while")) {
+                whileLoopStart = tokenlist.get(0);
                 tokenlist.remove(0);
 
                 if (tokenlist.isEmpty()) {
@@ -90,7 +95,7 @@ public class WhileLoopNode implements BodyStmtNode {
             } else throw new SyntaxException("Expected 'while' Got: "+ token.getToken(),
                     token.getFilename(), token.getLineNum());
         }
-        return new WhileLoopNode(exprNode, bodyNode);
+        return new WhileLoopNode(exprNode, bodyNode, whileLoopStart);
     }
 
     public String convertToJott(){
@@ -103,7 +108,51 @@ public class WhileLoopNode implements BodyStmtNode {
 
     public String convertToPython(){return "";}
     
-    public boolean validateTree(){return true;}
+    public boolean validateTree() throws SemanticException {
+        //1st checks if there is an boolean expression in the while loop
+        //expression node can be a id (boolean variable), boolean (true / false), function call, operation node that
+        //has a rel op
+        if (this.expr instanceof BoolNode) {
+            //expression node can be boolean (true / false)
+        } else if (this.expr instanceof IdNode) {
+            //expression node can be a id (boolean variable)
+            //check is this idnode is a boolean variable in the symbol table
+        } else if (this.expr instanceof FuncCallNode) {
+            //function call
+            //check symbol table for the return value of the funccallnode: should be a bool return
+        } else if (this.expr instanceof OperationNode) {
+            //operation node that has a rel op
+            OperationNode operationNode = (OperationNode)this.expr;
+            //had to be exactly 1 count
+            int relOpCount = 0;
+            while (true) {
+                if (operationNode.getOp().getToken().getTokenType() == TokenType.REL_OP) {
+                    relOpCount++;
+                }
+                if (operationNode.getRight() instanceof OperationNode) {
+                    operationNode = (OperationNode) operationNode.getRight();
+                } else {
+                    break;
+                }
+            }
+
+            if ( relOpCount != 1 ) {
+                throw new SemanticException("While loop condition is not a boolean expresion",
+                        operationNode.getOp().getToken().getFilename(),
+                        operationNode.getOp().getToken().getLineNum());
+            }
+
+        } else {
+            throw new SemanticException("While loop condition is not a boolean expresion",
+                    this.whileLoopStart.getFilename(),
+                    this.whileLoopStart.getLineNum());
+        }
+
+        this.expr.validateTree();
+        this.body.validateTree();
+
+        return true;
+    }
 
 
 }
