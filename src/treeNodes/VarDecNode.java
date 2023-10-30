@@ -24,7 +24,7 @@ public class VarDecNode implements BodyStmtNode {
         this.id = id;
     }
 
-    public static VarDecNode parseVarDec ( ArrayList<Token> tokenList ) throws SyntaxException {
+    public static VarDecNode parseVarDec ( ArrayList<Token> tokenList ) throws SyntaxException, SemanticException {
         TypeNode typeNode;
         IdNode idNode;
 
@@ -57,7 +57,11 @@ public class VarDecNode implements BodyStmtNode {
                 idNode = IdNode.parseId(tokenList);
 
                 //add variable to SymbolTable
-                SymbolTable.addVarDef(token.getToken(), varDetails);
+                if(SymbolTable.getVarDef(token.getToken()) != null){
+                    SymbolTable.addVarDef(token.getToken(), varDetails);
+                } else {
+                    throw new SemanticException("Variable already defined in scope ", token.getFilename(), token.getLineNum());
+                }
 
             } else throw new SyntaxException("Expected an Id. Got: "+ token.getToken(),
                     token.getFilename(), token.getLineNum());
@@ -94,11 +98,7 @@ public class VarDecNode implements BodyStmtNode {
     public String convertToPython(){return "";}
     
     public boolean validateTree() throws SemanticException{
-        if(SymbolTable.getVarDef(this.id.getToken().getToken()) != null){
-            return true;
-        } else {
-            throw new SemanticException("Variable already defined in scope ", this.id.getToken().getFilename(), this.id.getToken().getLineNum());
-        }
+        return true;
     }
 
 }

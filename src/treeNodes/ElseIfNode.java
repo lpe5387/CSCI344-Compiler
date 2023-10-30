@@ -6,6 +6,7 @@ package treeNodes;
  * @author Luka Eaton, Andrew Dantone
  */
 
+import exceptions.SemanticException;
 import exceptions.SyntaxException;
 import provided.JottTree;
 import provided.Token;
@@ -25,7 +26,7 @@ public class ElseIfNode implements JottTree {
         this.body = body;
     }
 
-    public static ElseIfNode parseElseIf(ArrayList<Token> tokenlist) throws SyntaxException{
+    public static ElseIfNode parseElseIf(ArrayList<Token> tokenlist) throws SyntaxException, SemanticException {
         Token tok;
         //
         //Testing the first token for the word elseif

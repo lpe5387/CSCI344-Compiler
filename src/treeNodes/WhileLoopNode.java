@@ -26,7 +26,7 @@ public class WhileLoopNode implements BodyStmtNode {
         this.whileLoopStart = whileLoopStart;
     }
 
-    public static WhileLoopNode parseWhileLoop (ArrayList<Token> tokenlist) throws SyntaxException {
+    public static WhileLoopNode parseWhileLoop (ArrayList<Token> tokenlist) throws SyntaxException, SemanticException {
         ExprNode exprNode = null;
         BodyNode bodyNode = null;
         Token whileLoopStart = null;

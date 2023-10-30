@@ -9,6 +9,7 @@ package treeNodes;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import exceptions.SemanticException;
 import provided.JottTree;
 import provided.Token;
 import provided.TokenType;
@@ -29,7 +30,7 @@ public class FuncDefNode implements JottTree {
         this.body = body;
     }
 
-    public static FuncDefNode parseFuncDef(ArrayList<Token> tokenlist) throws SyntaxException {
+    public static FuncDefNode parseFuncDef(ArrayList<Token> tokenlist) throws SyntaxException, SemanticException {
         //this is my magnum opus
         if(tokenlist.isEmpty()){
             throw new SyntaxException("Unexpected end of file");
