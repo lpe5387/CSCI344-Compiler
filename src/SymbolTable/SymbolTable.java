@@ -6,7 +6,7 @@ import java.util.HashMap;
 /**
  * This class is responsible for storing all the defined functions, and variables within their scopes.
  *
- * @author Dara Prak, Luka Eaton, Lucie Lim, Andrew Dantone
+ * @author Dara Prak, Luka Eaton, Lucie Lim, Andrew Dantone, Issac Kim
  */
 
 public class SymbolTable {

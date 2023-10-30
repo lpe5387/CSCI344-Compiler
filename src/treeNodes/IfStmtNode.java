@@ -6,6 +6,7 @@ package treeNodes;
  * @author Luka Eaton, Andrew Dantone
  */
 
+import exceptions.SemanticException;
 import exceptions.SyntaxException;
 import provided.JottTree;
 import provided.Token;
@@ -33,7 +34,7 @@ public class IfStmtNode implements BodyStmtNode {
         this.elseStmt = elseStmt;
     }
 
-    public static IfStmtNode parseIfStmt(ArrayList<Token> tokenlist) throws SyntaxException {
+    public static IfStmtNode parseIfStmt(ArrayList<Token> tokenlist) throws SyntaxException, SemanticException {
         Token tok;
         //
         //Testing the first token for the word if
