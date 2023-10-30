@@ -8,6 +8,7 @@ package treeNodes;
 
 import java.util.ArrayList;
 
+import exceptions.SemanticException;
 import provided.JottTree;
 import provided.Token;
 import exceptions.SyntaxException;
@@ -54,6 +55,6 @@ public interface ExprNode extends JottTree {
      * Will check if the node is a boolean expression
      * @return true if boolean expression, false otherwise
      */
-    public boolean isBooleanExpression();
+    public boolean isBooleanExpression() throws SemanticException;
 
 }
