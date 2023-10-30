@@ -9,6 +9,7 @@ package treeNodes;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import exceptions.SemanticException;
 import provided.JottTree;
 import provided.Token;
 import provided.TokenType;
@@ -29,7 +30,7 @@ public class FuncDefNode implements JottTree {
         this.body = body;
     }
 
-    public static FuncDefNode parseFuncDef(ArrayList<Token> tokenlist) throws SyntaxException {
+    public static FuncDefNode parseFuncDef(ArrayList<Token> tokenlist) throws SyntaxException, SemanticException {
         //this is my magnum opus
         if(tokenlist.isEmpty()){
             throw new SyntaxException("Unexpected end of file");
@@ -80,8 +81,13 @@ public class FuncDefNode implements JottTree {
 
                                     // adding function definition to symbol table
                                     String funcName = idNode.getToken().getToken();
+                                    if(SymbolTable.getFuncDef(funcName) != null) {
+                                        throw new SemanticException("Function definition already exists",
+                                                idNode.getToken().getFilename(),
+                                                idNode.getToken().getLineNum());
+                                    }
                                     ArrayList<String> funcDetails= new ArrayList<String>();
-                                    if(funcDefParams != null) {
+                                    if(funcDefParams != null) { // adds parameter types if they exist
                                         funcDetails.add(funcDefParams.getTypeNode().getToken().getToken());
                                         for(FuncDefParamsTNode param : funcDefParams.getFuncDefParamsTList()) {
                                             funcDetails.add(param.getTypeNode().getToken().getToken());
