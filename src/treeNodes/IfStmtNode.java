@@ -212,17 +212,17 @@ public class IfStmtNode implements BodyStmtNode {
     public String convertToPython(){return "";}
 
     public boolean validateTree() throws SemanticException {
-        if(!this.expr.isBooleanExpression()){
-            throw new SemanticException("While loop condition is not a valid boolean expresion",
-                    this.ifStmtStart.getFilename(),
-                    this.ifStmtStart.getLineNum());
-        }
         this.expr.validateTree();
         this.body.validateTree();
         for(ElseIfNode elseif : this.elseIfLst){
             elseif.validateTree();
         }
         this.elseStmt.validateTree();
+        if(!this.expr.isBooleanExpression()){
+            throw new SemanticException("While loop condition is not a valid boolean expresion",
+                    this.ifStmtStart.getFilename(),
+                    this.ifStmtStart.getLineNum());
+        }
         return true;
     }
 

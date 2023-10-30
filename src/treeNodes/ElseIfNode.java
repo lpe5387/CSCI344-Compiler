@@ -148,13 +148,13 @@ public class ElseIfNode implements JottTree {
     public String convertToPython(){return "";}
 
     public boolean validateTree() throws SemanticException {
+        this.expr.validateTree();
+        this.body.validateTree();
         if(!this.expr.isBooleanExpression()){
             throw new SemanticException("While loop condition is not a valid boolean expresion",
                     this.elseIfStart.getFilename(),
                     this.elseIfStart.getLineNum());
         }
-        this.expr.validateTree();
-        this.body.validateTree();
         return true;
     }
 

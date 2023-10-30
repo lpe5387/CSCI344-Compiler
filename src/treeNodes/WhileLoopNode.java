@@ -109,13 +109,13 @@ public class WhileLoopNode implements BodyStmtNode {
     public String convertToPython(){return "";}
     
     public boolean validateTree() throws SemanticException {
+        this.expr.validateTree();
+        this.body.validateTree();
         if(!this.expr.isBooleanExpression()){
             throw new SemanticException("While loop condition is not a valid boolean expresion",
                     this.whileLoopStart.getFilename(),
                     this.whileLoopStart.getLineNum());
         }
-        this.expr.validateTree();
-        this.body.validateTree();
         return true;
     }
 
