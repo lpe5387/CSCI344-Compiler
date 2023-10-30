@@ -3,7 +3,7 @@ package treeNodes;
 /**
  * This class is responsible for the function definition node for the parse tree
  *
- * @author Luka Eaton
+ * @author Isaac Kim, Dara Prak, Luka Eaton
  */
 
 import java.util.ArrayList;
@@ -13,6 +13,7 @@ import provided.JottTree;
 import provided.Token;
 import provided.TokenType;
 import exceptions.SyntaxException;
+import SymbolTable.SymbolTable;
 
 public class FuncDefNode implements JottTree {
     
@@ -41,7 +42,7 @@ public class FuncDefNode implements JottTree {
             }
             token = tokenlist.get(0);
             if(token.getTokenType() == TokenType.ID_KEYWORD){
-                IdNode idNode =IdNode.parseId(tokenlist);
+                IdNode idNode = IdNode.parseId(tokenlist);
                 if(tokenlist.isEmpty()){
                     throw new SyntaxException("Unexpected end of file");
                 }
@@ -76,6 +77,19 @@ public class FuncDefNode implements JottTree {
                                 if(token.getTokenType() == TokenType.R_BRACE){
                                     tokenlist.remove(0);
                                     FuncDefNode node = new FuncDefNode(idNode, funcDefParams, returnType, body);
+
+                                    // adding function definition to symbol table
+                                    String funcName = idNode.getToken().getToken();
+                                    ArrayList<String> funcDetails= new ArrayList<String>();
+                                    if(funcDefParams != null) {
+                                        funcDetails.add(funcDefParams.getTypeNode().getToken().getToken());
+                                        for(FuncDefParamsTNode param : funcDefParams.getFuncDefParamsTList()) {
+                                            funcDetails.add(param.getTypeNode().getToken().getToken());
+                                        }
+                                    }
+                                    funcDetails.add(returnType.getTypeNode().getToken().getToken());
+                                    SymbolTable.addFuncDef(funcName, funcDetails);
+
                                     return node;
                                 } else {
                                     throw new SyntaxException("Expected }, got " + token.getToken(), token.getFilename(), token.getLineNum());
@@ -120,7 +134,10 @@ public class FuncDefNode implements JottTree {
 
     public String convertToPython(){return "";}
     
-    public boolean validateTree(){return true;}
+    public boolean validateTree() {
+
+        return true;
+    }
 
     public IdNode getId() {
         return this.id;
