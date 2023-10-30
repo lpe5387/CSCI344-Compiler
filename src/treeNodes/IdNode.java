@@ -4,7 +4,10 @@ package treeNodes; /**
  * @author Luka Eaton, lucie lim
  */
 
+import SymbolTable.SymbolTable;
 import java.util.ArrayList;
+
+import exceptions.SemanticException;
 import provided.JottTree;
 import provided.Token;
 import provided.TokenType;
@@ -38,10 +41,18 @@ public class IdNode implements ExprNode {
         else throw new SyntaxException("Unexpected end of file");
     }
 
-    public boolean isBooleanExpression(){
-        if(){
-
+    public boolean isBooleanExpression() throws SemanticException {
+        ArrayList<String> results = SymbolTable.getVarDef("", this.token.getToken());
+        if(results ==  null){
+            throw new SemanticException("Variable '" + this.token.getToken() + "' does not exist.", this.token.getFilename(), this.token.getLineNum());
         }
+        if(!results.get(0).equals("Boolean")){
+            throw new SemanticException("Variable '" + this.token.getToken() + "' is not of type 'Boolean'.", this.token.getFilename(), this.token.getLineNum());
+        }
+        if(results.get(1).equals("no")){
+            throw new SemanticException("Variable '" + this.token.getToken() + "' is not instantiated.", this.token.getFilename(), this.token.getLineNum());
+        }
+        return true;
     }
 
     public String convertToJott(){
