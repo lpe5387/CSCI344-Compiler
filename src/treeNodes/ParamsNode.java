@@ -48,6 +48,8 @@ public class ParamsNode implements JottTree {
         return toString.toString();
     }
 
+    public boolean getIsEmpty(){return this.isEmpty;};
+
     public String convertToJava(String className){return "";}
 
     public String convertToC(){return "";}
