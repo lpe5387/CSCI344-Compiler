@@ -50,4 +50,10 @@ public interface ExprNode extends JottTree {
             throw new SyntaxException("Unexpected end of file");
     }
 
+    /**
+     * Will check if the node is a boolean expression
+     * @return true if boolean expression, false otherwise
+     */
+    public boolean isBooleanExpression();
+
 }

@@ -38,6 +38,12 @@ public class IdNode implements ExprNode {
         else throw new SyntaxException("Unexpected end of file");
     }
 
+    public boolean isBooleanExpression(){
+        if(){
+
+        }
+    }
+
     public String convertToJott(){
         return this.token.getToken();
     }
