@@ -28,7 +28,7 @@ public class ElseIfNode implements JottTree {
         this.elseIfStart = elseIfStart;
     }
 
-    public static ElseIfNode parseElseIf(ArrayList<Token> tokenlist) throws SyntaxException{
+    public static ElseIfNode parseElseIf(ArrayList<Token> tokenlist) throws SyntaxException, SemanticException {
         Token tok;
         Token elseIfStart;
         //

@@ -1,5 +1,6 @@
 package treeNodes;
 
+import exceptions.SemanticException;
 import exceptions.SyntaxException;
 import provided.JottTree;
 import provided.Token;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 
 public interface BodyStmtNode extends JottTree {
 
-    public static BodyStmtNode parseBodyStmt(ArrayList<Token> tokenList) throws SyntaxException {
+    public static BodyStmtNode parseBodyStmt(ArrayList<Token> tokenList) throws SyntaxException, SemanticException {
         if(tokenList.isEmpty()) {
             throw new SyntaxException("Unexpected end of file");
         }

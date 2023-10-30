@@ -36,7 +36,7 @@ public class IfStmtNode implements BodyStmtNode {
         this.ifStmtStart = ifStmtStart;
     }
 
-    public static IfStmtNode parseIfStmt(ArrayList<Token> tokenlist) throws SyntaxException {
+    public static IfStmtNode parseIfStmt(ArrayList<Token> tokenlist) throws SyntaxException, SemanticException {
         Token tok;
         Token ifStmtStart = null;
         //

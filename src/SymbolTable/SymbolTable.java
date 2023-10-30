@@ -6,7 +6,7 @@ import java.util.HashMap;
 /**
  * This class is responsible for storing all the defined functions, and variables within their scopes.
  *
- * @author Dara Prak, Luka Eaton, Lucie Lim, Andrew Dantone
+ * @author Dara Prak, Luka Eaton, Lucie Lim, Andrew Dantone, Issac Kim
  */
 
 public class SymbolTable {
@@ -22,6 +22,11 @@ public class SymbolTable {
         return varDefs.get(currentScope).get(varName);
     }
 
+    /**
+     *
+     * @param funcName name of the function
+     * @param funcDetails parameter types, then return type
+     */
     public static void addFuncDef(String funcName, ArrayList<String> funcDetails) {
         funcDefs.put(funcName, funcDetails);
         varDefs.put(funcName, new HashMap<String, ArrayList<String>>());

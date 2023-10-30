@@ -3,7 +3,7 @@ package treeNodes;
 /**
  * This class is responsible for the function definition parameters node for the parse tree
  *
- * @author Luka Eaton
+ * @author Luka Eaton, Dara Prak
  */
 
 import java.util.ArrayList;
@@ -74,4 +74,8 @@ public class FuncDefParamsNode implements JottTree {
     public IdNode getId() {
         return this.id;
     }
+
+    public TypeNode getTypeNode() {return this.type;}
+
+    public ArrayList<FuncDefParamsTNode> getFuncDefParamsTList() { return this.funcDefParamsTList; }
 }
