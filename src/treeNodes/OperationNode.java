@@ -61,6 +61,22 @@ public class OperationNode implements ExprNode {
     }
 
     public boolean isBooleanExpression() throws SemanticException {
-        return false;
+        int relOpCount = 0;
+        OperationNode operationNode = this;
+        while (true) {
+            if (operationNode.getOp().getToken().getTokenType() == TokenType.REL_OP) {
+                relOpCount++;
+            }
+            if (operationNode.getRight() instanceof OperationNode) {
+                operationNode = (OperationNode) operationNode.getRight();
+            } else {
+                break;
+            }
+        }
+        // if relOpCount == 1 we know this is a proper boolean expression
+        if ( relOpCount != 1 ) {
+            return false;
+        }
+        return true;
     }
 }
