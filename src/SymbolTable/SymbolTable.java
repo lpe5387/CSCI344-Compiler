@@ -35,4 +35,8 @@ public class SymbolTable {
     public static void setCurrentScope(String scope) {
         currentScope = scope;
     }
+
+    public static String getCurrentScope(){
+        return currentScope;
+    }
 }

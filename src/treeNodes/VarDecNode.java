@@ -7,10 +7,12 @@ package treeNodes;
  */
 
 import exceptions.SyntaxException;
+import exceptions.SemanticException;
 import provided.JottTree;
 import provided.Token;
 import provided.TokenType;
 import java.util.ArrayList;
+import SymbolTable.SymbolTable;
 
 public class VarDecNode implements BodyStmtNode {
 
@@ -81,6 +83,14 @@ public class VarDecNode implements BodyStmtNode {
 
     public String convertToPython(){return "";}
     
-    public boolean validateTree(){return true;}
+    public boolean validateTree throws SemanticException(){
+        //variable cannot be already taken
+        if(this.){
+            return true;
+        } else {
+            throw new SemanticException("Variable already declared", "holder", 0);
+        }
+        return true;
+    }
 
 }
