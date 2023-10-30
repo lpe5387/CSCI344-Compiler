@@ -44,6 +44,7 @@ public class VarDecNode implements BodyStmtNode {
 
             //get the type of the variable then parse it to String before adding it to varDetails
             varDetails.add(token.getTokenType().toString());
+            varDetails.add("no");
 
             //check if the tokenlist is not empty
             if (tokenList.isEmpty()) {
