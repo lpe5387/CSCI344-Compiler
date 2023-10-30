@@ -93,8 +93,12 @@ public class VarDecNode implements BodyStmtNode {
 
     public String convertToPython(){return "";}
     
-    public boolean validateTree(){
-        return SymbolTable.getVarDef(this.id.getToken().getToken()) != null;
+    public boolean validateTree() throws SemanticException{
+        if(SymbolTable.getVarDef(this.id.getToken().getToken()) != null){
+            return true;
+        } else {
+            throw new SemanticException("Variable already defined in scope ", this.id.getToken().getFilename(), this.id.getToken().getLineNum());
+        }
     }
 
 }
