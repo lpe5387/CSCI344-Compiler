@@ -94,7 +94,7 @@ public class VarDecNode implements BodyStmtNode {
     public String convertToPython(){return "";}
     
     public boolean validateTree(){
-        return !SymbolTable.getVarDef(this.id.getToken().getToken()).equals(null);
+        return SymbolTable.getVarDef(this.id.getToken().getToken()) != null;
     }
 
 }
