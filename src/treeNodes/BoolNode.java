@@ -7,6 +7,8 @@ package treeNodes;
 
 
 import java.util.ArrayList;
+
+import exceptions.SemanticException;
 import provided.JottTree;
 import provided.Token;
 import provided.TokenType;
@@ -54,4 +56,7 @@ public class BoolNode implements ExprNode {
     
     public boolean validateTree(){return true;}
 
+    public boolean isBooleanExpression() throws SemanticException {
+        return true;
+    }
 }

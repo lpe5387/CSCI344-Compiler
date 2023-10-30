@@ -3,6 +3,7 @@ package treeNodes;
  * This class is intended to hold any operation with a left and right operand.
  */
 
+import exceptions.SemanticException;
 import exceptions.SyntaxException;
 import provided.JottTree;
 import provided.Token;
@@ -57,5 +58,9 @@ public class OperationNode implements ExprNode {
 
     public OpNode getOp() {
         return this.op;
+    }
+
+    public boolean isBooleanExpression() throws SemanticException {
+        return false;
     }
 }

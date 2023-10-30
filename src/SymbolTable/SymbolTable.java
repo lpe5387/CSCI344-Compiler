@@ -18,8 +18,8 @@ public class SymbolTable {
         return funcDefs.get(funcName);
     }
 
-    public static ArrayList<String> getVarDef(String scope, String varName) {
-        return varDefs.get(scope).get(varName);
+    public static ArrayList<String> getVarDef(String varName) {
+        return varDefs.get(currentScope).get(varName);
     }
 
     public static void addFuncDef(String funcName, ArrayList<String> funcDetails) {
@@ -36,7 +36,4 @@ public class SymbolTable {
         currentScope = scope;
     }
 
-    public static String getCurrentScope(){
-        return currentScope;
-    }
 }

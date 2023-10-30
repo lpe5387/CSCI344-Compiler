@@ -6,6 +6,7 @@ package treeNodes;
  * @author Luka Eaton, lucie lim, Dara Prak
  */
 
+import exceptions.SemanticException;
 import exceptions.SyntaxException;
 import provided.JottTree;
 import provided.Token;
@@ -31,6 +32,10 @@ public class NumNode implements ExprNode {
         }
         tokenList.remove(0);
         return new NumNode(first);
+    }
+
+    public boolean isBooleanExpression() throws SemanticException{
+        return false;
     }
 
     public String convertToJott() {
