@@ -6,6 +6,8 @@ package treeNodes;
  * @author Luka Eaton, Lucie Lim
  */
 
+import SymbolTable.SymbolTable;
+import exceptions.SemanticException;
 import exceptions.SyntaxException;
 import provided.JottTree;
 import provided.Token;
@@ -91,4 +93,14 @@ public class FuncCallNode implements ExprNode, BodyStmtNode {
     
     public boolean validateTree(){return true;}
 
+    public boolean isBooleanExpression() throws SemanticException {
+        ArrayList<String> results = SymbolTable.getFuncDef(this.id.getToken().getToken());
+        if(results == null){
+            throw new SemanticException("Function '" + this.id.getToken().getToken() + "' does not exist.", this.id.getToken().getFilename(), this.id.getToken().getLineNum());
+        }
+        if(!results.get(results.size()-1).equals("Boolean")){
+            throw new SemanticException("Function '" + this.id.getToken().getToken() + "' does not return the type 'Boolean'.", this.id.getToken().getFilename(), this.id.getToken().getLineNum());
+        }
+        return true;
+    }
 }

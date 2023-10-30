@@ -6,6 +6,7 @@ package treeNodes;
  * @author Luka Eaton, lucie lim
  */
 
+import exceptions.SemanticException;
 import exceptions.SyntaxException;
 import provided.JottTree;
 import provided.Token;
@@ -50,4 +51,7 @@ public class StringLiteralNode implements ExprNode {
     
     public boolean validateTree(){return true;}
 
+    public boolean isBooleanExpression() throws SemanticException {
+        return false;
+    }
 }
