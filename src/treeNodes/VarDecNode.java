@@ -97,7 +97,7 @@ public class VarDecNode implements BodyStmtNode {
 
     public String convertToPython(){return "";}
     
-    public boolean validateTree() throws SemanticException{
+    public boolean validateTree() {
         return true;
     }
 
