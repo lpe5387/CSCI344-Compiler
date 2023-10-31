@@ -50,7 +50,10 @@ public class OperationNode implements ExprNode {
 
     public String convertToPython(){return "";}
 
-    public boolean validateTree(){return true;}
+    public boolean validateTree(){
+
+        return true;
+    }
 
     public ExprNode getRight() {
         return this.right;
@@ -73,10 +76,10 @@ public class OperationNode implements ExprNode {
                 break;
             }
         }
-        // if relOpCount == 1 we know this is a proper boolean expression
-        if ( relOpCount != 1 ) {
-            return false;
-        }
+        // if relOpCount > 1, this isn't a valid expression
+        if( relOpCount > 1 ) throw new SemanticException("Operation expression cannot contain multiple REL_OP's.", this.op.getToken().getFilename(), this.op.getToken().getLineNum());
+        // if relOpCount == 1, we know this is a proper boolean expression
+        if ( relOpCount != 1 ) return false;
         return true;
     }
 }

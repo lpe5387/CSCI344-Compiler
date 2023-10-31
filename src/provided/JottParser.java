@@ -7,6 +7,7 @@ package provided;
  * @author Luka Eaton
  */
 
+import exceptions.SemanticException;
 import exceptions.SyntaxException;
 import treeNodes.ProgramNode;
 
@@ -26,6 +27,8 @@ public class JottParser {
         }
         catch(SyntaxException syne){
             syne.printErrorMessage();
+        } catch (SemanticException e) {
+            e.printErrorMessage();
         }
         return null;
     }

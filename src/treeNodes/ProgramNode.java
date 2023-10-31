@@ -21,7 +21,7 @@ public class ProgramNode implements JottTree {
         this.funcDefList = funcDefList;
     }
 
-    public static ProgramNode parseProgram(ArrayList<Token> tokenlist) throws SyntaxException {
+    public static ProgramNode parseProgram(ArrayList<Token> tokenlist) throws SyntaxException, SemanticException {
         ArrayList<FuncDefNode> funcDefList = new ArrayList<>();
         while(!tokenlist.isEmpty()){
             FuncDefNode funcDef = FuncDefNode.parseFuncDef(tokenlist);

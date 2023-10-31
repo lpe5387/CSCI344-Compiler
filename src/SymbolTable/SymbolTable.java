@@ -11,6 +11,7 @@ import java.util.HashMap;
 
 public class SymbolTable {
     private static HashMap<String, ArrayList<String>> funcDefs = new HashMap<>();
+
     private static HashMap<String, HashMap<String, ArrayList<String>>> varDefs = new HashMap<>();
     private static String currentScope = null;
 
