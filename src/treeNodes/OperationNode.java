@@ -50,8 +50,12 @@ public class OperationNode implements ExprNode {
 
     public String convertToPython(){return "";}
 
-    public boolean validateTree(){
-
+    public boolean validateTree() throws SemanticException {
+        this.left.validateTree();
+        this.op.validateTree();
+        this.right.validateTree();
+        // Don't need to store the return of evaluateType(), if it doesn't throw a SemanticException we are all good
+        evaluateType();
         return true;
     }
 
@@ -87,6 +91,7 @@ public class OperationNode implements ExprNode {
         String left = this.left.evaluateType();
         String right = this.right.evaluateType();
         if(left.equals(right)){
+            if(isBooleanExpression()) return "Boolean";
             return left;
         }
         else throw new SemanticException("Types '" + left + "' and '" + right + "' cannot be in the same expression.", this.op.getToken().getFilename(), this.op.getToken().getLineNum());
