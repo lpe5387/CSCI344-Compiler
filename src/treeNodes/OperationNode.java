@@ -82,4 +82,14 @@ public class OperationNode implements ExprNode {
         if ( relOpCount != 1 ) return false;
         return true;
     }
+
+    public String evaluateType() throws SemanticException {
+        String left = this.left.evaluateType();
+        String right = this.right.evaluateType();
+        if(left.equals(right)){
+            return left;
+        }
+        else throw new SemanticException("Types '" + left + "' and '" + right + "' cannot be in the same expression.", this.op.getToken().getFilename(), this.op.getToken().getLineNum());
+    }
+
 }

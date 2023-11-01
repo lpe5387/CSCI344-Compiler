@@ -57,4 +57,11 @@ public interface ExprNode extends JottTree {
      */
     public boolean isBooleanExpression() throws SemanticException;
 
+    /**
+     * Evaluates what type an expression is or will return
+     * @return the data type of the result of the expression
+     * @throws SemanticException
+     */
+    public String evaluateType() throws SemanticException;
+
 }

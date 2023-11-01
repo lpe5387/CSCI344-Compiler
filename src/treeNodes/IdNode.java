@@ -55,6 +55,12 @@ public class IdNode implements ExprNode {
         return true;
     }
 
+    public String evaluateType() throws SemanticException {
+        ArrayList<String> variableDetails = SymbolTable.getVarDef(this.token.getToken());
+        if(variableDetails == null) throw new SemanticException("Variable '" + this.token.getToken() + "' does not exist.", this.token.getFilename(), this.token.getLineNum());
+        return variableDetails.get(0);
+    }
+
     public String convertToJott(){
         return this.token.getToken();
     }

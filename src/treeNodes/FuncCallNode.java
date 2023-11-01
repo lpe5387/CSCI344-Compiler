@@ -136,4 +136,10 @@ public class FuncCallNode implements ExprNode, BodyStmtNode {
         }
         return true;
     }
+
+    public String evaluateType() throws SemanticException {
+        ArrayList<String> funcDetails = SymbolTable.getFuncDef(this.id.getToken().getToken());
+        if(funcDetails == null) throw new SemanticException("Function '" + this.id.getToken().getToken() + "' does not exist.", this.id.getToken().getFilename(), this.id.getToken().getLineNum());
+        else return funcDetails.get(funcDetails.size()-1);
+    }
 }
