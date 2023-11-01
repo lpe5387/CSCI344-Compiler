@@ -42,4 +42,20 @@ public class SymbolTable {
         currentScope = scope;
     }
 
+    public static void bootUp(){
+        ArrayList<String> print = new ArrayList<>();
+        print.add("Any");
+        print.add("Void");
+        ArrayList<String> concat = new ArrayList<>();
+        concat.add("String");
+        concat.add("String");
+        concat.add("String");
+        ArrayList<String> length = new ArrayList<>();
+        length.add("String");
+        length.add("Integer");
+        addFuncDef("print", print);
+        addFuncDef("concat", concat);
+        addFuncDef("length", length);
+    }
+
 }
