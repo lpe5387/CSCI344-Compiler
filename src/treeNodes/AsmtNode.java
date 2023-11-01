@@ -55,6 +55,12 @@ public class AsmtNode implements BodyStmtNode {
         if (token.getTokenType() == TokenType.ID_KEYWORD && lookAhead.getTokenType() == TokenType.ASSIGN) {
             idNode = IdNode.parseId(tokenList);
 
+            //check if the name already exists in the symbol table
+            if (SymbolTable.getVarDef(idNode.getToken().getToken()) == null) {
+                throw new SemanticException("Assignment of variable without declaring type: " +
+                        idNode.getToken().getToken(), idNode.getToken().getFilename(), idNode.getToken().getLineNum());
+            }
+
             //check if the tokenlist is not empty
             if (tokenList.isEmpty()) {
                 throw new SyntaxException("Unexpected end of file");
@@ -82,18 +88,12 @@ public class AsmtNode implements BodyStmtNode {
             }
             tokenList.remove(0);
 
-            //check if the name already exists in the symbol table
-            if (SymbolTable.getVarDef(idNode.getToken().getToken()) != null) {
-                //name of variable doesn't exist in symbol table therefore put it into the table
-                ArrayList<String> varDetails = SymbolTable.getVarDef(idNode.getToken().getToken());
-                if (varDetails.get(1).equals("no")) {                               // if the var was not instantiated
-                    varDetails.set(1, "yes");                                       // update to yes in the table
-                }
-                SymbolTable.addVarDef(idNode.getToken().getToken(), varDetails);    // adds updated var to symbol table
-            } else {
-                throw new SemanticException("Assignment of variable without declaring type: " +
-                        idNode.getToken().getToken(), idNode.getToken().getFilename(), idNode.getToken().getLineNum());
+            //Name of var exists in symbol table therefore update the instantiation status of var
+            ArrayList<String> varDetails = SymbolTable.getVarDef(idNode.getToken().getToken());
+            if (varDetails.get(1).equals("no")) {                               // if the var was not instantiated
+                varDetails.set(1, "yes");                                       // update to yes in the table
             }
+            SymbolTable.addVarDef(idNode.getToken().getToken(), varDetails);    // adds updated var to symbol table
 
             return new AsmtNode(idNode, exprNode);
 
@@ -102,6 +102,13 @@ public class AsmtNode implements BodyStmtNode {
 
             typeNode = TypeNode.parseType(tokenList);
             idNode = IdNode.parseId(tokenList);
+
+            //check if the name already exists in the symbol table
+            if (SymbolTable.getVarDef(idNode.getToken().getToken()) != null) {
+                throw new SemanticException("Variable name: " + idNode.getToken().getToken() + " of type: " +
+                        typeNode.getToken().getToken() + ", already used ",
+                        typeNode.getToken().getFilename(), typeNode.getToken().getLineNum());
+            }
 
             //check if the tokenlist is not empty
             if (tokenList.isEmpty()) {
@@ -129,20 +136,11 @@ public class AsmtNode implements BodyStmtNode {
             }
             tokenList.remove(0);
 
-            //check if the name already exists in the symbol table
-            if (SymbolTable.getVarDef(idNode.getToken().getToken()) == null) {
-                //name of variable doesn't exist in symbol table therefore put it into the table
-                ArrayList<String> varDetails = new ArrayList<String>();
-                varDetails.add(typeNode.getToken().getToken());                     // adds the type of the variable
-                varDetails.add("yes");                                              // confirms instantiation
-                SymbolTable.addVarDef(idNode.getToken().getToken(), varDetails);    // adds new asmt var to symbol table
-            } else {
-                throw new SemanticException("Variable name of different type already used: " +
-                        typeNode.getToken().getToken() + " " + idNode.getToken().getToken(),
-                        typeNode.getToken().getFilename(), typeNode.getToken().getLineNum());
-            }
-            // issue how do I return the filename and line number from the desired spot, can tokens much, so
-            // I thought using nodes would be appropriate
+            //name of var doesn't exist in symbol table therefore put it into the table
+            ArrayList<String> varDetails = new ArrayList<>();
+            varDetails.add(typeNode.getToken().getToken());                     // adds the type of the variable
+            varDetails.add("yes");                                              // confirms instantiation
+            SymbolTable.addVarDef(idNode.getToken().getToken(), varDetails);    // adds new asmt var to symbol table
 
             return new AsmtNode(typeNode, idNode, exprNode);
 
