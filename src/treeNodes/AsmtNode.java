@@ -93,7 +93,6 @@ public class AsmtNode implements BodyStmtNode {
             if (varDetails.get(1).equals("no")) {                               // if the var was not instantiated
                 varDetails.set(1, "yes");                                       // update to yes in the table
             }
-            SymbolTable.addVarDef(idNode.getToken().getToken(), varDetails);    // adds updated var to symbol table
 
             return new AsmtNode(idNode, exprNode);
 
