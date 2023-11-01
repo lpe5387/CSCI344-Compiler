@@ -219,7 +219,7 @@ public class IfStmtNode implements BodyStmtNode {
         }
         this.elseStmt.validateTree();
         if(!this.expr.isBooleanExpression()){
-            throw new SemanticException("While loop condition is not a valid boolean expresion",
+            throw new SemanticException("If-statement condition is not a valid boolean expresion",
                     this.ifStmtStart.getFilename(),
                     this.ifStmtStart.getLineNum());
         }

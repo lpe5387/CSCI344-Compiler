@@ -117,8 +117,13 @@ public class FuncCallNode implements ExprNode, BodyStmtNode {
                 throw new SemanticException("Received " + numGotParams + " parameters for function " + this.id.getToken().getToken() + "which requires " + numParams + " parameters when previously declared.", this.id.getToken().getFilename(), this.id.getToken().getLineNum());
             }
             //todo: check each param;
+
             //  todo: check if it exists if its a var or function call
+            //  this should be done using the validate functions of ParamsNode and ParamsTNode
+            this.params.validateTree();
+
             //  todo: check that each one evaluates to the correct data type
+            //  loop through params and do this check
 
 
         }

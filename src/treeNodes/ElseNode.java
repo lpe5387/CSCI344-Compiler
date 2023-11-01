@@ -99,6 +99,9 @@ public class ElseNode implements JottTree {
 
     public String convertToPython(){return "";}
     
-    public boolean validateTree(){return true;}
+    public boolean validateTree() throws SemanticException {
+        this.body.validateTree();
+        return true;
+    }
 
 }

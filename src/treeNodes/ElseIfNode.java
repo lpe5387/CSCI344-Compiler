@@ -151,7 +151,7 @@ public class ElseIfNode implements JottTree {
         this.expr.validateTree();
         this.body.validateTree();
         if(!this.expr.isBooleanExpression()){
-            throw new SemanticException("While loop condition is not a valid boolean expresion",
+            throw new SemanticException("Else-If statement condition is not a valid boolean expresion",
                     this.elseIfStart.getFilename(),
                     this.elseIfStart.getLineNum());
         }
