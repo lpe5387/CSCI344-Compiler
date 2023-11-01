@@ -166,9 +166,16 @@ public class AsmtNode implements BodyStmtNode {
     
     public boolean validateTree() throws SemanticException {
         // ensure type matches the actual assignment for new variable assignment
-        if (this.type == this.expr){}
-        // ensure name isnt already taken
+        OperationNode expression = (OperationNode)this.expr;        // gets the expression
+        String type = this.type.getToken().getToken();              // gets the type of the var
 
+        if ( !type.equals(expression.evaluateType()) ) {            // if var type != type of expression throw error
+            throw new SemanticException("Variable type doesn't match with assignment type.\n " +
+                    this.type.getToken().getToken() + " " + this.id.getToken().getToken() + " = " +
+                    this.expr.toString(), this.id.getToken().getFilename(), this.id.getToken().getLineNum());
+        }
+
+        // ensure name isn't already taken: already handled in the parser when before we add keys to the symbol table
         return true;
     }
 
