@@ -6,10 +6,11 @@ package treeNodes;
  * @author Luka Eaton, Lucie Lim
  */
 
+import exceptions.SemanticException;
 import exceptions.SyntaxException;
-import provided.JottTree;
 import provided.Token;
 import provided.TokenType;
+import SymbolTable.SymbolTable;
 
 import java.util.ArrayList;
 
@@ -30,7 +31,7 @@ public class AsmtNode implements BodyStmtNode {
         this.expr = expr;
     }
 
-    public static AsmtNode parseAsmt(ArrayList<Token> tokenList) throws SyntaxException {
+    public static AsmtNode parseAsmt(ArrayList<Token> tokenList) throws SyntaxException, SemanticException {
         TypeNode typeNode;
         IdNode idNode;
         ExprNode exprNode;
@@ -50,6 +51,7 @@ public class AsmtNode implements BodyStmtNode {
         Token lookAhead = tokenList.get(1);
 
         //check the content of the token
+        //checks <id>=<expr>
         if (token.getTokenType() == TokenType.ID_KEYWORD && lookAhead.getTokenType() == TokenType.ASSIGN) {
             idNode = IdNode.parseId(tokenList);
 
@@ -80,9 +82,24 @@ public class AsmtNode implements BodyStmtNode {
             }
             tokenList.remove(0);
 
+            //check if the name already exists in the symbol table
+            if (SymbolTable.getVarDef(idNode.getToken().getToken()) != null) {
+                //name of variable doesn't exist in symbol table therefore put it into the table
+                ArrayList<String> varDetails = SymbolTable.getVarDef(idNode.getToken().getToken());
+                if (varDetails.get(1).equals("no")) {                               // if the var was not instantiated
+                    varDetails.set(1, "yes");                                       // update to yes in the table
+                }
+                SymbolTable.addVarDef(idNode.getToken().getToken(), varDetails);    // adds updated var to symbol table
+            } else {
+                throw new SemanticException("Assignment of variable without declaring type: " +
+                        idNode.getToken().getToken(), idNode.getToken().getFilename(), idNode.getToken().getLineNum());
+            }
+
             return new AsmtNode(idNode, exprNode);
 
         } else if (token.getTokenType() == TokenType.ID_KEYWORD) {
+            //checks <type><id>=<expr>
+
             typeNode = TypeNode.parseType(tokenList);
             idNode = IdNode.parseId(tokenList);
 
@@ -112,6 +129,21 @@ public class AsmtNode implements BodyStmtNode {
             }
             tokenList.remove(0);
 
+            //check if the name already exists in the symbol table
+            if (SymbolTable.getVarDef(idNode.getToken().getToken()) == null) {
+                //name of variable doesn't exist in symbol table therefore put it into the table
+                ArrayList<String> varDetails = new ArrayList<String>();
+                varDetails.add(typeNode.getToken().getToken());                     // adds the type of the variable
+                varDetails.add("yes");                                              // confirms instantiation
+                SymbolTable.addVarDef(idNode.getToken().getToken(), varDetails);    // adds new asmt var to symbol table
+            } else {
+                throw new SemanticException("Variable name of different type already used: " +
+                        typeNode.getToken().getToken() + " " + idNode.getToken().getToken(),
+                        typeNode.getToken().getFilename(), typeNode.getToken().getLineNum());
+            }
+            // issue how do I return the filename and line number from the desired spot, can tokens much, so
+            // I thought using nodes would be appropriate
+
             return new AsmtNode(typeNode, idNode, exprNode);
 
         } else throw new SyntaxException("Expected a type or id. Got: "+ token.getToken(),
@@ -132,7 +164,13 @@ public class AsmtNode implements BodyStmtNode {
 
     public String convertToPython(){return "";}
     
-    public boolean validateTree(){return true;}
+    public boolean validateTree() throws SemanticException {
+        // ensure type matches the actual assignment for new variable assignment
+        if (this.type == this.expr){}
+        // ensure name isnt already taken
+
+        return true;
+    }
 
 
 }
