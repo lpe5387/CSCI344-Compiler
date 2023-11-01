@@ -24,9 +24,12 @@ public class VarDecNode implements BodyStmtNode {
         this.id = id;
     }
 
-    public static VarDecNode parseVarDec ( ArrayList<Token> tokenList ) throws SyntaxException {
+    public static VarDecNode parseVarDec ( ArrayList<Token> tokenList ) throws SyntaxException, SemanticException {
         TypeNode typeNode;
         IdNode idNode;
+
+        //variable declaration for SymbolTable entry
+        ArrayList<String> varDetails = new ArrayList<String>();
 
         //check if the tokenlist is not empty
         if (tokenList.isEmpty()) {
@@ -39,6 +42,10 @@ public class VarDecNode implements BodyStmtNode {
         if (token.getTokenType() == TokenType.ID_KEYWORD) {
             typeNode = TypeNode.parseType(tokenList);
 
+            //get the type of the variable then parse it to String before adding it to varDetails
+            varDetails.add(token.getTokenType().toString());
+            varDetails.add("no");
+
             //check if the tokenlist is not empty
             if (tokenList.isEmpty()) {
                 throw new SyntaxException("Unexpected end of file");
@@ -49,6 +56,14 @@ public class VarDecNode implements BodyStmtNode {
 
             if (token.getTokenType() == TokenType.ID_KEYWORD) {
                 idNode = IdNode.parseId(tokenList);
+
+                //add variable to SymbolTable
+                if(SymbolTable.getVarDef(token.getToken()) != null){
+                    SymbolTable.addVarDef(token.getToken(), varDetails);
+                } else {
+                    throw new SemanticException("Variable already defined in scope ", token.getFilename(), token.getLineNum());
+                }
+
             } else throw new SyntaxException("Expected an Id. Got: "+ token.getToken(),
                     token.getFilename(), token.getLineNum());
 
@@ -60,7 +75,7 @@ public class VarDecNode implements BodyStmtNode {
             throw new SyntaxException("Unexpected end of file");
         }
 
-        //gets the ; token
+        //gets the token
         token = tokenList.get(0);
         //check if its ;
         if (token.getTokenType() != TokenType.SEMICOLON) {
@@ -83,13 +98,7 @@ public class VarDecNode implements BodyStmtNode {
 
     public String convertToPython(){return "";}
     
-    public boolean validateTree throws SemanticException(){
-        //variable cannot be already taken
-        if(this.){
-            return true;
-        } else {
-            throw new SemanticException("Variable already declared", "holder", 0);
-        }
+    public boolean validateTree() {
         return true;
     }
 

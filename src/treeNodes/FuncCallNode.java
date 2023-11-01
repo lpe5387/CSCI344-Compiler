@@ -97,9 +97,6 @@ public class FuncCallNode implements ExprNode, BodyStmtNode {
             throw new SemanticException("Called the function: " + this.id.getToken().getToken() + " without declaring it.", this.id.getToken().getFilename(), this.id.getToken().getLineNum());
         }
         //if we are here then the function exists, so now we need the params
-
-
-        //todo: store params here, not implemented yet so i cant rn
         ArrayList<String> funcDef = SymbolTable.getFuncDef(this.id.getToken().getToken());
         int numParams = funcDef.size()-1; //funcDef holds all the params and the return type
         if(this.params.getIsEmpty() && numParams != 0){
@@ -115,12 +112,18 @@ public class FuncCallNode implements ExprNode, BodyStmtNode {
             return true;
         }
         else{ //if here we are supposed to have at least one param
-            //todo: check if num of params are correct
-
-
+            int numGotParams = this.params.getParamsTList().size() + 1; //the number of params we were given, params t lists size the num of params excluding the first one, so add one
+            if(numGotParams != numParams){ //check the number of params are correct
+                throw new SemanticException("Received " + numGotParams + " parameters for function " + this.id.getToken().getToken() + "which requires " + numParams + " parameters when previously declared.", this.id.getToken().getFilename(), this.id.getToken().getLineNum());
+            }
             //todo: check each param;
+
             //  todo: check if it exists if its a var or function call
+            //  this should be done using the validate functions of ParamsNode and ParamsTNode
+            this.params.validateTree();
+
             //  todo: check that each one evaluates to the correct data type
+            //  loop through params and do this check
 
 
         }
@@ -137,5 +140,11 @@ public class FuncCallNode implements ExprNode, BodyStmtNode {
             throw new SemanticException("Function '" + this.id.getToken().getToken() + "' does not return the type 'Boolean'.", this.id.getToken().getFilename(), this.id.getToken().getLineNum());
         }
         return true;
+    }
+
+    public String evaluateType() throws SemanticException {
+        ArrayList<String> funcDetails = SymbolTable.getFuncDef(this.id.getToken().getToken());
+        if(funcDetails == null) throw new SemanticException("Function '" + this.id.getToken().getToken() + "' does not exist.", this.id.getToken().getFilename(), this.id.getToken().getLineNum());
+        else return funcDetails.get(funcDetails.size()-1);
     }
 }

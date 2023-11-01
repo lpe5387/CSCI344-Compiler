@@ -42,7 +42,7 @@ public class IdNode implements ExprNode {
     }
 
     public boolean isBooleanExpression() throws SemanticException {
-        ArrayList<String> results = SymbolTable.getVarDef(SymbolTable.getCurrentScope(), this.token.getToken());
+        ArrayList<String> results = SymbolTable.getVarDef(this.token.getToken());
         if(results ==  null){
             throw new SemanticException("Variable '" + this.token.getToken() + "' does not exist.", this.token.getFilename(), this.token.getLineNum());
         }
@@ -53,6 +53,12 @@ public class IdNode implements ExprNode {
             throw new SemanticException("Variable '" + this.token.getToken() + "' is not instantiated.", this.token.getFilename(), this.token.getLineNum());
         }
         return true;
+    }
+
+    public String evaluateType() throws SemanticException {
+        ArrayList<String> variableDetails = SymbolTable.getVarDef(this.token.getToken());
+        if(variableDetails == null) throw new SemanticException("Variable '" + this.token.getToken() + "' does not exist.", this.token.getFilename(), this.token.getLineNum());
+        return variableDetails.get(0);
     }
 
     public String convertToJott(){

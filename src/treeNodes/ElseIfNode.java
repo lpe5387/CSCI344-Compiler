@@ -6,6 +6,7 @@ package treeNodes;
  * @author Luka Eaton, Andrew Dantone
  */
 
+import exceptions.SemanticException;
 import exceptions.SyntaxException;
 import provided.JottTree;
 import provided.Token;
@@ -19,14 +20,17 @@ public class ElseIfNode implements JottTree {
     private ExprNode expr;
 
     private BodyNode body;
+    private Token elseIfStart;
 
-    public ElseIfNode(ExprNode expr, BodyNode body){
+    public ElseIfNode(ExprNode expr, BodyNode body, Token elseIfStart){
         this.expr = expr;
         this.body = body;
+        this.elseIfStart = elseIfStart;
     }
 
-    public static ElseIfNode parseElseIf(ArrayList<Token> tokenlist) throws SyntaxException{
+    public static ElseIfNode parseElseIf(ArrayList<Token> tokenlist) throws SyntaxException, SemanticException {
         Token tok;
+        Token elseIfStart;
         //
         //Testing the first token for the word elseif
         //
@@ -38,6 +42,7 @@ public class ElseIfNode implements JottTree {
             if (!Objects.equals(tok.getToken(), "elseif")) { //check if first token is the word if
                 throw new SyntaxException("Expected the word \"elseif\", got: " + tok.getToken(), tok.getFilename(), tok.getLineNum());
             }
+            elseIfStart = tokenlist.get(0);
             //
             //if we got here that means this is an elseif statement so start parsing and removing tokens
             //
@@ -124,7 +129,7 @@ public class ElseIfNode implements JottTree {
         else{
             throw new SyntaxException("Unexpected End Of File");
         }
-        return new ElseIfNode(expr, body);
+        return new ElseIfNode(expr, body, elseIfStart);
     }
 
     public String convertToJott(){
@@ -142,6 +147,15 @@ public class ElseIfNode implements JottTree {
 
     public String convertToPython(){return "";}
 
-    public boolean validateTree(){return true;}
+    public boolean validateTree() throws SemanticException {
+        this.expr.validateTree();
+        this.body.validateTree();
+        if(!this.expr.isBooleanExpression()){
+            throw new SemanticException("Else-If statement condition is not a valid boolean expresion",
+                    this.elseIfStart.getFilename(),
+                    this.elseIfStart.getLineNum());
+        }
+        return true;
+    }
 
 }

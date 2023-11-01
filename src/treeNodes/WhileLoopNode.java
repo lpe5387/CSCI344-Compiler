@@ -26,7 +26,7 @@ public class WhileLoopNode implements BodyStmtNode {
         this.whileLoopStart = whileLoopStart;
     }
 
-    public static WhileLoopNode parseWhileLoop (ArrayList<Token> tokenlist) throws SyntaxException {
+    public static WhileLoopNode parseWhileLoop (ArrayList<Token> tokenlist) throws SyntaxException, SemanticException {
         ExprNode exprNode = null;
         BodyNode bodyNode = null;
         Token whileLoopStart = null;
@@ -109,48 +109,13 @@ public class WhileLoopNode implements BodyStmtNode {
     public String convertToPython(){return "";}
     
     public boolean validateTree() throws SemanticException {
-        //1st checks if there is an boolean expression in the while loop
-        //expression node can be a id (boolean variable), boolean (true / false), function call, operation node that
-        //has a rel op
-        if (this.expr instanceof BoolNode) {
-            //expression node can be boolean (true / false)
-        } else if (this.expr instanceof IdNode) {
-            //expression node can be a id (boolean variable)
-            //check is this idnode is a boolean variable in the symbol table
-        } else if (this.expr instanceof FuncCallNode) {
-            //function call
-            //check symbol table for the return value of the funccallnode: should be a bool return
-        } else if (this.expr instanceof OperationNode) {
-            //operation node that has a rel op
-            OperationNode operationNode = (OperationNode)this.expr;
-            //had to be exactly 1 count
-            int relOpCount = 0;
-            while (true) {
-                if (operationNode.getOp().getToken().getTokenType() == TokenType.REL_OP) {
-                    relOpCount++;
-                }
-                if (operationNode.getRight() instanceof OperationNode) {
-                    operationNode = (OperationNode) operationNode.getRight();
-                } else {
-                    break;
-                }
-            }
-
-            if ( relOpCount != 1 ) {
-                throw new SemanticException("While loop condition is not a boolean expresion",
-                        operationNode.getOp().getToken().getFilename(),
-                        operationNode.getOp().getToken().getLineNum());
-            }
-
-        } else {
-            throw new SemanticException("While loop condition is not a boolean expresion",
+        this.expr.validateTree();
+        this.body.validateTree();
+        if(!this.expr.isBooleanExpression()){
+            throw new SemanticException("While loop condition is not a valid boolean expresion",
                     this.whileLoopStart.getFilename(),
                     this.whileLoopStart.getLineNum());
         }
-
-        this.expr.validateTree();
-        this.body.validateTree();
-
         return true;
     }
 

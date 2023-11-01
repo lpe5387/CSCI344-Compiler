@@ -6,6 +6,7 @@ package treeNodes;
  * @author Luka Eaton, Dara Prak
  */
 
+import exceptions.SemanticException;
 import exceptions.SyntaxException;
 import provided.JottTree;
 import provided.Token;
@@ -22,7 +23,7 @@ public class BodyNode implements JottTree {
         this.returnStmt = returnStmt;
     }
 
-    public static BodyNode parseBody(ArrayList<Token> tokenList) throws SyntaxException {
+    public static BodyNode parseBody(ArrayList<Token> tokenList) throws SyntaxException, SemanticException {
         BodyStmtNode bodyStmt;
         ArrayList<BodyStmtNode> stmtList = new ArrayList<>();
         while(true) {
@@ -56,6 +57,12 @@ public class BodyNode implements JottTree {
 
     public String convertToPython(){return "";}
     
-    public boolean validateTree(){return true;}
+    public boolean validateTree() throws SemanticException {
+        for(BodyStmtNode bodyStmt : this.bodyStmtList){
+            bodyStmt.validateTree();
+        }
+        if(this.returnStmt != null) this.returnStmt.validateTree();
+        return true;
+    }
 
 }

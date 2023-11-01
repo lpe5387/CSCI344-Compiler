@@ -50,7 +50,14 @@ public class OperationNode implements ExprNode {
 
     public String convertToPython(){return "";}
 
-    public boolean validateTree(){return true;}
+    public boolean validateTree() throws SemanticException {
+        this.left.validateTree();
+        this.op.validateTree();
+        this.right.validateTree();
+        // Don't need to store the return of evaluateType(), if it doesn't throw a SemanticException we are all good
+        evaluateType();
+        return true;
+    }
 
     public ExprNode getRight() {
         return this.right;
@@ -61,6 +68,33 @@ public class OperationNode implements ExprNode {
     }
 
     public boolean isBooleanExpression() throws SemanticException {
-        return false;
+        int relOpCount = 0;
+        OperationNode operationNode = this;
+        while (true) {
+            if (operationNode.getOp().getToken().getTokenType() == TokenType.REL_OP) {
+                relOpCount++;
+            }
+            if (operationNode.getRight() instanceof OperationNode) {
+                operationNode = (OperationNode) operationNode.getRight();
+            } else {
+                break;
+            }
+        }
+        // if relOpCount > 1, this isn't a valid expression
+        if( relOpCount > 1 ) throw new SemanticException("Operation expression cannot contain multiple REL_OP's.", this.op.getToken().getFilename(), this.op.getToken().getLineNum());
+        // if relOpCount == 1, we know this is a proper boolean expression
+        if ( relOpCount != 1 ) return false;
+        return true;
     }
+
+    public String evaluateType() throws SemanticException {
+        String left = this.left.evaluateType();
+        String right = this.right.evaluateType();
+        if(left.equals(right)){
+            if(isBooleanExpression()) return "Boolean";
+            return left;
+        }
+        else throw new SemanticException("Types '" + left + "' and '" + right + "' cannot be in the same expression.", this.op.getToken().getFilename(), this.op.getToken().getLineNum());
+    }
+
 }

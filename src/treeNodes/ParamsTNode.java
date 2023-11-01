@@ -7,6 +7,8 @@ package treeNodes;
  */
 
 import java.util.ArrayList;
+
+import exceptions.SemanticException;
 import provided.JottTree;
 import provided.Token;
 import provided.TokenType;
@@ -48,6 +50,9 @@ public class ParamsTNode implements JottTree {
 
     public String convertToPython(){return "";}
     
-    public boolean validateTree(){return true;}
+    public boolean validateTree() throws SemanticException {
+        this.expr.validateTree();
+        return true;
+    }
 
 }

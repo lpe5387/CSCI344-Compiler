@@ -54,4 +54,8 @@ public class StringLiteralNode implements ExprNode {
     public boolean isBooleanExpression() throws SemanticException {
         return false;
     }
+
+    public String evaluateType() throws SemanticException {
+        return "String";
+    }
 }

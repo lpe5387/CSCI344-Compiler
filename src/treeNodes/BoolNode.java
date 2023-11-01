@@ -59,4 +59,8 @@ public class BoolNode implements ExprNode {
     public boolean isBooleanExpression() throws SemanticException {
         return true;
     }
+
+    public String evaluateType() throws SemanticException {
+        return "Boolean";
+    }
 }

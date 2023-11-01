@@ -7,6 +7,8 @@ package treeNodes;
  */
 
 import java.util.ArrayList;
+
+import exceptions.SemanticException;
 import provided.JottTree;
 import provided.Token;
 import provided.TokenType;
@@ -50,12 +52,22 @@ public class ParamsNode implements JottTree {
 
     public boolean getIsEmpty(){return this.isEmpty;};
 
+    public ExprNode getExpr() {return this.expr;}
+
+    public ArrayList<ParamsTNode> getParamsTList(){return this.paramsTList;}
+
     public String convertToJava(String className){return "";}
 
     public String convertToC(){return "";}
 
     public String convertToPython(){return "";}
     
-    public boolean validateTree(){return true;}
+    public boolean validateTree() throws SemanticException {
+        this.expr.validateTree();
+        for(ParamsTNode paramT : this.paramsTList){
+            paramT.validateTree();
+        }
+        return true;
+    }
 
 }

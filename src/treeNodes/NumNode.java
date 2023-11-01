@@ -38,6 +38,11 @@ public class NumNode implements ExprNode {
         return false;
     }
 
+    public String evaluateType() throws SemanticException {
+        if(this.token.getToken().contains(".")) return "Double";
+        else return "Integer";
+    }
+
     public String convertToJott() {
         return this.token.getToken();
     }

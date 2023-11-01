@@ -6,6 +6,7 @@ package treeNodes;
  * @author Luka Eaton, Andrew Dantone
  */
 
+import exceptions.SemanticException;
 import exceptions.SyntaxException;
 import provided.JottTree;
 import provided.Token;
@@ -22,19 +23,22 @@ public class IfStmtNode implements BodyStmtNode {
 
     private ArrayList<ElseIfNode> elseIfLst;
     private ElseNode elseStmt;
+    private Token ifStmtStart;
 
     //
     //IMPORTANT NOTE: ElseIfLst and elseStmt CAN BE EMPTY AND NULL RESPECTIVELY, THESE CASES MUST BE ACCOUNTED FOR
     //
-    public IfStmtNode(ExprNode expr, BodyNode body, ArrayList<ElseIfNode> elseIfLst, ElseNode elseStmt){
+    public IfStmtNode(ExprNode expr, BodyNode body, ArrayList<ElseIfNode> elseIfLst, ElseNode elseStmt, Token ifStmtStart){
         this.expr = expr;
         this.body = body;
         this.elseIfLst = elseIfLst;
         this.elseStmt = elseStmt;
+        this.ifStmtStart = ifStmtStart;
     }
 
-    public static IfStmtNode parseIfStmt(ArrayList<Token> tokenlist) throws SyntaxException {
+    public static IfStmtNode parseIfStmt(ArrayList<Token> tokenlist) throws SyntaxException, SemanticException {
         Token tok;
+        Token ifStmtStart = null;
         //
         //Testing the first token for the word if
         //
@@ -46,7 +50,7 @@ public class IfStmtNode implements BodyStmtNode {
             if (!Objects.equals(tok.getToken(), "if")) { //check if first token is the word if
                 throw new SyntaxException("Expected the word \"if\", got: " + tok.getToken(), tok.getFilename(), tok.getLineNum());
             }
-
+            ifStmtStart = tokenlist.get(0);
             //
             //if we got here that means this is an if statement so start parsing and removing tokens
             //
@@ -176,7 +180,7 @@ public class IfStmtNode implements BodyStmtNode {
         //
         //Now make and return the node
         //
-        return new IfStmtNode(expr, body, elseIfList, finalElse);
+        return new IfStmtNode(expr, body, elseIfList, finalElse, ifStmtStart);
     }
 
     public String convertToJott(){
@@ -207,6 +211,19 @@ public class IfStmtNode implements BodyStmtNode {
 
     public String convertToPython(){return "";}
 
-    public boolean validateTree(){return true;}
+    public boolean validateTree() throws SemanticException {
+        this.expr.validateTree();
+        this.body.validateTree();
+        for(ElseIfNode elseif : this.elseIfLst){
+            elseif.validateTree();
+        }
+        this.elseStmt.validateTree();
+        if(!this.expr.isBooleanExpression()){
+            throw new SemanticException("If-statement condition is not a valid boolean expresion",
+                    this.ifStmtStart.getFilename(),
+                    this.ifStmtStart.getLineNum());
+        }
+        return true;
+    }
 
 }

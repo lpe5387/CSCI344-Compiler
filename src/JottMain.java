@@ -22,7 +22,7 @@ public class JottMain {
                         "and Language is \"Jott\", \"Java\", \"C\", or \"Python\" depending on which language you want the result in.");
             }
             //must have the 2nd arg be a language we translate to
-            else if(!args[1].equals("Jott") && !args[1].equals("Java") && !args[1].equals( "C") && !args[1].equals("Python")){
+            else if(!args[1].equals("Jott") && !args[1].equals("Java") && !args[1].equals("C") && !args[1].equals("Python")){
                 System.err.println("Usage: JottMain FILENAME Language.\n" +
                         "Where:\n" +
                         "FILENAME is the name of the Jott file to be parsed,\n" +
@@ -37,7 +37,7 @@ public class JottMain {
                     valid = true; //if we get here without breaking we are good to run the program
                 }
                 catch (Exception E){
-                    System.err.println("Failed to open " + args[0] + " See error below.");
+                    System.err.println("Failed to open " + args[0] + ", See error below.");
                     System.err.println(E.toString());
                     System.err.println("Usage: JottMain FILENAME Language.\n" +
                             "Where:\n" +
