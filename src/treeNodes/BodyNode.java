@@ -57,6 +57,12 @@ public class BodyNode implements JottTree {
 
     public String convertToPython(){return "";}
     
-    public boolean validateTree(){return true;}
+    public boolean validateTree() throws SemanticException {
+        for(BodyStmtNode bodyStmt : this.bodyStmtList){
+            bodyStmt.validateTree();
+        }
+        if(this.returnStmt != null) this.returnStmt.validateTree();
+        return true;
+    }
 
 }

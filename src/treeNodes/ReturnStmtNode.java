@@ -6,6 +6,7 @@ package treeNodes;
  * @author Luka Eaton, Dara Prak
  */
 
+import exceptions.SemanticException;
 import exceptions.SyntaxException;
 import provided.JottTree;
 import provided.Token;
@@ -56,6 +57,9 @@ public class ReturnStmtNode implements JottTree {
 
     public String convertToPython(){return "";}
     
-    public boolean validateTree(){return true;}
+    public boolean validateTree() throws SemanticException {
+        this.expr.validateTree();
+        return true;
+    }
 
 }
