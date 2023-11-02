@@ -49,4 +49,8 @@ public interface BodyStmtNode extends JottTree {
             return null; // not a body statement
         }
     }
+
+    public boolean hasReturn();
+
+    public String getReturnType() throws SemanticException;
 }

@@ -103,9 +103,6 @@ public class FuncDefNode implements JottTree {
                                     tokenlist.remove(0);
                                     FuncDefNode node = new FuncDefNode(idNode, funcDefParams, returnType, body);
 
-                                    // updates function's entry in the symbol table with the complete details
-                                    SymbolTable.addFuncDef(funcName, funcDetails);
-
                                     // tells symbol table we exited the scope of this function
                                     SymbolTable.setCurrentScope(null);
 
@@ -153,10 +150,46 @@ public class FuncDefNode implements JottTree {
 
     public String convertToPython(){return "";}
     
-    public boolean validateTree() {
-//        if(this.returnType.getTypeNode().getToken().getTokenType() == this.body.getReturnStmt().get) {
-//
-//        }
+    public boolean validateTree() throws SemanticException {
+        String expectedReturnType = this.returnType.getTypeNode().getToken().getToken();
+        ExprNode returnExpr = this.body.getReturnStmt().getExprNode();
+        if(returnExpr == null) {
+            if(expectedReturnType.equals("Void")) {
+                for(BodyStmtNode bodyStmt : this.body.getBodyStmtList()) {
+                    if(bodyStmt.hasReturn()) {
+                        throw new SemanticException("Function with Void return has a return statement",
+                                this.id.getToken().getFilename(),
+                                this.id.getToken().getLineNum());
+                    }
+                }
+            } else {
+                boolean hasReturnPath = false;
+                for(BodyStmtNode bodyStmt : this.body.getBodyStmtList()) {
+                    // if bodyStmt is an if statement, check if return path is valid and type matches
+                    if(bodyStmt instanceof IfStmtNode ifStmt) {
+                        if(ifStmt.isReturnable() != null) {
+                            hasReturnPath = true;
+                            break;
+                        }
+                    }
+                }
+                if(!hasReturnPath) {
+                    throw new SemanticException("Non-Void function has no return path",
+                            this.id.getToken().getFilename(),
+                            this.id.getToken().getLineNum());
+                }
+            }
+        } else {
+            if(!expectedReturnType.equals(returnExpr.evaluateType())) {
+                throw new SemanticException("Incorrect return type",
+                        this.id.getToken().getFilename(),
+                        this.id.getToken().getLineNum());
+            }
+            for(BodyStmtNode bodyStmt : this.body.getBodyStmtList()) {
+                // TODO if it has a return statement, check if type matches. else throw error
+            }
+        }
+
         return true;
     }
 

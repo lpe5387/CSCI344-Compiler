@@ -65,4 +65,10 @@ public class BodyNode implements JottTree {
         return true;
     }
 
+    public ReturnStmtNode getReturnStmt(){return this.returnStmt;}
+
+    public ArrayList<BodyStmtNode> getBodyStmtList() {
+        return this.bodyStmtList;
+    }
+
 }

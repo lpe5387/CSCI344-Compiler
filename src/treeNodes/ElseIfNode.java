@@ -158,4 +158,8 @@ public class ElseIfNode implements JottTree {
         return true;
     }
 
+    public BodyNode getBody() {
+        return this.body;
+    }
+
 }

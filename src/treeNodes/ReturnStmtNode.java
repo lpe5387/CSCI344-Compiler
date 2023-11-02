@@ -62,4 +62,8 @@ public class ReturnStmtNode implements JottTree {
         return true;
     }
 
+    public ExprNode getExprNode() {
+        return this.expr;
+    }
+
 }

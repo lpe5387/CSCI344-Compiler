@@ -104,4 +104,8 @@ public class ElseNode implements JottTree {
         return true;
     }
 
+    public BodyNode getBody() {
+        return this.body;
+    }
+
 }

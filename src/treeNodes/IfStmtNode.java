@@ -226,4 +226,45 @@ public class IfStmtNode implements BodyStmtNode {
         return true;
     }
 
+    @Override
+    public boolean hasReturn() {
+        if(this.body.getReturnStmt() == null) {
+            return false;
+        }
+        return true;
+    }
+
+    public String isReturnable() throws SemanticException {
+        if(this.elseStmt == null) {
+            return null;
+        }
+
+        ReturnStmtNode ifReturnNode = this.body.getReturnStmt();
+        if(ifReturnNode == null) {
+            return null;
+        }
+        String ifReturnType = ifReturnNode.getExprNode().evaluateType();
+        for(ElseIfNode elseIf : this.elseIfLst) {
+            ReturnStmtNode elseIfReturnNode = elseIf.getBody().getReturnStmt();
+            if(elseIfReturnNode == null) {
+                return null;
+            }
+            if(!elseIfReturnNode.getExprNode().evaluateType().equals(ifReturnType)) {
+                throw new SemanticException("Multiple different return types",
+                        this.ifStmtStart.getFilename(),
+                        this.ifStmtStart.getLineNum());
+            }
+        }
+
+        ReturnStmtNode elseReturnNode = this.elseStmt.getBody().getReturnStmt();
+        if(elseReturnNode == null) {
+            return null;
+        }
+        if(!elseReturnNode.getExprNode().evaluateType().equals(ifReturnType)) {
+            throw new SemanticException("Multiple different return types",
+                    this.ifStmtStart.getFilename(),
+                    this.ifStmtStart.getLineNum());
+        }
+        return ifReturnType;
+    }
 }

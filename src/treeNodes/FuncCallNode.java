@@ -168,4 +168,9 @@ public class FuncCallNode implements ExprNode, BodyStmtNode {
         if(funcDetails == null) throw new SemanticException("Function '" + this.id.getToken().getToken() + "' does not exist.", this.id.getToken().getFilename(), this.id.getToken().getLineNum());
         else return funcDetails.get(funcDetails.size()-1);
     }
+
+    @Override
+    public boolean hasReturn() {
+        return false;
+    }
 }
