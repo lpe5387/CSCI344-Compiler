@@ -58,7 +58,7 @@ public class VarDecNode implements BodyStmtNode {
                 idNode = IdNode.parseId(tokenList);
 
                 //add variable to SymbolTable
-                if(SymbolTable.getVarDef(token.getToken()) != null){
+                if(SymbolTable.getVarDef(token.getToken()) == null){
                     SymbolTable.addVarDef(token.getToken(), varDetails);
                 } else {
                     throw new SemanticException("Variable already defined in scope ", token.getFilename(), token.getLineNum());
