@@ -7,6 +7,8 @@ package treeNodes;
  */
 
 import java.util.ArrayList;
+
+import SymbolTable.SymbolTable;
 import provided.JottTree;
 import provided.Token;
 import provided.TokenType;
@@ -25,25 +27,43 @@ public class FuncDefParamsNode implements JottTree {
         this.funcDefParamsTList = funcDefParamsTList;
     }
 
-    public static FuncDefParamsNode parseFuncDefParams(ArrayList<Token> tokenlist) throws SyntaxException {
+    public static FuncDefParamsNode parseFuncDefParams(ArrayList<Token> tokenlist, ArrayList<String> funcDetails)
+            throws SyntaxException {
         if(tokenlist.isEmpty()){
             throw new SyntaxException("Unexpected end of file");
         }
         Token token = tokenlist.get(0);
         if(token.getTokenType() == TokenType.ID_KEYWORD){
             IdNode idNode = IdNode.parseId(tokenlist);
+
+            String paramName = idNode.getToken().getToken();
+
             if(tokenlist.isEmpty()){
                 throw new SyntaxException("Unexpected end of file");
             }
             token = tokenlist.get(0);
             if(token.getTokenType() == TokenType.COLON) {
                 tokenlist.remove(0);
-                TypeNode type = TypeNode.parseType(tokenlist);
+                TypeNode typeNode = TypeNode.parseType(tokenlist);
+
+                String type = typeNode.getToken().getToken();
+
+                // in the function symbol table, adds the type of this parameter to the entry of the containing function
+                funcDetails.add(type);
+
+                // in the variable symbol table, adds this parameter as a local variable to the containing function
+                ArrayList<String> varDetails = new ArrayList<>();
+                varDetails.add(type);
+                varDetails.add("yes");
+                SymbolTable.addVarDef(paramName, varDetails);
+
                 ArrayList<FuncDefParamsTNode> funcDefParamsTNodes = new ArrayList<>();
                 while (tokenlist.get(0).getTokenType() == TokenType.COMMA) {
-                    funcDefParamsTNodes.add(FuncDefParamsTNode.parseFuncDefParamsT(tokenlist));
+
+                    // dynamically adds parameter types to funcDetails during parse
+                    funcDefParamsTNodes.add(FuncDefParamsTNode.parseFuncDefParamsT(tokenlist, funcDetails));
                 }
-                FuncDefParamsNode node = new FuncDefParamsNode(idNode, type, funcDefParamsTNodes);
+                FuncDefParamsNode node = new FuncDefParamsNode(idNode, typeNode, funcDefParamsTNodes);
                 return node;
             } else {
                 throw new SyntaxException("Expected :, got " + token.getTokenType(), token.getFilename(), token.getLineNum());
@@ -77,5 +97,4 @@ public class FuncDefParamsNode implements JottTree {
 
     public TypeNode getTypeNode() {return this.type;}
 
-    public ArrayList<FuncDefParamsTNode> getFuncDefParamsTList() { return this.funcDefParamsTList; }
 }
