@@ -44,13 +44,33 @@ public class FuncDefNode implements JottTree {
             token = tokenlist.get(0);
             if(token.getTokenType() == TokenType.ID_KEYWORD){
                 IdNode idNode = IdNode.parseId(tokenlist);
+
+                String funcName = idNode.getToken().getToken();
+
+                // holds details of the function to include in its symbol table entry
+                ArrayList<String> funcDetails = new ArrayList<>();
+
+                // adds function definition to symbol table, if the name is unique
+                if(SymbolTable.getFuncDef(funcName) != null) {
+                    throw new SemanticException("Function definition with this name already exists",
+                            idNode.getToken().getFilename(),
+                            idNode.getToken().getLineNum());
+                }
+                SymbolTable.addFuncDef(funcName, funcDetails); // currently no details, but entry will get updated later
+
+                // sets current scope of the symbol table to this function
+                SymbolTable.setCurrentScope(funcName);
+
                 if(tokenlist.isEmpty()){
                     throw new SyntaxException("Unexpected end of file");
                 }
                 token = tokenlist.get(0);
                 if(token.getTokenType() == TokenType.L_BRACKET) {
                     tokenlist.remove(0);
-                    FuncDefParamsNode funcDefParams = FuncDefParamsNode.parseFuncDefParams(tokenlist);
+
+                    // dynamically adds parameter types to funcDetails during parse
+                    FuncDefParamsNode funcDefParams = FuncDefParamsNode.parseFuncDefParams(tokenlist, funcDetails);
+
                     if(tokenlist.isEmpty()){
                         throw new SyntaxException("Unexpected end of file");
                     }
@@ -64,6 +84,10 @@ public class FuncDefNode implements JottTree {
                         if (token.getTokenType() == TokenType.COLON) {
                             tokenlist.remove(0);
                             FunctionReturnNode returnType = FunctionReturnNode.ParseFuncReturn(tokenlist);
+
+                            // add return type to symbol table for this function definition
+                            funcDetails.add(returnType.getTypeNode().getToken().getToken());
+
                             if(tokenlist.isEmpty()){
                                 throw new SyntaxException("Unexpected end of file");
                             }
@@ -79,22 +103,11 @@ public class FuncDefNode implements JottTree {
                                     tokenlist.remove(0);
                                     FuncDefNode node = new FuncDefNode(idNode, funcDefParams, returnType, body);
 
-                                    // adding function definition to symbol table
-                                    String funcName = idNode.getToken().getToken();
-                                    if(SymbolTable.getFuncDef(funcName) != null) {
-                                        throw new SemanticException("Function definition already exists",
-                                                idNode.getToken().getFilename(),
-                                                idNode.getToken().getLineNum());
-                                    }
-                                    ArrayList<String> funcDetails= new ArrayList<String>();
-                                    if(funcDefParams != null) { // adds parameter types if they exist
-                                        funcDetails.add(funcDefParams.getTypeNode().getToken().getToken());
-                                        for(FuncDefParamsTNode param : funcDefParams.getFuncDefParamsTList()) {
-                                            funcDetails.add(param.getTypeNode().getToken().getToken());
-                                        }
-                                    }
-                                    funcDetails.add(returnType.getTypeNode().getToken().getToken());
+                                    // updates function's entry in the symbol table with the complete details
                                     SymbolTable.addFuncDef(funcName, funcDetails);
+
+                                    // tells symbol table we exited the scope of this function
+                                    SymbolTable.setCurrentScope(null);
 
                                     return node;
                                 } else {
@@ -141,7 +154,9 @@ public class FuncDefNode implements JottTree {
     public String convertToPython(){return "";}
     
     public boolean validateTree() {
-
+//        if(this.returnType.getTypeNode().getToken().getTokenType() == this.body.getReturnStmt().get) {
+//
+//        }
         return true;
     }
 
