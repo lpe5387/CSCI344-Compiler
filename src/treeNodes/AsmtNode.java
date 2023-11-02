@@ -6,10 +6,11 @@ package treeNodes;
  * @author Luka Eaton, Lucie Lim
  */
 
+import exceptions.SemanticException;
 import exceptions.SyntaxException;
-import provided.JottTree;
 import provided.Token;
 import provided.TokenType;
+import SymbolTable.SymbolTable;
 
 import java.util.ArrayList;
 
@@ -30,7 +31,7 @@ public class AsmtNode implements BodyStmtNode {
         this.expr = expr;
     }
 
-    public static AsmtNode parseAsmt(ArrayList<Token> tokenList) throws SyntaxException {
+    public static AsmtNode parseAsmt(ArrayList<Token> tokenList) throws SyntaxException, SemanticException {
         TypeNode typeNode;
         IdNode idNode;
         ExprNode exprNode;
@@ -50,8 +51,15 @@ public class AsmtNode implements BodyStmtNode {
         Token lookAhead = tokenList.get(1);
 
         //check the content of the token
+        //checks <id>=<expr>
         if (token.getTokenType() == TokenType.ID_KEYWORD && lookAhead.getTokenType() == TokenType.ASSIGN) {
             idNode = IdNode.parseId(tokenList);
+
+            //check if the name already exists in the symbol table
+            if (SymbolTable.getVarDef(idNode.getToken().getToken()) == null) {
+                throw new SemanticException("Assignment of variable without declaring type: " +
+                        idNode.getToken().getToken(), idNode.getToken().getFilename(), idNode.getToken().getLineNum());
+            }
 
             //check if the tokenlist is not empty
             if (tokenList.isEmpty()) {
@@ -80,11 +88,26 @@ public class AsmtNode implements BodyStmtNode {
             }
             tokenList.remove(0);
 
+            //Name of var exists in symbol table therefore update the instantiation status of var
+            ArrayList<String> varDetails = SymbolTable.getVarDef(idNode.getToken().getToken());
+            if (varDetails.get(1).equals("no")) {                               // if the var was not instantiated
+                varDetails.set(1, "yes");                                       // update to yes in the table
+            }
+
             return new AsmtNode(idNode, exprNode);
 
         } else if (token.getTokenType() == TokenType.ID_KEYWORD) {
+            //checks <type><id>=<expr>
+
             typeNode = TypeNode.parseType(tokenList);
             idNode = IdNode.parseId(tokenList);
+
+            //check if the name already exists in the symbol table
+            if (SymbolTable.getVarDef(idNode.getToken().getToken()) != null) {
+                throw new SemanticException("Variable name: " + idNode.getToken().getToken() + " of type: " +
+                        typeNode.getToken().getToken() + ", already used ",
+                        typeNode.getToken().getFilename(), typeNode.getToken().getLineNum());
+            }
 
             //check if the tokenlist is not empty
             if (tokenList.isEmpty()) {
@@ -112,6 +135,12 @@ public class AsmtNode implements BodyStmtNode {
             }
             tokenList.remove(0);
 
+            //name of var doesn't exist in symbol table therefore put it into the table
+            ArrayList<String> varDetails = new ArrayList<>();
+            varDetails.add(typeNode.getToken().getToken());                     // adds the type of the variable
+            varDetails.add("yes");                                              // confirms instantiation
+            SymbolTable.addVarDef(idNode.getToken().getToken(), varDetails);    // adds new asmt var to symbol table
+
             return new AsmtNode(typeNode, idNode, exprNode);
 
         } else throw new SyntaxException("Expected a type or id. Got: "+ token.getToken(),
@@ -132,7 +161,18 @@ public class AsmtNode implements BodyStmtNode {
 
     public String convertToPython(){return "";}
     
-    public boolean validateTree(){return true;}
+    public boolean validateTree() throws SemanticException {
+        // ensure type matches the actual assignment for new variable assignment
+        String type = this.type.getToken().getToken();              // gets the type of the var
+
+        if ( !type.equals( this.expr.evaluateType() ) ) {            // if var type != type of expression throw error
+            throw new SemanticException("Variable type doesn't match with assignment type.\n " +
+                    this.type.getToken().getToken() + " " + this.id.getToken().getToken() + " = " +
+                    this.expr.toString(), this.id.getToken().getFilename(), this.id.getToken().getLineNum());
+        }
+        // ensure name isn't already taken: already handled in the parser when before we add keys to the symbol table
+        return true;
+    }
 
 
 }
