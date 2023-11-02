@@ -3,7 +3,7 @@ package treeNodes;
 /**
  * This class is responsible for the function call node for the parse tree
  *
- * @author Luka Eaton, Lucie Lim
+ * @author Luka Eaton, Lucie Lim, Andrew Dantone
  */
 
 import SymbolTable.SymbolTable;
@@ -111,21 +111,42 @@ public class FuncCallNode implements ExprNode, BodyStmtNode {
             //if we are here then we got 0 params, and we are supposed to have 0 params, since we already validated the name, we are good
             return true;
         }
+        else if(this.id.getToken().getToken().equals("print")){
+            this.params.validateTree();
+            if(!this.params.getParamsTList().isEmpty()){ //the ParamsTList has every parameter but the first, so if it's not empty we have 2+ params since the above cases account for 0 params
+                throw new SemanticException("The implicit print function takes only one parameter of any non-void type", this.id.getToken().getFilename(), this.id.getToken().getLineNum());
+            }
+            else if(this.params.getExpr().evaluateType().equals("Void")){
+                throw new SemanticException("The implicit print function takes only one parameter of any non-void type", this.id.getToken().getFilename(), this.id.getToken().getLineNum());
+            }
+            else{
+                return true;
+            }
+        }
         else{ //if here we are supposed to have at least one param
             int numGotParams = this.params.getParamsTList().size() + 1; //the number of params we were given, params t lists size the num of params excluding the first one, so add one
             if(numGotParams != numParams){ //check the number of params are correct
                 throw new SemanticException("Received " + numGotParams + " parameters for function " + this.id.getToken().getToken() + "which requires " + numParams + " parameters when previously declared.", this.id.getToken().getFilename(), this.id.getToken().getLineNum());
             }
-            //todo: check each param;
-
-            //  todo: check if it exists if its a var or function call
+            //check each param;
+            //  check if it exists, if it's a var or function call
             //  this should be done using the validate functions of ParamsNode and ParamsTNode
             this.params.validateTree();
 
-            //  todo: check that each one evaluates to the correct data type
-            //  loop through params and do this check
-
-
+            //  check that each one evaluates to the correct data type
+            //  loop through params
+            ArrayList<ExprNode> paramsList = new ArrayList<ExprNode>();
+            paramsList.add(this.params.getExpr());
+            for (ParamsTNode pt: this.params.getParamsTList()) {
+                paramsList.add(pt.getExpr());
+            }
+            //check each params type
+            for (int i = 0; i < numGotParams; i++) {
+                //if they data types don't match throw exception
+                if(!paramsList.get(i).evaluateType().equals(funcDef.get(i)) ){
+                    throw new SemanticException("Return type of parameter does not match previous declaration", this.id.getToken().getFilename(), this.id.getToken().getLineNum());
+                }
+            }
         }
         return true;
     }

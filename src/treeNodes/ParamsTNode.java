@@ -40,6 +40,10 @@ public class ParamsTNode implements JottTree {
         else throw new SyntaxException("Unexpected end of file");
     }
 
+    public ExprNode getExpr() {
+        return expr;
+    }
+
     public String convertToJott(){
         return ", " + this.expr.convertToJott();
     }
