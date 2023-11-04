@@ -38,6 +38,8 @@ public class SymbolTable {
         varMap.put(varName, varDetails);
     }
 
+    public static String getCurrentScope(){ return currentScope; }
+
     public static void setCurrentScope(String scope) {
         currentScope = scope;
     }

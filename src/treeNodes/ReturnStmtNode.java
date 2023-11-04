@@ -6,6 +6,7 @@ package treeNodes;
  * @author Luka Eaton, Dara Prak
  */
 
+import SymbolTable.SymbolTable;
 import exceptions.SemanticException;
 import exceptions.SyntaxException;
 import provided.JottTree;
@@ -18,8 +19,11 @@ public class ReturnStmtNode implements JottTree {
 
     private ExprNode expr;
 
-    public ReturnStmtNode(ExprNode expr){
+    private Token returnStart;
+
+    public ReturnStmtNode(ExprNode expr, Token token){
         this.expr = expr;
+        this.returnStart = token;
     }
 
     public static ReturnStmtNode parseReturnStmt(ArrayList<Token> tokenList) throws SyntaxException {
@@ -33,7 +37,7 @@ public class ReturnStmtNode implements JottTree {
             Token firstAfterExpr = tokenList.get(0);
             if(firstAfterExpr.getTokenType() == TokenType.SEMICOLON) { // if followed by ';', eat it
                 tokenList.remove(0);
-                return new ReturnStmtNode(expr);
+                return new ReturnStmtNode(expr, first);
             } else {
                 throw new SyntaxException("Expected ';' Got: "+ firstAfterExpr.getToken(),
                         firstAfterExpr.getFilename(), firstAfterExpr.getLineNum());
@@ -59,6 +63,13 @@ public class ReturnStmtNode implements JottTree {
     
     public boolean validateTree() throws SemanticException {
         this.expr.validateTree();
+        // check if return matches function return type
+        ArrayList<String> funcDetails = SymbolTable.getFuncDef(SymbolTable.getCurrentScope());
+        if(!funcDetails.get(funcDetails.size()-1).equals("Any")){
+            if(!funcDetails.get(funcDetails.size()-1).equals(this.expr.evaluateType())){
+                throw new SemanticException("Incorrect return type", this.returnStart.getFilename(), this.returnStart.getLineNum());
+            }
+        }
         return true;
     }
 

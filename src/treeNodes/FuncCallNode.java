@@ -169,8 +169,4 @@ public class FuncCallNode implements ExprNode, BodyStmtNode {
         else return funcDetails.get(funcDetails.size()-1);
     }
 
-    @Override
-    public boolean hasReturn() {
-        return false;
-    }
 }

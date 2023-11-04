@@ -118,12 +118,4 @@ public class WhileLoopNode implements BodyStmtNode {
         }
         return true;
     }
-
-    @Override
-    public boolean hasReturn() {
-        if(this.body.getReturnStmt() == null) {
-            return false;
-        }
-        return true;
-    }
 }

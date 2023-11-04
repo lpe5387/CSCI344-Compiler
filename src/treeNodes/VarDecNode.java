@@ -102,8 +102,4 @@ public class VarDecNode implements BodyStmtNode {
         return true;
     }
 
-    @Override
-    public boolean hasReturn() {
-        return false;
-    }
 }
