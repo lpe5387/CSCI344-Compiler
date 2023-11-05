@@ -217,7 +217,7 @@ public class IfStmtNode implements BodyStmtNode {
         for(ElseIfNode elseif : this.elseIfLst){
             elseif.validateTree();
         }
-        this.elseStmt.validateTree();
+        if(this.elseStmt != null) this.elseStmt.validateTree();
         if(!this.expr.isBooleanExpression()){
             throw new SemanticException("If-statement condition is not a valid boolean expresion",
                     this.ifStmtStart.getFilename(),
