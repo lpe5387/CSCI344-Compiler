@@ -86,7 +86,8 @@ public class FuncDefNode implements JottTree {
                             FunctionReturnNode returnType = FunctionReturnNode.ParseFuncReturn(tokenlist);
 
                             // add return type to symbol table for this function definition
-                            funcDetails.add(returnType.getTypeNode().getToken().getToken());
+                            if(returnType.getVoidReturn() != null) funcDetails.add("Void");
+                            else funcDetails.add(returnType.getTypeNode().getToken().getToken());
 
                             if(tokenlist.isEmpty()){
                                 throw new SyntaxException("Unexpected end of file");
@@ -151,11 +152,15 @@ public class FuncDefNode implements JottTree {
     public String convertToPython(){return "";}
     
     public boolean validateTree() throws SemanticException {
-        this.funcDefParams.validateTree();
+        SymbolTable.setCurrentScope(this.id.getToken().getToken());
+        if(this.funcDefParams != null) this.funcDefParams.validateTree();
         // this will validate any return statements in the body and ensure it's the correct type
         this.body.validateTree();
-        String expectedReturnType = this.returnType.getTypeNode().getToken().getToken();
-        ExprNode returnExpr = this.body.getReturnStmt().getExprNode();
+        String expectedReturnType;
+        if(this.returnType.getVoidReturn() != null) expectedReturnType = "Void";
+        else expectedReturnType = this.returnType.getTypeNode().getToken().getToken();
+        ExprNode returnExpr = null;
+        if(this.body.getReturnStmt() != null) returnExpr = this.body.getReturnStmt().getExprNode();
         // if this isn't a void return and the main function body doesn't have a return,
         // we check if there are any if-elseif-else statements that have a valid return path
         if(returnExpr == null && !expectedReturnType.equals("Void")) {

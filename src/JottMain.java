@@ -1,3 +1,5 @@
+import exceptions.SemanticException;
+import exceptions.SyntaxException;
 import provided.*;
 import treeNodes.ProgramNode;
 
@@ -50,13 +52,17 @@ public class JottMain {
                     // STEP 2: Parse into jott tree
                     ProgramNode program = ProgramNode.parseProgram(tokenList);
                     // STEP 3: Make the Parse table and validate tree
-                    //TODO: make the parse table
                     program.validateTree();
                     // STEP 4: Do Phase 4 things.
                 }
             }
+        } catch (SyntaxException e){
+            e.printErrorMessage();
+        } catch (SemanticException s){
+            s.printErrorMessage();
         } catch (Exception exception) {
             System.err.println(exception.toString());
+            exception.printStackTrace();
         }
     }    
 }

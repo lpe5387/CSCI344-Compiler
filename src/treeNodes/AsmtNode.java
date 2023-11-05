@@ -162,6 +162,7 @@ public class AsmtNode implements BodyStmtNode {
     public String convertToPython(){return "";}
     
     public boolean validateTree() throws SemanticException {
+        this.expr.validateTree();
         // ensure type matches the actual assignment for new variable assignment
         String type = this.type.getToken().getToken();              // gets the type of the var
 

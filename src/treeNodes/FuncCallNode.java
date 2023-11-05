@@ -144,7 +144,7 @@ public class FuncCallNode implements ExprNode, BodyStmtNode {
             for (int i = 0; i < numGotParams; i++) {
                 //if they data types don't match throw exception
                 if(!paramsList.get(i).evaluateType().equals(funcDef.get(i)) ){
-                    throw new SemanticException("Return type of parameter does not match previous declaration", this.id.getToken().getFilename(), this.id.getToken().getLineNum());
+                    throw new SemanticException("Parameter type does not match previous declaration", this.id.getToken().getFilename(), this.id.getToken().getLineNum());
                 }
             }
         }
