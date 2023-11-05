@@ -94,7 +94,7 @@ public class FuncCallNode implements ExprNode, BodyStmtNode {
     public boolean validateTree() throws SemanticException{
         //Make sure function name (id) is in the symbol table
         if(SymbolTable.getFuncDef(this.id.getToken().getToken()) == null){
-            throw new SemanticException("Called the function: " + this.id.getToken().getToken() + " without declaring it.", this.id.getToken().getFilename(), this.id.getToken().getLineNum());
+            throw new SemanticException("Called the function '" + this.id.getToken().getToken() + "' without declaring it.", this.id.getToken().getFilename(), this.id.getToken().getLineNum());
         }
         //if we are here then the function exists, so now we need the params
         ArrayList<String> funcDef = SymbolTable.getFuncDef(this.id.getToken().getToken());

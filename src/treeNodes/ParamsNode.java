@@ -33,6 +33,7 @@ public class ParamsNode implements JottTree {
     }
 
     public static ParamsNode parseParams(ArrayList<Token> tokenlist) throws SyntaxException{
+        if(!tokenlist.isEmpty() && tokenlist.get(0).getTokenType() == TokenType.R_BRACKET) return new ParamsNode();
         ExprNode expr = ExprNode.parseExpr(tokenlist); //gets exprNode
         ArrayList<ParamsTNode> paramsTList = new ArrayList<>(); //initializes an array of ParamsTNodes
         while(!tokenlist.isEmpty() && tokenlist.get(0).getTokenType() == TokenType.COMMA){ //while token after first expr node/ParamsTNode is a comma that means  there is another ParamsTNode
