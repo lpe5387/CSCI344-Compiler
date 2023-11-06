@@ -6,15 +6,15 @@ package treeNodes;
  * @author Isaac Kim, Dara Prak, Luka Eaton
  */
 
-import java.util.ArrayList;
-import java.util.Objects;
-
+import SymbolTable.SymbolTable;
 import exceptions.SemanticException;
+import exceptions.SyntaxException;
 import provided.JottTree;
 import provided.Token;
 import provided.TokenType;
-import exceptions.SyntaxException;
-import SymbolTable.SymbolTable;
+
+import java.util.ArrayList;
+import java.util.Objects;
 
 public class FuncDefNode implements JottTree {
     
@@ -46,6 +46,11 @@ public class FuncDefNode implements JottTree {
                 IdNode idNode = IdNode.parseId(tokenlist);
 
                 String funcName = idNode.getToken().getToken();
+
+                if (SymbolTable.reservedWords.contains(funcName)){
+                    throw new SemanticException("Cannot used reserved words as a function name",
+                            idNode.getToken().getFilename(), idNode.getToken().getLineNum());
+                }
 
                 // holds details of the function to include in its symbol table entry
                 ArrayList<String> funcDetails = new ArrayList<>();

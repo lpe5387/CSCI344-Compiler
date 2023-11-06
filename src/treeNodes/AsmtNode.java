@@ -55,6 +55,11 @@ public class AsmtNode implements BodyStmtNode {
         if (token.getTokenType() == TokenType.ID_KEYWORD && lookAhead.getTokenType() == TokenType.ASSIGN) {
             idNode = IdNode.parseId(tokenList);
 
+            if (SymbolTable.reservedWords.contains(idNode.getToken().getToken())){
+                throw new SemanticException("Cannot used reserved words as a variable name",
+                        idNode.getToken().getFilename(), idNode.getToken().getLineNum());
+            }
+
             //check if the name already exists in the symbol table
             if (SymbolTable.getVarDef(idNode.getToken().getToken()) == null) {
                 throw new SemanticException("Assignment of variable without declaring type: " +
@@ -101,6 +106,11 @@ public class AsmtNode implements BodyStmtNode {
 
             typeNode = TypeNode.parseType(tokenList);
             idNode = IdNode.parseId(tokenList);
+
+            if (SymbolTable.reservedWords.contains(idNode.getToken().getToken())){
+                throw new SemanticException("Cannot used reserved words as a variable name",
+                        idNode.getToken().getFilename(), idNode.getToken().getLineNum());
+            }
 
             //check if the name already exists in the symbol table
             if (SymbolTable.getVarDef(idNode.getToken().getToken()) != null) {

@@ -6,13 +6,13 @@ package treeNodes;
  * @author Luka Eaton, Lucie Lim
  */
 
-import exceptions.SyntaxException;
+import SymbolTable.SymbolTable;
 import exceptions.SemanticException;
-import provided.JottTree;
+import exceptions.SyntaxException;
 import provided.Token;
 import provided.TokenType;
+
 import java.util.ArrayList;
-import SymbolTable.SymbolTable;
 
 public class VarDecNode implements BodyStmtNode {
 
@@ -56,6 +56,11 @@ public class VarDecNode implements BodyStmtNode {
 
             if (token.getTokenType() == TokenType.ID_KEYWORD) {
                 idNode = IdNode.parseId(tokenList);
+
+                if (SymbolTable.reservedWords.contains(idNode.getToken().getToken())){
+                    throw new SemanticException("Cannot used reserved words as a variable name",
+                            idNode.getToken().getFilename(), idNode.getToken().getLineNum());
+                }
 
                 //add variable to SymbolTable
                 if(SymbolTable.getVarDef(token.getToken()) == null){

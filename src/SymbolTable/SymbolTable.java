@@ -16,7 +16,7 @@ public class SymbolTable {
     private static HashMap<String, HashMap<String, ArrayList<String>>> varDefs = new HashMap<>();
     private static String currentScope = null;
 
-    private static HashSet<String> reservedWords = new HashSet<>();
+    public static HashSet<String> reservedWords = new HashSet<>();
 
     public static ArrayList<String> getFuncDef(String funcName) {
         return funcDefs.get(funcName);
