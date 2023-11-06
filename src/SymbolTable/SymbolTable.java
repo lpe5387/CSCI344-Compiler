@@ -2,6 +2,7 @@ package SymbolTable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 /**
  * This class is responsible for storing all the defined functions, and variables within their scopes.
@@ -14,6 +15,8 @@ public class SymbolTable {
 
     private static HashMap<String, HashMap<String, ArrayList<String>>> varDefs = new HashMap<>();
     private static String currentScope = null;
+
+    private static HashSet<String> reservedWords = new HashSet<>();
 
     public static ArrayList<String> getFuncDef(String funcName) {
         return funcDefs.get(funcName);
@@ -58,6 +61,10 @@ public class SymbolTable {
         addFuncDef("print", print);
         addFuncDef("concat", concat);
         addFuncDef("length", length);
+        reservedWords.add("if");
+        reservedWords.add("else");
+        reservedWords.add("elseif");
+        reservedWords.add("while");
     }
 
 }
