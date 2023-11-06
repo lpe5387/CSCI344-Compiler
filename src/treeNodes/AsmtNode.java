@@ -168,7 +168,7 @@ public class AsmtNode implements BodyStmtNode {
         else type = SymbolTable.getVarDef(this.id.getToken().getToken()).get(0);
 
         if ( !type.equals( this.expr.evaluateType() ) ) {            // if var type != type of expression throw error
-            throw new SemanticException("Variable type doesn't match with assignment type.\n ",
+            throw new SemanticException("Variable type doesn't match with assignment type.",
                     this.id.getToken().getFilename(), this.id.getToken().getLineNum());
         }
         // ensure name isn't already taken: already handled in the parser when before we add keys to the symbol table
