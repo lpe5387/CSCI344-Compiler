@@ -104,8 +104,7 @@ public class AsmtNode implements BodyStmtNode {
 
             //check if the name already exists in the symbol table
             if (SymbolTable.getVarDef(idNode.getToken().getToken()) != null) {
-                throw new SemanticException("Variable name: " + idNode.getToken().getToken() + " of type: " +
-                        typeNode.getToken().getToken() + ", already used ",
+                throw new SemanticException("Variable name already used.",
                         typeNode.getToken().getFilename(), typeNode.getToken().getLineNum());
             }
 
@@ -169,9 +168,8 @@ public class AsmtNode implements BodyStmtNode {
         else type = SymbolTable.getVarDef(this.id.getToken().getToken()).get(0);
 
         if ( !type.equals( this.expr.evaluateType() ) ) {            // if var type != type of expression throw error
-            throw new SemanticException("Variable type doesn't match with assignment type.\n " +
-                    this.type.getToken().getToken() + " " + this.id.getToken().getToken() + " = " +
-                    this.expr.toString(), this.id.getToken().getFilename(), this.id.getToken().getLineNum());
+            throw new SemanticException("Variable type doesn't match with assignment type.\n ",
+                    this.id.getToken().getFilename(), this.id.getToken().getLineNum());
         }
         // ensure name isn't already taken: already handled in the parser when before we add keys to the symbol table
         return true;
