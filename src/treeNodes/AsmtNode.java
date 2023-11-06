@@ -56,7 +56,7 @@ public class AsmtNode implements BodyStmtNode {
             idNode = IdNode.parseId(tokenList);
 
             if (SymbolTable.reservedWords.contains(idNode.getToken().getToken())){
-                throw new SemanticException("Cannot used reserved words as a variable name",
+                throw new SemanticException("Cannot use reserved word as a variable name",
                         idNode.getToken().getFilename(), idNode.getToken().getLineNum());
             }
 
@@ -108,7 +108,7 @@ public class AsmtNode implements BodyStmtNode {
             idNode = IdNode.parseId(tokenList);
 
             if (SymbolTable.reservedWords.contains(idNode.getToken().getToken())){
-                throw new SemanticException("Cannot used reserved words as a variable name",
+                throw new SemanticException("Cannot use reserved word as a variable name",
                         idNode.getToken().getFilename(), idNode.getToken().getLineNum());
             }
 
