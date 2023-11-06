@@ -48,7 +48,7 @@ public class FuncDefNode implements JottTree {
                 String funcName = idNode.getToken().getToken();
 
                 if (SymbolTable.reservedWords.contains(funcName)){
-                    throw new SemanticException("Cannot used reserved words as a function name",
+                    throw new SemanticException("Cannot use reserved word as a function name",
                             idNode.getToken().getFilename(), idNode.getToken().getLineNum());
                 }
 
