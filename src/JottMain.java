@@ -2,6 +2,7 @@ import exceptions.SemanticException;
 import exceptions.SyntaxException;
 import provided.*;
 import treeNodes.ProgramNode;
+import java.io.File;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -31,12 +32,10 @@ public class JottMain {
                         "and Language is \"Jott\", \"Java\", \"C\", or \"Python\" depending on which language you want the result in.");
             }
             else {
-                boolean valid = false;
+                boolean exists = false;
                 try{
-                    //TODO: make sure this actually checks for the file
-                    Path file = Paths.get(args[0]);
-                    file = file.toAbsolutePath(); //redundancy in file pathing where CSCI344 repeated
-                    valid = true; //if we get here without breaking we are good to run the program
+                    File file = new File(args[0]);
+                    exists = file.isFile();
                 }
                 catch (Exception E){
                     System.err.println("Failed to open " + args[0] + ", See error below.");
@@ -46,7 +45,7 @@ public class JottMain {
                             "FILENAME is the name of the Jott file to be parsed,\n" +
                             "and Language is \"Jott\", \"Java\", \"C\", or \"Python\" depending on which language you want the result in.");
                 }
-                if(valid) {
+                if(exists) {
                     // STEP 1: Tokenize
                     ArrayList<Token> tokenList = JottTokenizer.tokenize(args[0]);
                     // STEP 2: Parse into jott tree
@@ -54,6 +53,13 @@ public class JottMain {
                     // STEP 3: Make the Parse table and validate tree
                     program.validateTree();
                     // STEP 4: Do Phase 4 things.
+                }
+                else{
+                    System.err.println("File " + args[0] + " does not exist");
+                    System.err.println("Usage: JottMain FILENAME Language.\n" +
+                            "Where:\n" +
+                            "FILENAME is the name of the Jott file to be parsed,\n" +
+                            "and Language is \"Jott\", \"Java\", \"C\", or \"Python\" depending on which language you want the result in.");
                 }
             }
         } catch (SyntaxException e){
