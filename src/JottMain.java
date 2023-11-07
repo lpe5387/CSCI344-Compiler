@@ -125,7 +125,7 @@ public class JottMain {
                     }
                 }
                 else{
-                    System.err.println("File " + args[0] + " does not exist." + "Or file " + args[1] + " does not exist");
+                    System.err.println("File " + args[0] + " does not exist.");
                     System.err.println("Usage: JottMain INPUTFILENAME OUTPUTFILENAME Language.\n" +
                             "Where:\n" +
                             "INPUTFILENAME is the name of the Jott file to be parsed,\n" +
