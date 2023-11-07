@@ -65,6 +65,15 @@ public class SymbolTable {
         reservedWords.add("else");
         reservedWords.add("elseif");
         reservedWords.add("while");
+        reservedWords.add("def");
+        reservedWords.add("Integer");
+        reservedWords.add("Double");
+        reservedWords.add("Boolean");
+        reservedWords.add("String");
+        reservedWords.add("Void");
+        reservedWords.add("return");
+        reservedWords.add("True");
+        reservedWords.add("False");
     }
 
 }
