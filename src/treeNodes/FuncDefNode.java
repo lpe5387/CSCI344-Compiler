@@ -180,7 +180,7 @@ public class FuncDefNode implements JottTree {
                 }
             }
             if(!hasReturnPath) {
-                throw new SemanticException("Non-Void function has a path with no return",
+                throw new SemanticException("Non-Void function has no return path",
                         this.id.getToken().getFilename(),
                         this.id.getToken().getLineNum());
             }
