@@ -72,7 +72,7 @@ public class TypeNode implements JottTree {
         else if (this.getName().equals(TypeNodeNames.Boolean)){
             return TypeNodeNames.Boolean.name()+" ";
         }
-        else {return "ERROR";} //there has tto be a better thing to do than this
+        else {return null;}
     }
 
     public String convertToJava(String className){return "";}
