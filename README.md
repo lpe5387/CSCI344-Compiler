@@ -1,4 +1,4 @@
-# CSCI344-Compiler: Phase 2
+# CSCI344-Compiler: Phase 3
 
 To build the project on the command line, go into the "src" directory, and run:
 
