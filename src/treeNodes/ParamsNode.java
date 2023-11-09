@@ -44,11 +44,19 @@ public class ParamsNode implements JottTree {
     }
 
     public String convertToJott(){
-        StringBuilder toString = new StringBuilder(this.expr.convertToJott());
-        for (ParamsTNode i : this.paramsTList){
+        if(this.expr != null) {
+            StringBuilder toString = new StringBuilder(this.expr.convertToJott());
+            for (ParamsTNode i : this.paramsTList) {
+                toString.append(i.convertToJott());
+            }
+            return toString.toString();
+        }
+        StringBuilder toString = new StringBuilder();
+        for (ParamsTNode i : this.paramsTList) {
             toString.append(i.convertToJott());
         }
         return toString.toString();
+
     }
 
     public boolean getIsEmpty(){return this.isEmpty;};
