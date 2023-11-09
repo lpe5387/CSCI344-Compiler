@@ -64,7 +64,14 @@ public class ParamsNode implements JottTree {
     public String convertToPython(){return "";}
     
     public boolean validateTree() throws SemanticException {
-        this.expr.validateTree();
+        if(this.expr == null && this.paramsTList == null){
+            return true;
+        }
+        if(this.expr != null){
+            this.expr.validateTree();
+        } else {
+            return false;
+        }
         for(ParamsTNode paramT : this.paramsTList){
             paramT.validateTree();
         }
