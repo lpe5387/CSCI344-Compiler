@@ -44,19 +44,11 @@ public class ParamsNode implements JottTree {
     }
 
     public String convertToJott(){
-        if(this.expr != null) {
-            StringBuilder toString = new StringBuilder(this.expr.convertToJott());
-            for (ParamsTNode i : this.paramsTList) {
-                toString.append(i.convertToJott());
-            }
-            return toString.toString();
-        }
-        StringBuilder toString = new StringBuilder();
-        for (ParamsTNode i : this.paramsTList) {
+        StringBuilder toString = new StringBuilder(this.expr.convertToJott());
+        for (ParamsTNode i : this.paramsTList){
             toString.append(i.convertToJott());
         }
         return toString.toString();
-
     }
 
     public boolean getIsEmpty(){return this.isEmpty;};
@@ -72,14 +64,7 @@ public class ParamsNode implements JottTree {
     public String convertToPython(){return "";}
     
     public boolean validateTree() throws SemanticException {
-        if(this.expr == null && this.paramsTList == null){
-            return true;
-        }
-        if(this.expr != null){
-            this.expr.validateTree();
-        } else {
-            return false;
-        }
+        this.expr.validateTree();
         for(ParamsTNode paramT : this.paramsTList){
             paramT.validateTree();
         }
