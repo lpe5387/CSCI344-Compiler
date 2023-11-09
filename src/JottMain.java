@@ -49,7 +49,7 @@ public class JottMain {
                 boolean existsOutput = false;
                 try{
                     File fileInput = new File(args[0]);
-                    File fileOutput = new File("/out", args[1]); //TODO: ask Jott abt the output always being in out directory
+                    File fileOutput = new File(args[1]);
                     existsInput = fileInput.isFile();
                     existsOutput = fileOutput.isFile();
                     if(!existsOutput){
