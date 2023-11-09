@@ -104,11 +104,11 @@ public class FuncCallNode implements ExprNode, BodyStmtNode {
         int numParams = funcDef.size()-1; //funcDef holds all the params and the return type
         if(this.params.getIsEmpty() && numParams != 0){
             //if we are here then we are supposed to have at least one param and have been given 0
-            throw new SemanticException("Received no parameters for function " + this.id.getToken().getToken() + " which requires at least one parameter when previously defined.", this.id.getToken().getFilename(), this.id.getToken().getLineNum());
+            throw new SemanticException("Received no parameters for function " + this.id.getToken().getToken() + " which requires at least one parameter.", this.id.getToken().getFilename(), this.id.getToken().getLineNum());
         }
         else if(!this.params.getIsEmpty() && numParams == 0){
             //if we are here then we are supposed to have 0 params, but we are given at least one
-            throw new SemanticException("Received at least one parameter for function " + this.id.getToken().getToken() + " which requires no parameters when previously defined.", this.id.getToken().getFilename(), this.id.getToken().getLineNum());
+            throw new SemanticException("Received at least one parameter for function " + this.id.getToken().getToken() + " which requires no parameters.", this.id.getToken().getFilename(), this.id.getToken().getLineNum());
         }
         else if(this.params.getIsEmpty() && numParams == 0){
             //if we are here then we got 0 params, and we are supposed to have 0 params, since we already validated the name, we are good
