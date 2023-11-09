@@ -9,9 +9,9 @@ package treeNodes;
 import SymbolTable.SymbolTable;
 import exceptions.SemanticException;
 import exceptions.SyntaxException;
-import provided.JottTree;
 import provided.Token;
 import provided.TokenType;
+
 import java.util.ArrayList;
 
 public class FuncCallNode implements ExprNode, BodyStmtNode {
@@ -82,6 +82,9 @@ public class FuncCallNode implements ExprNode, BodyStmtNode {
     }
 
     public String convertToJott(){
+        if (params.getIsEmpty()) {
+            return "::" + this.id.convertToJott() + "[]";
+        }
         return "::" + this.id.convertToJott() + "[" + params.convertToJott() + "]";
     }
 
