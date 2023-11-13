@@ -4,14 +4,13 @@ package treeNodes; /**
  * @author Luka Eaton, lucie lim
  */
 
-import SymbolTable.SymbolTable;
-import java.util.ArrayList;
-
 import exceptions.SemanticException;
-import provided.JottTree;
+import exceptions.SyntaxException;
+import helpers.SymbolTable;
 import provided.Token;
 import provided.TokenType;
-import exceptions.SyntaxException;
+
+import java.util.ArrayList;
 
 public class IdNode implements ExprNode {
  
@@ -65,7 +64,9 @@ public class IdNode implements ExprNode {
         return this.token.getToken();
     }
 
-    public String convertToJava(String className){return "";}
+    public String convertToJava(String className){
+        return this.token.getToken();
+    }
 
     public String convertToC(){return "";}
 

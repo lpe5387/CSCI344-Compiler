@@ -6,7 +6,7 @@ package treeNodes;
  * @author Isaac Kim, Dara Prak, Luka Eaton
  */
 
-import SymbolTable.SymbolTable;
+import helpers.SymbolTable;
 import exceptions.SemanticException;
 import exceptions.SyntaxException;
 import provided.JottTree;
@@ -150,7 +150,23 @@ public class FuncDefNode implements JottTree {
         return toString;
     }
 
-    public String convertToJava(String className){return "";}
+    public String convertToJava(String className){
+        String toString;
+
+        String main = "";
+        if ( this.id.getToken().getToken().equals("main")) {
+            main = "String[] args";
+        }
+        if(this.funcDefParams == null){
+            toString = "public static " + this.returnType.convertToJava(className) + " " + this.id.convertToJava(className)
+                    + "(" + main + "){\n" + this.body.convertToJava(className) + "} \n";
+        }
+        else{
+            toString = "public static " + this.returnType.convertToJava(className) + " " + this.id.convertToJava(className)
+                    + "(" + this.funcDefParams.convertToJava(className) + "){\n" + this.body.convertToJava(className) + "} \n";
+        }
+        return toString;
+    }
 
     public String convertToC(){return "";}
 

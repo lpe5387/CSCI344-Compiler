@@ -1,13 +1,12 @@
 import exceptions.SemanticException;
 import exceptions.SyntaxException;
-import provided.*;
+import provided.JottTokenizer;
+import provided.Token;
 import treeNodes.ProgramNode;
-import java.io.File;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /**
@@ -79,7 +78,7 @@ public class JottMain {
                         if (args[2].equals("Jott")) {
                             writer.write(program.convertToJott());
                         } else if (args[2].equals("Java")) {
-                            writer.write(program.convertToJava(args[0])); //this might be wrong idk, that's not this phase
+                            writer.write(program.convertToJava(args[1].substring(0,args[1].length()-5))); //this might be wrong idk, that's not this phase
                         } else if (args[2].equals("C")) {
                             writer.write(program.convertToC());
                         } else if (args[2].equals("Python")) {

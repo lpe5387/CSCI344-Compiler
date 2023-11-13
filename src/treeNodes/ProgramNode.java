@@ -3,10 +3,10 @@ package treeNodes;
 /**
  * This class is responsible for the program node for the parse tree
  *
- * @author Luka Eaton
+ * @author Luka Eaton, Lucie Lim
  */
 
-import SymbolTable.SymbolTable;
+import helpers.SymbolTable;
 import exceptions.SemanticException;
 import exceptions.SyntaxException;
 import provided.JottTree;
@@ -40,7 +40,14 @@ public class ProgramNode implements JottTree {
         return programString;
     }
 
-    public String convertToJava(String className){return "";}
+    public String convertToJava(String className){
+        String programString = "public class " + className + " {\n";
+        for(FuncDefNode funcDef : funcDefList){
+            programString += funcDef.convertToJava(className);
+        }
+        programString += "}";
+        return programString;
+    }
 
     public String convertToC(){return "";}
 

@@ -8,7 +8,6 @@ package treeNodes;
 
 import exceptions.SemanticException;
 import exceptions.SyntaxException;
-import provided.JottTree;
 import provided.Token;
 import provided.TokenType;
 
@@ -43,7 +42,7 @@ public class StringLiteralNode implements ExprNode {
         return this.text;
     }
 
-    public String convertToJava(String className){return "";}
+    public String convertToJava(String className){ return this.text; }
 
     public String convertToC(){return "";}
 

@@ -8,7 +8,6 @@ package treeNodes;
 
 import exceptions.SemanticException;
 import exceptions.SyntaxException;
-import provided.JottTree;
 import provided.Token;
 import provided.TokenType;
 
@@ -205,7 +204,27 @@ public class IfStmtNode implements BodyStmtNode {
         return str;
     }
 
-    public String convertToJava(String className){return "";}
+    public String convertToJava(String className){
+        String str = "if("; //starting if
+        str += this.expr.convertToJava(className); //condition for the if
+        str += "){\n"; //end if start body
+        str += this.body.convertToJava(className); //body statement
+        str += "}\n"; //end body
+        //
+        //loop through else if statements, the list can be empty that just means no else ifs are present
+        //
+        while(!this.elseIfLst.isEmpty()){ //while the list is not empty
+            str += elseIfLst.get(0).convertToJava(className);
+            elseIfLst.remove(0);
+        }
+        //
+        //there is allowed to be no else statement, in that case elseStmt will be null
+        //
+        if(this.elseStmt != null){
+            str += this.elseStmt.convertToJava(className);
+        }
+        return str;
+    }
 
     public String convertToC(){return "";}
 

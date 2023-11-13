@@ -10,7 +10,7 @@ import exceptions.SemanticException;
 import exceptions.SyntaxException;
 import provided.Token;
 import provided.TokenType;
-import SymbolTable.SymbolTable;
+import helpers.SymbolTable;
 
 import java.util.ArrayList;
 
@@ -164,7 +164,13 @@ public class AsmtNode implements BodyStmtNode {
         return this.type.convertToJott() + this.id.convertToJott() + " = " + this.expr.convertToJott() + ";";
     }
 
-    public String convertToJava(String className){return "";}
+    public String convertToJava(String className){
+        if (this.type == null) {
+            return this.id.convertToJava(className) + " = " + this.expr.convertToJava(className) + ";\n";
+        }
+        return this.type.convertToJava(className) + " " + this.id.convertToJava(className) + " = " +
+                this.expr.convertToJava(className) + ";\n";
+    }
 
     public String convertToC(){return "";}
 

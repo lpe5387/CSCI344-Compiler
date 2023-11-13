@@ -45,7 +45,12 @@ public class FunctionReturnNode implements JottTree {
         else return this.type.convertToJott();
     }
 
-    public String convertToJava(String className){return "";}
+    public String convertToJava(String className){
+        if(this.voidReturn != null){
+            return "void";
+        }
+        else return this.type.convertToJava(className);
+    }
 
     public String convertToC(){return "";}
 

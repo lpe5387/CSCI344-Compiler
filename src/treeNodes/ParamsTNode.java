@@ -6,13 +6,13 @@ package treeNodes;
  * @author Luka Eaton, Issac Kim, Lucie Lim
  */
 
-import java.util.ArrayList;
-
 import exceptions.SemanticException;
+import exceptions.SyntaxException;
 import provided.JottTree;
 import provided.Token;
 import provided.TokenType;
-import exceptions.SyntaxException;
+
+import java.util.ArrayList;
 
 public class ParamsTNode implements JottTree {
 
@@ -48,7 +48,9 @@ public class ParamsTNode implements JottTree {
         return ", " + this.expr.convertToJott();
     }
 
-    public String convertToJava(String className){return "";}
+    public String convertToJava(String className){
+        return ", " + this.expr.convertToJava(className);
+    }
 
     public String convertToC(){return "";}
 

@@ -8,7 +8,6 @@ package treeNodes;
 
 import exceptions.SemanticException;
 import exceptions.SyntaxException;
-import provided.JottTree;
 import provided.Token;
 import provided.TokenType;
 
@@ -47,7 +46,7 @@ public class NumNode implements ExprNode {
         return this.token.getToken();
     }
 
-    public String convertToJava(String className){return "";}
+    public String convertToJava(String className){ return this.token.getToken(); }
 
     public String convertToC(){return "";}
 

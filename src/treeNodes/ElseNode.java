@@ -93,7 +93,12 @@ public class ElseNode implements JottTree {
         return str;
     }
 
-    public String convertToJava(String className){return "";}
+    public String convertToJava(String className){
+        String str = "else{\n";
+        str += this.body.convertToJava(className);
+        str += "}\n";
+        return str;
+    }
 
     public String convertToC(){return "";}
 

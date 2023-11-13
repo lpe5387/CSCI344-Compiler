@@ -6,7 +6,7 @@ package treeNodes;
  * @author Luka Eaton, Lucie Lim
  */
 
-import SymbolTable.SymbolTable;
+import helpers.SymbolTable;
 import exceptions.SemanticException;
 import exceptions.SyntaxException;
 import provided.Token;
@@ -97,7 +97,8 @@ public class VarDecNode implements BodyStmtNode {
         return this.type.convertToJott() + this.id.convertToJott() + ";";
     }
 
-    public String convertToJava(String className){return "";}
+    public String convertToJava(String className){ return this.type.convertToJava(className) + " " +
+            this.id.convertToJava(className) + ";\n";}
 
     public String convertToC(){return "";}
 

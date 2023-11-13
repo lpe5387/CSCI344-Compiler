@@ -6,14 +6,14 @@ package treeNodes;
  * @author Luka Eaton, Dara Prak
  */
 
-import java.util.ArrayList;
-
-import SymbolTable.SymbolTable;
 import exceptions.SemanticException;
+import exceptions.SyntaxException;
+import helpers.SymbolTable;
 import provided.JottTree;
 import provided.Token;
 import provided.TokenType;
-import exceptions.SyntaxException;
+
+import java.util.ArrayList;
 
 public class FuncDefParamsNode implements JottTree {
     
@@ -84,7 +84,14 @@ public class FuncDefParamsNode implements JottTree {
         return toString.toString();
     }
 
-    public String convertToJava(String className){return "";}
+    public String convertToJava(String className){
+        StringBuilder toString = new StringBuilder(this.type.convertToJava(className));
+        toString.append( " " + this.id.convertToJava(className));
+        for (FuncDefParamsTNode i : this.funcDefParamsTList){
+            toString.append(i.convertToJava(className));
+        }
+        return toString.toString();
+    }
 
     public String convertToC(){return "";}
 

@@ -4,11 +4,12 @@ package treeNodes; /**
  * @author Luka Eaton Issac Kim lucie lim
  */
 
-import java.util.ArrayList;
+import exceptions.SyntaxException;
 import provided.JottTree;
 import provided.Token;
 import provided.TokenType;
-import exceptions.SyntaxException;
+
+import java.util.ArrayList;
 
 public class OpNode implements JottTree {
 
@@ -42,7 +43,9 @@ public class OpNode implements JottTree {
     public String convertToJott(){
         return this.token.getToken();}
 
-    public String convertToJava(String className){return "";}
+    public String convertToJava(String className){
+        return this.token.getToken();
+    }
 
     public String convertToC(){return "";}
 

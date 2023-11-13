@@ -6,13 +6,12 @@ package treeNodes;
  */
 
 
-import java.util.ArrayList;
-
 import exceptions.SemanticException;
-import provided.JottTree;
+import exceptions.SyntaxException;
 import provided.Token;
 import provided.TokenType;
-import exceptions.SyntaxException;
+
+import java.util.ArrayList;
 
 public class BoolNode implements ExprNode {
     
@@ -48,7 +47,7 @@ public class BoolNode implements ExprNode {
         return this.token.getToken();
     }
 
-    public String convertToJava(String className){return "";}
+    public String convertToJava(String className){ return this.token.getToken().toLowerCase(); }
 
     public String convertToC(){return "";}
 

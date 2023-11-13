@@ -5,7 +5,6 @@ package treeNodes;
 
 import exceptions.SemanticException;
 import exceptions.SyntaxException;
-import provided.JottTree;
 import provided.Token;
 import provided.TokenType;
 
@@ -44,7 +43,10 @@ public class OperationNode implements ExprNode {
         return this.left.convertToJott() + this.op.convertToJott() + this.right.convertToJott();
     }
 
-    public String convertToJava(String className){return "";}
+    public String convertToJava(String className){
+        return this.left.convertToJava(className) + " " + this.op.convertToJava(className) + " " +
+                this.right.convertToJava(className);
+    }
 
     public String convertToC(){return "";}
 

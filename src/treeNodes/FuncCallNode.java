@@ -6,7 +6,7 @@ package treeNodes;
  * @author Luka Eaton, Lucie Lim, Andrew Dantone
  */
 
-import SymbolTable.SymbolTable;
+import helpers.SymbolTable;
 import exceptions.SemanticException;
 import exceptions.SyntaxException;
 import provided.Token;
@@ -88,7 +88,33 @@ public class FuncCallNode implements ExprNode, BodyStmtNode {
         return "::" + this.id.convertToJott() + "[" + params.convertToJott() + "]";
     }
 
-    public String convertToJava(String className){return "";}
+    public String convertToJava(String className){
+        String string = "";
+        if (this.id.getToken().getToken().equals("print")) {
+            string += "System.out.println(" + params.convertToJava(className) + ")";
+            return string;
+        }
+        if (this.id.getToken().getToken().equals("concat")) {
+            string += this.params.getExpr().convertToJava(className);
+            for (ParamsTNode param: params.getParamsTList())
+                string += " + " + param.getExpr().convertToJava(className);
+            return string;
+        }
+
+        if (this.id.getToken().getToken().equals("length")) {
+            string += params.getExpr().convertToJava(className) + ".length();";
+            return string;
+        }
+
+        if (params.getIsEmpty()) {
+            return this.id.convertToJava(className) + "()";
+        }
+        else {
+            string += this.id.convertToJava(className) + "(" + params.convertToJava(className) + ")";
+        }
+
+        return string;
+    }
 
     public String convertToC(){return "";}
 

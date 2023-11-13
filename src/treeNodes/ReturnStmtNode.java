@@ -6,7 +6,7 @@ package treeNodes;
  * @author Luka Eaton, Dara Prak
  */
 
-import SymbolTable.SymbolTable;
+import helpers.SymbolTable;
 import exceptions.SemanticException;
 import exceptions.SyntaxException;
 import provided.JottTree;
@@ -55,7 +55,7 @@ public class ReturnStmtNode implements JottTree {
         return "return " + this.expr.convertToJott() + ";";
     }
 
-    public String convertToJava(String className){return "";}
+    public String convertToJava(String className){return "return " + this.expr.convertToJava(className) + ";\n";}
 
     public String convertToC(){return "";}
 
