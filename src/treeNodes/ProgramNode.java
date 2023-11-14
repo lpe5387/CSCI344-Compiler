@@ -6,6 +6,7 @@ package treeNodes;
  * @author Luka Eaton, Lucie Lim
  */
 
+import helpers.Indentation;
 import helpers.SymbolTable;
 import exceptions.SemanticException;
 import exceptions.SyntaxException;
@@ -42,9 +43,11 @@ public class ProgramNode implements JottTree {
 
     public String convertToJava(String className){
         String programString = "public class " + className + " {\n";
+        Indentation.shiftIndentForward();
         for(FuncDefNode funcDef : funcDefList){
-            programString += funcDef.convertToJava(className);
+            programString += Indentation.addIndent() + funcDef.convertToJava(className);
         }
+        Indentation.shiftIndentBackward();
         programString += "}";
         return programString;
     }

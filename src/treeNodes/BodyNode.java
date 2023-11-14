@@ -8,6 +8,7 @@ package treeNodes;
 
 import exceptions.SemanticException;
 import exceptions.SyntaxException;
+import helpers.Indentation;
 import provided.JottTree;
 import provided.Token;
 
@@ -53,17 +54,17 @@ public class BodyNode implements JottTree {
 
     public String convertToJava(String className){
         String javaString = "";
+        Indentation.shiftIndentForward();
         for(BodyStmtNode bodyStmt : this.bodyStmtList) {
-            javaString += bodyStmt.convertToJava(className);
+            javaString += Indentation.addIndent() + bodyStmt.convertToJava(className);
             if(bodyStmt instanceof FuncCallNode)
                 javaString += ";\n";
         }
-        if(this.returnStmt == null) {
-            return javaString;
-        } else {
-            javaString += this.returnStmt.convertToJava(className);
-            return javaString;
+        if(this.returnStmt != null) {
+            javaString += Indentation.addIndent() + this.returnStmt.convertToJava(className);
         }
+        Indentation.shiftIndentBackward();
+        return javaString;
     }
 
     public String convertToC(){return "";}

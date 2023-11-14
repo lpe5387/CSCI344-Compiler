@@ -8,6 +8,7 @@ package treeNodes;
 
 import exceptions.SemanticException;
 import exceptions.SyntaxException;
+import helpers.Indentation;
 import provided.JottTree;
 import provided.Token;
 import provided.TokenType;
@@ -96,7 +97,7 @@ public class ElseNode implements JottTree {
     public String convertToJava(String className){
         String str = "else{\n";
         str += this.body.convertToJava(className);
-        str += "}\n";
+        str += Indentation.addIndent() + "}\n";
         return str;
     }
 

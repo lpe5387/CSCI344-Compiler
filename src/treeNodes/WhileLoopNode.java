@@ -8,6 +8,7 @@ package treeNodes;
 
 import exceptions.SemanticException;
 import exceptions.SyntaxException;
+import helpers.Indentation;
 import provided.Token;
 import provided.TokenType;
 
@@ -102,7 +103,8 @@ public class WhileLoopNode implements BodyStmtNode {
     }
 
     public String convertToJava(String className){
-        return "while (" + this.expr.convertToJava(className) + "){\n" + this.body.convertToJava(className) + "}\n";
+        return "while (" + this.expr.convertToJava(className) + "){\n" + this.body.convertToJava(className) + Indentation.addIndent() +
+        "}\n";
     }
 
     public String convertToC(){return "";}

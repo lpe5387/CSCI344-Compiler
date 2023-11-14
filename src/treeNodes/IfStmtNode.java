@@ -8,6 +8,7 @@ package treeNodes;
 
 import exceptions.SemanticException;
 import exceptions.SyntaxException;
+import helpers.Indentation;
 import provided.Token;
 import provided.TokenType;
 
@@ -209,7 +210,7 @@ public class IfStmtNode implements BodyStmtNode {
         str += this.expr.convertToJava(className); //condition for the if
         str += "){\n"; //end if start body
         str += this.body.convertToJava(className); //body statement
-        str += "}\n"; //end body
+        str += Indentation.addIndent() + "}\n"; //end body
         //
         //loop through else if statements, the list can be empty that just means no else ifs are present
         //

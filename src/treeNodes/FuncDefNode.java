@@ -6,6 +6,7 @@ package treeNodes;
  * @author Isaac Kim, Dara Prak, Luka Eaton
  */
 
+import helpers.Indentation;
 import helpers.SymbolTable;
 import exceptions.SemanticException;
 import exceptions.SyntaxException;
@@ -159,11 +160,11 @@ public class FuncDefNode implements JottTree {
         }
         if(this.funcDefParams == null){
             toString = "public static " + this.returnType.convertToJava(className) + " " + this.id.convertToJava(className)
-                    + "(" + main + "){\n" + this.body.convertToJava(className) + "} \n";
+                    + "(" + main + "){\n" + this.body.convertToJava(className) + Indentation.addIndent() + "}\n";
         }
         else{
             toString = "public static " + this.returnType.convertToJava(className) + " " + this.id.convertToJava(className)
-                    + "(" + this.funcDefParams.convertToJava(className) + "){\n" + this.body.convertToJava(className) + "} \n";
+                    + "(" + this.funcDefParams.convertToJava(className) + "){\n" + this.body.convertToJava(className) + Indentation.addIndent() + "}\n";
         }
         return toString;
     }
