@@ -15,7 +15,7 @@ import java.util.ArrayList;
  *  @author: Lucie Lim, Dara Prak, Andrew Dantone
  */
 
-public class JottMain {
+public class Jott {
     public static void main (String[] args) {
         try {
             // STEP 0: validate args.

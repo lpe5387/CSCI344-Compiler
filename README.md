@@ -3,7 +3,7 @@
 To build the project on the command line, go into the "src" directory, and run:
 
 `javac */*.java`<br />
-`java JottMain <infile> <outfile> <language>`
+`java Jott <infile> <outfile> <language>`
 
 Authors:
 Issac Kim,
