@@ -54,7 +54,13 @@ public class ProgramNode implements JottTree {
 
     public String convertToC(){return "";}
 
-    public String convertToPython(){return "";}
+    public String convertToPython(){
+        String programString = "";
+        for(FuncDefNode funcDef : funcDefList){
+            programString += funcDef.convertToPython();
+        }
+        return programString;
+    }
     
     public boolean validateTree() throws SemanticException {
         boolean main = false;

@@ -171,7 +171,26 @@ public class FuncDefNode implements JottTree {
 
     public String convertToC(){return "";}
 
-    public String convertToPython(){return "";}
+    public String convertToPython(){
+        String toString;
+
+        if(this.funcDefParams == null){
+            toString = "def " + this.id.convertToPython() + "() -> " + this.returnType.convertToPython() +
+                 ":\n" + this.body.convertToPython();
+        }
+        else{
+            toString = "def " + this.id.convertToPython() + "(" + this.funcDefParams.convertToPython()+  ") -> " + this.returnType.convertToPython() +
+                    ":\n" + this.body.convertToPython();
+        }
+
+        // adds the main() at the bottom of the program
+        if ( this.id.getToken().getToken().equals("main")) {
+            toString += "main()";
+        }
+
+        return toString;
+
+    }
     
     public boolean validateTree() throws SemanticException {
         SymbolTable.setCurrentScope(this.id.getToken().getToken());
