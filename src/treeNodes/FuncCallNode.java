@@ -118,7 +118,33 @@ public class FuncCallNode implements ExprNode, BodyStmtNode {
 
     public String convertToC(){return "";}
 
-    public String convertToPython(){return "";}
+    public String convertToPython(){
+        String string = "";
+        if (this.id.getToken().getToken().equals("print")) {
+            string += "print(" + params.convertToPython() + ")";
+            return string;
+        }
+        if (this.id.getToken().getToken().equals("concat")) {
+            string += this.params.getExpr().convertToPython();
+            for (ParamsTNode param: params.getParamsTList())
+                string += " + " + param.getExpr().convertToPython();
+            return string;
+        }
+
+        if (this.id.getToken().getToken().equals("length")) {
+            string +=  "len(" + params.getExpr().convertToPython() + ")";
+            return string;
+        }
+
+        if (params.getIsEmpty()) {
+            return this.id.convertToPython() + "()";
+        }
+        else {
+            string += this.id.convertToPython() + "(" + params.convertToPython() + ")";
+        }
+
+        return string;
+    }
 
     public boolean validateTree() throws SemanticException{
         //Make sure function name (id) is in the symbol table

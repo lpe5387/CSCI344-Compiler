@@ -50,7 +50,10 @@ public class OperationNode implements ExprNode {
 
     public String convertToC(){return "";}
 
-    public String convertToPython(){return "";}
+    public String convertToPython(){
+        return this.left.convertToPython() + " " + this.op.convertToPython() + " " +
+                this.right.convertToPython();
+    }
 
     public boolean validateTree() throws SemanticException {
         this.left.validateTree();

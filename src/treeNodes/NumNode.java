@@ -50,7 +50,7 @@ public class NumNode implements ExprNode {
 
     public String convertToC(){return "";}
 
-    public String convertToPython(){return "";}
+    public String convertToPython(){ return this.token.getToken(); }
     
     public boolean validateTree(){return true;}
 

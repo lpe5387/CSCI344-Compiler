@@ -93,7 +93,9 @@ public class TypeNode implements JottTree {
 
     public String convertToC(){return "";}
 
-    public String convertToPython(){return "";}
+    public String convertToPython(){
+        return "";
+    }
     
     public boolean validateTree(){return true;}
 

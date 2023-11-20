@@ -97,7 +97,6 @@ public class FuncDefParamsNode implements JottTree {
 
     public String convertToPython(){
         StringBuilder toString = new StringBuilder(this.id.convertToPython());
-        toString.append( ": " + this.type.convertToPython()); // in python string is str for params change this in type.convertopython
         for (FuncDefParamsTNode i : this.funcDefParamsTList){
             toString.append(i.convertToPython());
         }

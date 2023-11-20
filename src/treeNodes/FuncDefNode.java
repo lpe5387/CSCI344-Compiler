@@ -175,17 +175,16 @@ public class FuncDefNode implements JottTree {
         String toString;
 
         if(this.funcDefParams == null){
-            toString = "def " + this.id.convertToPython() + "() -> " + this.returnType.convertToPython() +
-                 ":\n" + this.body.convertToPython();
+            toString = "def " + this.id.convertToPython() + "()" + ":\n" + this.body.convertToPython();
         }
         else{
-            toString = "def " + this.id.convertToPython() + "(" + this.funcDefParams.convertToPython()+  ") -> " + this.returnType.convertToPython() +
-                    ":\n" + this.body.convertToPython();
+            toString = "def " + this.id.convertToPython() + "(" + this.funcDefParams.convertToPython()+  "):\n"
+                    + this.body.convertToPython();
         }
 
         // adds the main() at the bottom of the program
         if ( this.id.getToken().getToken().equals("main")) {
-            toString += "main()";
+            toString += "\n\nmain()";
         }
 
         return toString;

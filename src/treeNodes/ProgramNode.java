@@ -42,10 +42,10 @@ public class ProgramNode implements JottTree {
     }
 
     public String convertToJava(String className){
-        String programString = "public class " + className + " {\n";
+        String programString = "public class " + className + " {\n\n";
         Indentation.shiftIndentForward();
         for(FuncDefNode funcDef : funcDefList){
-            programString += Indentation.addIndent() + funcDef.convertToJava(className);
+            programString += Indentation.addIndent() + funcDef.convertToJava(className) + "\n";
         }
         Indentation.shiftIndentBackward();
         programString += "}";
@@ -57,7 +57,7 @@ public class ProgramNode implements JottTree {
     public String convertToPython(){
         String programString = "";
         for(FuncDefNode funcDef : funcDefList){
-            programString += funcDef.convertToPython();
+            programString += funcDef.convertToPython() + "\n\n";
         }
         return programString;
     }

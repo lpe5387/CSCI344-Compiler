@@ -174,7 +174,9 @@ public class AsmtNode implements BodyStmtNode {
 
     public String convertToC(){return "";}
 
-    public String convertToPython(){return "";}
+    public String convertToPython(){
+        return this.id.convertToPython() + " = " + this.expr.convertToPython() + "\n";
+    }
     
     public boolean validateTree() throws SemanticException {
         this.expr.validateTree();

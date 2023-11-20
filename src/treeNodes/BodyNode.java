@@ -69,7 +69,20 @@ public class BodyNode implements JottTree {
 
     public String convertToC(){return "";}
 
-    public String convertToPython(){return "";}
+    public String convertToPython(){
+        String pythonString = "";
+        Indentation.shiftIndentForward();
+        for(BodyStmtNode bodyStmt : this.bodyStmtList) {
+            pythonString += Indentation.addIndent() + bodyStmt.convertToPython();
+            if(bodyStmt instanceof FuncCallNode)
+                pythonString += "\n";
+        }
+        if(this.returnStmt != null) {
+            pythonString += Indentation.addIndent() + this.returnStmt.convertToPython();
+        }
+        Indentation.shiftIndentBackward();
+        return pythonString;
+    }
     
     public boolean validateTree() throws SemanticException {
         for(BodyStmtNode bodyStmt : this.bodyStmtList){

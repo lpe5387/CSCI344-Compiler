@@ -103,7 +103,12 @@ public class ElseNode implements JottTree {
 
     public String convertToC(){return "";}
 
-    public String convertToPython(){return "";}
+    public String convertToPython(){
+        String str = "else:\n";
+        str += this.body.convertToPython();
+        str += "\n";
+        return str;
+    }
     
     public boolean validateTree() throws SemanticException {
         this.body.validateTree();

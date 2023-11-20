@@ -46,7 +46,7 @@ public class StringLiteralNode implements ExprNode {
 
     public String convertToC(){return "";}
 
-    public String convertToPython(){return "";}
+    public String convertToPython(){ return this.text; }
     
     public boolean validateTree(){return true;}
 

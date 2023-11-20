@@ -102,7 +102,8 @@ public class VarDecNode implements BodyStmtNode {
 
     public String convertToC(){return "";}
 
-    public String convertToPython(){return "";}
+    public String convertToPython(){ return this.id.convertToPython() + " = 0\n";
+    }
     
     public boolean validateTree() {
         return true;

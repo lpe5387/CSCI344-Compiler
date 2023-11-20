@@ -54,7 +54,9 @@ public class FunctionReturnNode implements JottTree {
 
     public String convertToC(){return "";}
 
-    public String convertToPython(){return "";}
+    public String convertToPython(){
+        return"";
+    }
     
     public boolean validateTree(){return true;}
 

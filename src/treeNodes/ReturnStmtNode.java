@@ -59,7 +59,7 @@ public class ReturnStmtNode implements JottTree {
 
     public String convertToC(){return "";}
 
-    public String convertToPython(){return "";}
+    public String convertToPython(){return "return " + this.expr.convertToPython() + "\n";}
     
     public boolean validateTree() throws SemanticException {
         this.expr.validateTree();
