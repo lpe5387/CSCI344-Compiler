@@ -91,7 +91,18 @@ public class TypeNode implements JottTree {
         else {return null;}
     }
 
-    public String convertToC(){return "";}
+    public String convertToC(){
+        if (this.getName().equals(TypeNodeNames.Double)){
+            return "double";
+        }
+        else if (this.getName().equals(TypeNodeNames.Integer) || (this.getName().equals(TypeNodeNames.Boolean)) ){
+            return "int";
+        }
+        else if (this.getName().equals(TypeNodeNames.String)){
+            return "char *";
+        }
+        else {return null;}
+    }
 
     public String convertToPython(){
         return "";

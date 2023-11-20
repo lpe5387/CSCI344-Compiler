@@ -6,6 +6,7 @@ package treeNodes;
  * @author Luka Eaton, Lucie Lim, Andrew Dantone
  */
 
+import helpers.CConversions;
 import helpers.SymbolTable;
 import exceptions.SemanticException;
 import exceptions.SyntaxException;
@@ -102,7 +103,7 @@ public class FuncCallNode implements ExprNode, BodyStmtNode {
         }
 
         if (this.id.getToken().getToken().equals("length")) {
-            string += params.getExpr().convertToJava(className) + ".length();";
+            string += params.getExpr().convertToJava(className) + ".length()";
             return string;
         }
 
@@ -116,7 +117,34 @@ public class FuncCallNode implements ExprNode, BodyStmtNode {
         return string;
     }
 
-    public String convertToC(){return "";}
+    public String convertToC() throws SemanticException {
+        String string = "";
+        if (this.id.getToken().getToken().equals("print")) {
+            return CConversions.printC(this.params);
+        }
+
+        // TODO
+        if (this.id.getToken().getToken().equals("concat")) {
+            string += this.params.getExpr().convertToC();
+            for (ParamsTNode param: params.getParamsTList())
+                string += " + " + param.getExpr().convertToC();
+            return string;
+        }
+
+        if (this.id.getToken().getToken().equals("length")) {
+            string += "strlen(" + params.getExpr().convertToC() + ")";
+            return string;
+        }
+
+        if (params.getIsEmpty()) {
+            return this.id.convertToC() + "()";
+        }
+        else {
+            string += this.id.convertToC() + "(" + params.convertToC() + ")";
+        }
+
+        return string;
+    }
 
     public String convertToPython(){
         String string = "";

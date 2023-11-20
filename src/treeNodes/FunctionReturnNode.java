@@ -52,7 +52,12 @@ public class FunctionReturnNode implements JottTree {
         else return this.type.convertToJava(className);
     }
 
-    public String convertToC(){return "";}
+    public String convertToC(){
+        if(this.voidReturn != null){
+            return "void";
+        }
+        else return this.type.convertToC();
+    }
 
     public String convertToPython(){
         return"";

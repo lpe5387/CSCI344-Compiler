@@ -52,7 +52,19 @@ public class ProgramNode implements JottTree {
         return programString;
     }
 
-    public String convertToC(){return "";}
+    public String convertToC() throws SemanticException {
+        String programString = """
+                #include <stdio.h>
+                #include <string.h>
+                #include <stdlib.h>
+
+                """;
+        for(FuncDefNode funcDef : funcDefList){
+            programString += funcDef.convertToC() + "\n";
+        }
+        return programString;
+
+    }
 
     public String convertToPython(){
         String programString = "";

@@ -49,7 +49,12 @@ public class BoolNode implements ExprNode {
 
     public String convertToJava(String className){ return this.token.getToken().toLowerCase(); }
 
-    public String convertToC(){return "";}
+    public String convertToC(){
+        if ( this.token.getToken().equals("True") ) {
+            return "1";
+        }
+        return "0";
+    }
 
     public String convertToPython(){ return this.token.getToken(); }
     

@@ -107,7 +107,9 @@ public class WhileLoopNode implements BodyStmtNode {
         "}\n";
     }
 
-    public String convertToC(){return "";}
+    public String convertToC() throws SemanticException {return "while (" + this.expr.convertToC() + "){\n" +
+            this.body.convertToC() + Indentation.addIndent() +  "}\n";
+    }
 
     public String convertToPython(){
         return "while " + this.expr.convertToPython() + ":\n" + this.body.convertToPython() + "\n";

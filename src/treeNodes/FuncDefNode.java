@@ -169,7 +169,21 @@ public class FuncDefNode implements JottTree {
         return toString;
     }
 
-    public String convertToC(){return "";}
+    public String convertToC() throws SemanticException {
+        String toString;
+        if ( this.id.getToken().getToken().equals("main")) {
+            toString = "int main(void){\n" + this.body.convertToC() + Indentation.addIndent() + "}\n";
+        }
+        else if(this.funcDefParams == null){
+            toString = this.returnType.convertToC() + " " + this.id.convertToC()
+                    + "(void){\n" + this.body.convertToC() + Indentation.addIndent() + "}\n";
+        }
+        else{
+            toString = this.returnType.convertToC() + " " + this.id.convertToC()
+                    + "(" + this.funcDefParams.convertToC() + "){\n" + this.body.convertToC() + Indentation.addIndent() + "}\n";
+        }
+        return toString;
+    }
 
     public String convertToPython(){
         String toString;

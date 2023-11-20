@@ -172,7 +172,13 @@ public class AsmtNode implements BodyStmtNode {
                 this.expr.convertToJava(className) + ";\n";
     }
 
-    public String convertToC(){return "";}
+    public String convertToC(){
+        if (this.type == null) {
+            return this.id.convertToC() + " = " + this.expr.convertToC() + ";\n";
+        }
+        return this.type.convertToC() + " " + this.id.convertToC() + " = " +
+                this.expr.convertToC() + ";\n";
+    }
 
     public String convertToPython(){
         return this.id.convertToPython() + " = " + this.expr.convertToPython() + "\n";

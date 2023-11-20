@@ -97,7 +97,10 @@ public class FuncDefParamsTNode implements JottTree {
         return toString;
     }
 
-    public String convertToC(){return "";}
+    public String convertToC(){
+        String toString = ", " + this.type.convertToC() + " " + this.id.convertToC();
+        return toString;
+    }
 
     public String convertToPython(){
         String toString = ", " + this.id.convertToPython();

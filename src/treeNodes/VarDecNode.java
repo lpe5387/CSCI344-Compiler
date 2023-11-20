@@ -100,7 +100,8 @@ public class VarDecNode implements BodyStmtNode {
     public String convertToJava(String className){ return this.type.convertToJava(className) + " " +
             this.id.convertToJava(className) + ";\n";}
 
-    public String convertToC(){return "";}
+    public String convertToC(){ return this.type.convertToC() + " " +
+            this.id.convertToC() + ";\n"; }
 
     public String convertToPython(){ return this.id.convertToPython() + " = 0\n";
     }
