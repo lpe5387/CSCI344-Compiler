@@ -1,5 +1,6 @@
-# CSCI344-Compiler: Phase 3
+# CSCI344-Compiler: Phase 4
 
+When converting to C, make sure concat.c and concat.h are siblings directly inside of "src"
 To build the project on the command line, go into the "src" directory, and run:
 
 `javac */*.java`<br />
