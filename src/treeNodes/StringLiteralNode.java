@@ -44,7 +44,7 @@ public class StringLiteralNode implements ExprNode {
 
     public String convertToJava(String className){ return this.text; }
 
-    public String convertToC(){return "";}
+    public String convertToC(){return this.text;}
 
     public String convertToPython(){ return this.text; }
     

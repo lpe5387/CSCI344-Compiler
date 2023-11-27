@@ -65,7 +65,13 @@ public class ParamsNode implements JottTree {
         return toString.toString();
     }
 
-    public String convertToC(){return "";}
+    public String convertToC() throws SemanticException {
+        StringBuilder toString = new StringBuilder(this.expr.convertToC());
+        for (ParamsTNode i : this.paramsTList){
+            toString.append(i.convertToC());
+        }
+        return toString.toString();
+    }
 
     public String convertToPython(){
         StringBuilder toString = new StringBuilder(this.expr.convertToPython());

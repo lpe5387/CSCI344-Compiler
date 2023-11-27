@@ -101,7 +101,12 @@ public class ElseNode implements JottTree {
         return str;
     }
 
-    public String convertToC(){return "";}
+    public String convertToC() throws SemanticException {
+        String str = "else{\n";
+        str += this.body.convertToC();
+        str += Indentation.addIndent() + "}\n";
+        return str;
+    }
 
     public String convertToPython(){
         String str = "else:\n";

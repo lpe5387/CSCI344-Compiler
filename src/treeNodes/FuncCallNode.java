@@ -123,11 +123,10 @@ public class FuncCallNode implements ExprNode, BodyStmtNode {
             return CConversions.printC(this.params);
         }
 
-        // TODO
         if (this.id.getToken().getToken().equals("concat")) {
-            string += this.params.getExpr().convertToC();
-            for (ParamsTNode param: params.getParamsTList())
-                string += " + " + param.getExpr().convertToC();
+            ExprNode param1 = this.params.getExpr();
+            ExprNode param2 = this.params.getParamsTList().get(0).getExpr();
+            string += "concat(" + param1.convertToC() + ", " + param2.convertToC() + ")";
             return string;
         }
 

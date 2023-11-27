@@ -52,7 +52,7 @@ public class ParamsTNode implements JottTree {
         return ", " + this.expr.convertToJava(className);
     }
 
-    public String convertToC(){ return "";}
+    public String convertToC() throws SemanticException { return ", " + this.expr.convertToC();}
 
     public String convertToPython(){ return ", " + this.expr.convertToPython();}
 

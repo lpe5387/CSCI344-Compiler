@@ -151,7 +151,14 @@ public class ElseIfNode implements JottTree {
         return str;
     }
 
-    public String convertToC(){return "";}
+    public String convertToC() throws SemanticException {
+        String str = "else if("; //starting elseif
+        str += this.expr.convertToC(); //condition for the elseif
+        str += "){\n"; //end if start body
+        str += this.body.convertToC(); //body statement
+        str += Indentation.addIndent() + "}\n"; //end body
+        return str;
+    }
 
     public String convertToPython(){
         String str = "elif "; //starting elseif
