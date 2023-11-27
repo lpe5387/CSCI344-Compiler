@@ -12,13 +12,3 @@ char* concat(char* s1, char* s2) {
 
     return newString;
 }
-
-int main (void) {
-    char * s1 = "Hello";
-    char * s2 = " World";
-    char * newWord = concat(s1, s2);
-    
-    printf("%s", newWord);
-
-    return 0;
-}
