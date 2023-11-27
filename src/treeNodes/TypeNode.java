@@ -99,7 +99,7 @@ public class TypeNode implements JottTree {
             return "int";
         }
         else if (this.getName().equals(TypeNodeNames.String)){
-            return "char *";
+            return "char*";
         }
         else {return null;}
     }
