@@ -48,7 +48,7 @@ public class NumNode implements ExprNode {
 
     public String convertToJava(String className){ return this.token.getToken(); }
 
-    public String convertToC(){return "";}
+    public String convertToC(){return this.token.getToken();}
 
     public String convertToPython(){ return this.token.getToken(); }
     

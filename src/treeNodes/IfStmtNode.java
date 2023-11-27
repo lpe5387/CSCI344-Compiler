@@ -227,7 +227,26 @@ public class IfStmtNode implements BodyStmtNode {
         return str;
     }
 
-    public String convertToC(){return "";}
+    public String convertToC() throws SemanticException {
+        String str = "if("; //starting if
+        str += this.expr.convertToC(); //condition for the if
+        str += "){\n"; //end if start body
+        str += this.body.convertToC(); //body statement
+        str += Indentation.addIndent() + "}\n"; //end body
+        //
+        //loop through else if statements, the list can be empty that just means no else ifs are present
+        //
+        while(!this.elseIfLst.isEmpty()){ //while the list is not empty
+            str += elseIfLst.get(0).convertToC();
+            elseIfLst.remove(0);
+        }
+        //
+        //there is allowed to be no else statement, in that case elseStmt will be null
+        //
+        if(this.elseStmt != null){
+            str += this.elseStmt.convertToC();
+        }
+        return str;}
 
     public String convertToPython(){
         String str = "if "; //starting if

@@ -1,6 +1,7 @@
 package helpers;
 
 import exceptions.SemanticException;
+import treeNodes.ExprNode;
 import treeNodes.ParamsNode;
 
 public class CConversions {
@@ -15,13 +16,6 @@ public class CConversions {
             cString += "%s\"," + params.getExpr().convertToC() + ")";
         }
         return cString;
-    }
-
-    public static String concatC( ParamsNode params ) throws SemanticException {
-        String cString = "";
-        //math for byte size string
-        int byteSize = params.getExpr()
-
     }
 
 }

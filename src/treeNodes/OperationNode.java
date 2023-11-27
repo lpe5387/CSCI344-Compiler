@@ -48,7 +48,8 @@ public class OperationNode implements ExprNode {
                 this.right.convertToJava(className);
     }
 
-    public String convertToC(){return "";}
+    public String convertToC() throws SemanticException {return this.left.convertToC() + " " + this.op.convertToC() + " " +
+            this.right.convertToC();}
 
     public String convertToPython(){
         return this.left.convertToPython() + " " + this.op.convertToPython() + " " +

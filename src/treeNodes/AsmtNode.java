@@ -172,7 +172,7 @@ public class AsmtNode implements BodyStmtNode {
                 this.expr.convertToJava(className) + ";\n";
     }
 
-    public String convertToC(){
+    public String convertToC() throws SemanticException {
         if (this.type == null) {
             return this.id.convertToC() + " = " + this.expr.convertToC() + ";\n";
         }
