@@ -57,7 +57,7 @@ public class ProgramNode implements JottTree {
                 #include <stdio.h>
                 #include <string.h>
                 #include <stdlib.h>
-                #include <concat.h>
+                #include \"concat.h\"
 
                 """;
         for(FuncDefNode funcDef : funcDefList){
