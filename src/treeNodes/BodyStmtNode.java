@@ -2,6 +2,7 @@ package treeNodes;
 
 import exceptions.SemanticException;
 import exceptions.SyntaxException;
+import helpers.SymbolTable;
 import provided.JottTree;
 import provided.Token;
 import provided.TokenType;
@@ -41,7 +42,14 @@ public interface BodyStmtNode extends JottTree {
             return WhileLoopNode.parseWhileLoop(tokenList);
         } else if(tokenList.size() >= 3 && (tokenList.get(1).getToken().equals("=") ||
                 tokenList.get(2).getToken().equals("="))) {
-            return AsmtNode.parseAsmt(tokenList);
+            // if the first token is a variable that's in the symbol table, or the first token
+            // is a valid datatype, we know it's an assignment node
+            if(SymbolTable.getVarDef(first.getToken()) != null ||
+                    first.getToken().equals("Double") || first.getToken().equals("Integer") ||
+                    first.getToken().equals("String") || first.getToken().equals("Boolean")){
+                return AsmtNode.parseAsmt(tokenList);
+            }
+            return null;
         } else if(first.getToken().equals("Double") || first.getToken().equals("Integer") ||
                 first.getToken().equals("String") || first.getToken().equals("Boolean")) {
             return VarDecNode.parseVarDec(tokenList);

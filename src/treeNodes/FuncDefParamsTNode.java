@@ -41,7 +41,6 @@ public class FuncDefParamsTNode implements JottTree {
 
             if(token.getTokenType() == TokenType.ID_KEYWORD){
 
-                tokenlist.remove(0);//remove comma from tokenlist
                 IdNode idNode = IdNode.parseId(tokenlist); //replace w/ actual iD parser
 
                 String paramName = idNode.getToken().getToken();

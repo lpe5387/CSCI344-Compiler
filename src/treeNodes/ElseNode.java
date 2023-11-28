@@ -95,21 +95,21 @@ public class ElseNode implements JottTree {
     }
 
     public String convertToJava(String className){
-        String str = "else{\n";
+        String str = Indentation.addIndent() + "else{\n";
         str += this.body.convertToJava(className);
         str += Indentation.addIndent() + "}\n";
         return str;
     }
 
     public String convertToC() throws SemanticException {
-        String str = "else{\n";
+        String str = Indentation.addIndent() + "else{\n";
         str += this.body.convertToC();
         str += Indentation.addIndent() + "}\n";
         return str;
     }
 
     public String convertToPython(){
-        String str = "else:\n";
+        String str = Indentation.addIndent() + "else:\n";
         str += this.body.convertToPython();
         str += "\n";
         return str;

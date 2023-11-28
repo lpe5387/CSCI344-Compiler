@@ -1,0 +1,41 @@
+# should pass everything
+
+def intLoop[x:Integer]:Boolean{
+    Integer y = 0;
+    while[x<10]{
+        if[x > 5]{
+            ::print["x is greater than 5"];
+            y = y + 1;
+        }
+        else{
+            ::print["x is less than or equal to 5"];
+        }
+        x = x + 1;
+    }
+    if[y < 3]{
+        return True;
+    }
+    else{
+        return False;
+    }
+}
+
+def randomFunc[s:String,str:String]:String{
+    Integer i = 9;
+    Integer j = 2;
+    String r = "";
+    if[::intLoop[i]]{
+        r = ::concat[r,s];
+    }
+    if[::length["testing"] > 3]{
+        r = ::concat[r,"and"];
+    }
+    if[::intLoop[j]]{
+        r = ::concat[r,str];
+    }
+    return r;
+}
+
+def main[]:Void{
+    ::print[::randomFunc["this","that"]];
+}

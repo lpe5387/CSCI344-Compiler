@@ -143,7 +143,7 @@ public class ElseIfNode implements JottTree {
     }
 
     public String convertToJava(String className){
-        String str = "else if("; //starting elseif
+        String str = Indentation.addIndent() + "else if("; //starting elseif
         str += this.expr.convertToJava(className); //condition for the elseif
         str += "){\n"; //end if start body
         str += this.body.convertToJava(className); //body statement
@@ -152,7 +152,7 @@ public class ElseIfNode implements JottTree {
     }
 
     public String convertToC() throws SemanticException {
-        String str = "else if("; //starting elseif
+        String str = Indentation.addIndent() + "else if("; //starting elseif
         str += this.expr.convertToC(); //condition for the elseif
         str += "){\n"; //end if start body
         str += this.body.convertToC(); //body statement
@@ -161,7 +161,7 @@ public class ElseIfNode implements JottTree {
     }
 
     public String convertToPython(){
-        String str = "elif "; //starting elseif
+        String str = Indentation.addIndent() + "elif "; //starting elseif
         str += this.expr.convertToPython(); //condition for the elseif
         str += ":\n"; //end if start body
         str += this.body.convertToPython(); //body statement
