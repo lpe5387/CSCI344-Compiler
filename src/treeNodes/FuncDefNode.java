@@ -172,7 +172,11 @@ public class FuncDefNode implements JottTree {
     public String convertToC() throws SemanticException {
         String toString;
         if ( this.id.getToken().getToken().equals("main")) {
-            toString = "int main(void){\n" + this.body.convertToC() + Indentation.addIndent() + "}\n";
+            toString = "int main(void){\n" + this.body.convertToC();
+            Indentation.shiftIndentForward();
+            toString += Indentation.addIndent() + "return 1;\n";
+            Indentation.shiftIndentBackward();
+            toString += Indentation.addIndent() + "}\n";
         }
         else if(this.funcDefParams == null){
             toString = this.returnType.convertToC() + " " + this.id.convertToC()
