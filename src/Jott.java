@@ -78,7 +78,13 @@ public class Jott {
                         if (args[2].equals("Jott")) {
                             writer.write(program.convertToJott());
                         } else if (args[2].equals("Java")) {
-                            writer.write(program.convertToJava(args[1].substring(0,args[1].length()-5))); //this might be wrong idk, that's not this phase
+                            int period = args[1].indexOf('.');
+                            if(period != -1){
+                                writer.write(program.convertToJava(args[1].substring(0,period)));
+                            }
+                            else {
+                                writer.write(program.convertToJava(args[1])); //this might be wrong idk, that's not this phase
+                            }
                         } else if (args[2].equals("C")) {
                             writer.write(program.convertToC());
                         } else if (args[2].equals("Python")) {
